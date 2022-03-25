@@ -13,9 +13,9 @@ namespace FastFoodManagement
         private string _MaHD;
         private bool _TrangThai;
 
-        public string MaBan { get; set; }
-        public string TenBan { get; set; }
-        public string MaHD { get; set; }
-        public bool TrangThai { get; set; }
+        public string MaBan { get => _MaBan; set => _MaBan = value; }
+        public string TenBan { get => _TenBan; set => _TenBan = value; }
+        public string MaHD { get => _MaHD; set => _MaHD = value; }
+        public bool TrangThai { get => _TrangThai; set => _TrangThai = value; }
     }
 }

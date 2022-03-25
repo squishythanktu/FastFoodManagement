@@ -10,3 +10,15 @@ D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodMa
 D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.exe
 D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.pdb
 D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.Order.resources
+C:\Users\DELL\source\repos\FastFoodManagement\bin\Debug\FastFoodManagement.exe.config
+C:\Users\DELL\source\repos\FastFoodManagement\bin\Debug\FastFoodManagement.exe
+C:\Users\DELL\source\repos\FastFoodManagement\bin\Debug\FastFoodManagement.pdb
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.csproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.csproj.SuggestedBindingRedirects.cache
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.Form1.resources
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.Order.resources
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.Properties.Resources.resources
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.csproj.GenerateResource.cache
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.exe
+C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.pdb
