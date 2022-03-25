@@ -26,5 +26,12 @@ namespace FastFoodManagement
         {
             this.Close();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Order order = new Order();
+            order.ShowDialog();
+            this.Close();
+        }
     }
 }

@@ -15,6 +15,22 @@ namespace FastFoodManagement
         public Order()
         {
             InitializeComponent();
+            home1.BringToFront();
+        }
+
+        private void btnEsc_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            home1.BringToFront();
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            order_user1.BringToFront();
         }
     }
 }

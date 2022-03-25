@@ -15,11 +15,11 @@ namespace FastFoodManagement
         private int _TongTien;
         private int _MaBan;
 
-        public string MaHD { get ; set; }
-        public string MaNV { get ; set; }
-        public DateTime ThoiGianVao { get; set; }
-        public DateTime ThoiGianRa { get; set; }
-        public int TongTien { get; set; }
-        public int MaBan { get; set; }
+        public string MaHD { get => _MaHD; set => _MaHD = value; }
+        public string MaNV { get => _MaNV; set => _MaNV = value; }
+        public DateTime ThoiGianVao { get => _ThoiGianVao; set => _ThoiGianVao = value; }
+        public DateTime ThoiGianRa { get => _ThoiGianRa; set => _ThoiGianRa = value; }
+        public int TongTien { get => _TongTien; set => _TongTien = value; }
+        public int MaBan { get => _MaBan; set => _MaBan = value; }
     }
 }
