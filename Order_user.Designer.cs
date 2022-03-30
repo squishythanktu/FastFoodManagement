@@ -123,7 +123,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(8, 44);
+            this.listBox1.Location = new System.Drawing.Point(6, 44);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(271, 436);
             this.listBox1.TabIndex = 0;
@@ -171,7 +171,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(702, 641);
+            this.tabPage2.Size = new System.Drawing.Size(750, 652);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Order";
             this.tabPage2.UseVisualStyleBackColor = true;

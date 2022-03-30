@@ -38,8 +38,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnEsc = new System.Windows.Forms.Button();
-            this.home1 = new FastFoodManagement.Home();
             this.order_user1 = new FastFoodManagement.Order_user();
+            this.home1 = new FastFoodManagement.Home();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -138,7 +138,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(243, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1072, 39);
+            this.panel2.Size = new System.Drawing.Size(1072, 43);
             this.panel2.TabIndex = 1;
             // 
             // btnEsc
@@ -155,19 +155,22 @@
             this.btnEsc.UseVisualStyleBackColor = true;
             this.btnEsc.Click += new System.EventHandler(this.btnEsc_Click);
             // 
-            // home1
-            // 
-            this.home1.Location = new System.Drawing.Point(262, 44);
-            this.home1.Name = "home1";
-            this.home1.Size = new System.Drawing.Size(1069, 675);
-            this.home1.TabIndex = 2;
-            // 
             // order_user1
             // 
-            this.order_user1.Location = new System.Drawing.Point(246, 44);
+            this.order_user1.Location = new System.Drawing.Point(243, 39);
             this.order_user1.Name = "order_user1";
-            this.order_user1.Size = new System.Drawing.Size(1069, 687);
+            this.order_user1.Size = new System.Drawing.Size(1072, 692);
             this.order_user1.TabIndex = 3;
+            // 
+            // home1
+            // 
+            this.home1.BackColor = System.Drawing.Color.Moccasin;
+            this.home1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.home1.ForeColor = System.Drawing.Color.Coral;
+            this.home1.Location = new System.Drawing.Point(243, 39);
+            this.home1.Name = "home1";
+            this.home1.Size = new System.Drawing.Size(1072, 692);
+            this.home1.TabIndex = 2;
             // 
             // Order
             // 

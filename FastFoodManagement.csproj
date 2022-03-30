@@ -55,13 +55,13 @@
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="HoaDon.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="HoaDon.cs" />
     <Compile Include="NhanVien.cs" />
     <Compile Include="Order.cs">
       <SubType>Form</SubType>
