@@ -12,13 +12,13 @@ namespace FastFoodManagement
         private string _TenSP;
         private int _Gia;
         private bool _TrangThai;
-        private string _DM;
+        private DanhMuc _DM;
 
         public string MaSP { get => _MaSP; set => _MaSP = value; }
         public string TenSP { get => _TenSP; set => _TenSP = value; }
         public int Gia { get => _Gia; set => _Gia = value; }
         public bool TrangThai { get => _TrangThai; set => _TrangThai = value; }
-        public string DM { get => _DM; set => _DM = value; }
+        public DanhMuc DM { get => _DM; set => _DM = value; }
 
         public override string ToString()
         {
