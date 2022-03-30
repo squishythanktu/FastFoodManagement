@@ -15,11 +15,20 @@ namespace FastFoodManagement
         private string _DiaChi;
         private string _SDT;
 
+
+        public string MaQL { get => _MaQL; set => _MaQL = value; }
+        public string MatKhau { get => _MatKhau; set => _MatKhau = value; }
+        public string Ten { get => _Ten; set => _Ten = value; }
+        public string Tuoi { get => _Tuoi; set => _Tuoi = value; }
+        public string DiaChi { get => _DiaChi; set => _DiaChi = value; }
+        public string SDT { get => _SDT; set => _SDT = value; }
+
         public string MaQL1 { get => _MaQL; set => _MaQL = value; }
         public string MatKhau1 { get => _MatKhau; set => _MatKhau = value; }
         public string Ten1 { get => _Ten; set => _Ten = value; }
         public string Tuoi1 { get => _Tuoi; set => _Tuoi = value; }
-        public string DiaChi { get => _DiaChi; set => _DiaChi = value; }
+        public string DiaChi1 { get => _DiaChi; set => _DiaChi = value; }
         public string SDT1 { get => _SDT; set => _SDT = value; }
+
     }
 }
