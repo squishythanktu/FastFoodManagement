@@ -40,3 +40,6 @@ C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.exe
 C:\Users\DELL\source\repos\FastFoodManagement\obj\Debug\FastFoodManagement.pdb
 >>>>>>> e346da0a59152345f38370b828148a6c2de8f672
 C:\Users\Ngoc\source\repos\squishythanktu\FastFoodManagement\obj\Debug\FastFoodManagement.Login.resources
+D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.Home.resources
+D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.Login.resources
+D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.Order_user.resources
