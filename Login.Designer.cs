@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnEsc = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -40,7 +41,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.btnEsc = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -58,6 +58,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(812, 85);
             this.panel1.TabIndex = 0;
+            // 
+            // btnEsc
+            // 
+            this.btnEsc.FlatAppearance.BorderSize = 0;
+            this.btnEsc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEsc.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEsc.ForeColor = System.Drawing.Color.Gold;
+            this.btnEsc.Location = new System.Drawing.Point(774, 0);
+            this.btnEsc.Name = "btnEsc";
+            this.btnEsc.Size = new System.Drawing.Size(38, 33);
+            this.btnEsc.TabIndex = 1;
+            this.btnEsc.Text = "X";
+            this.btnEsc.UseVisualStyleBackColor = true;
+            this.btnEsc.Click += new System.EventHandler(this.btnEsc_Click);
             // 
             // label1
             // 
@@ -157,20 +171,6 @@
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // btnEsc
-            // 
-            this.btnEsc.FlatAppearance.BorderSize = 0;
-            this.btnEsc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEsc.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEsc.ForeColor = System.Drawing.Color.Gold;
-            this.btnEsc.Location = new System.Drawing.Point(774, 0);
-            this.btnEsc.Name = "btnEsc";
-            this.btnEsc.Size = new System.Drawing.Size(38, 33);
-            this.btnEsc.TabIndex = 1;
-            this.btnEsc.Text = "X";
-            this.btnEsc.UseVisualStyleBackColor = true;
-            this.btnEsc.Click += new System.EventHandler(this.btnEsc_Click);
-            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -191,6 +191,8 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+           
+
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
