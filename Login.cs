@@ -19,14 +19,25 @@ namespace FastFoodManagement
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-           Order order = new Order();
-           order.ShowDialog();
-           this.Close();
+            Order order = new Order();
+            order.Show();
+            this.Hide();
+            order.Dangxuat += order_Dangxuat;
+          
         }
-
         private void btnEsc_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
+        private void order_Dangxuat(object sender, EventArgs e)
+        {
+            (sender as Order).isThoat = false;
+            (sender as Order).Close();
+            this.Show();
+        }
+
+      
+
+        
     }
 }
