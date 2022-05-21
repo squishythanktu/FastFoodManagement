@@ -1,15 +1,7 @@
 {
   "ExpandedNodes": [
-<<<<<<< HEAD
     ""
   ],
-  "SelectedNode": "\\Order.Designer.cs",
-=======
-    "",
-    "\\bin",
-    "\\obj",
-    "\\Properties"
-  ],
->>>>>>> e346da0a59152345f38370b828148a6c2de8f672
+  "SelectedNode": "\\Order.cs",
   "PreviewInSolutionExplorer": false
 }

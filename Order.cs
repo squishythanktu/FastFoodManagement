@@ -18,18 +18,22 @@ namespace FastFoodManagement
             InitializeComponent();
            
         }
-        public event EventHandler Dangxuat; 
+        public event EventHandler Dangxuat;
 
-        private void btnEsc_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            if(isThoat)
-                Application.Exit();
+            if (isThoat)
+            {
+                if (MessageBox.Show("Ban co muon thoat khong?", "Thoat chuong trinh", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    Application.Exit();
+                else return;
+            }
         }
-        private void panel2_Paint(object sender, PaintEventArgs e)
+
+        private void btnLogout_Click(object sender, EventArgs e)
         {
-
+            Dangxuat(this, new EventArgs());
         }
-
         private void btnHome_Click_1(object sender, EventArgs e)
         {
             panelHome.Visible = true;
@@ -40,10 +44,6 @@ namespace FastFoodManagement
             panelAccout.Visible = false;
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
         private void btnOrder_Click_1(object sender, EventArgs e)
         {
@@ -94,24 +94,11 @@ namespace FastFoodManagement
             panelTable.Visible = false;
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void btnMinimize_Click(object sender, EventArgs e)
         {
-            Dangxuat(this, new EventArgs());
+            this.WindowState = FormWindowState.Minimized;
         }
 
-        private void Order_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if(isThoat)
-                Application.Exit(); 
-        }
-
-        private void Order_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if(isThoat)
-            {
-                if(MessageBox.Show("Ban co muon thoat khong?","Thoat chuong trinh",MessageBoxButtons.YesNo)!=DialogResult.Yes)
-                    e.Cancel = true;
-            }
-        }
+        
     }
 }
