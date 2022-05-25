@@ -13,7 +13,8 @@
       <PropertyRef Name="MaBan" />
     </Key>
     <Property Name="MaBan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="TenBan" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="DanhMuc">
     <Key>

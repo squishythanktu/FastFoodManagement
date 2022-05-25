@@ -52,6 +52,62 @@ namespace FastFoodManagement
             LoadDgvCategory();
             AddCategoryBinding();
         }
+        private void btnHome_Click_1(object sender, EventArgs e)
+        {
+            panelHome.Visible = true;
+            panelOrder.Visible = false;
+            panelFood.Visible = false;
+            panelCategory.Visible = false;
+            panelTable.Visible = false;
+            panelAccount.Visible = false;
+        }
+        private void btnOrder_Click_1(object sender, EventArgs e)
+        {
+            panelOrder.Visible = true;
+            panelHome.Visible = false;
+            panelFood.Visible = false;
+            panelCategory.Visible = false;
+            panelTable.Visible = false;
+            panelAccount.Visible = false;
+        }
+
+        private void btnFood_Click_1(object sender, EventArgs e)
+        {
+            panelFood.Visible = true;
+            panelHome.Visible = false;
+            panelOrder.Visible = false;
+            panelCategory.Visible = false;
+            panelTable.Visible = false;
+            panelAccount.Visible = false;
+        }
+        private void btnDanhmuc_Click(object sender, EventArgs e)
+        {
+            panelCategory.Visible = true;
+            panelHome.Visible = false;
+            panelOrder.Visible = false;
+            panelFood.Visible = false;
+            panelTable.Visible = false;
+            panelAccount.Visible = false;
+        }
+
+        private void btnTable_Click(object sender, EventArgs e)
+        {
+            panelTable.Visible = true;
+            panelHome.Visible = false;
+            panelOrder.Visible = false;
+            panelFood.Visible = false;
+            panelCategory.Visible = false;
+            panelAccount.Visible = false;
+        }
+        private void btnAccout_Click(object sender, EventArgs e)
+        {
+            panelAccount.Visible = true;
+            panelHome.Visible = false;
+            panelOrder.Visible = false;
+            panelFood.Visible = false;
+            panelCategory.Visible = false;
+            panelTable.Visible = false;
+        }
         //LOAD FOOD
 
         private void LoadItemsCbDanhMuc()
@@ -126,62 +182,7 @@ namespace FastFoodManagement
         {
             Dangxuat(this, new EventArgs());
         }
-        private void btnHome_Click_1(object sender, EventArgs e)
-        {
-            panelHome.Visible = true;
-            panelOrder.Visible = false;
-            panelFood.Visible = false;
-            panelCategory.Visible = false;
-            panelTable.Visible = false;
-            panelAccount.Visible = false;
-        }
-        private void btnOrder_Click_1(object sender, EventArgs e)
-        {
-            panelOrder.Visible = true;
-            panelHome.Visible = false;
-            panelFood.Visible = false;
-            panelCategory.Visible = false;
-            panelTable.Visible = false;
-            panelAccount.Visible = false;
-        }
-
-        private void btnFood_Click_1(object sender, EventArgs e)
-        {
-            panelFood.Visible = true;
-            panelHome.Visible = false;
-            panelOrder.Visible = false;
-            panelCategory.Visible = false;
-            panelTable.Visible = false;
-            panelAccount.Visible = false;
-        }
-        private void btnDanhmuc_Click(object sender, EventArgs e)
-        {
-            panelCategory.Visible = true;
-            panelHome.Visible = false;
-            panelOrder.Visible = false;
-            panelFood.Visible = false;
-            panelTable.Visible = false;
-            panelAccount.Visible = false;
-        }
-
-        private void btnTable_Click(object sender, EventArgs e)
-        {
-            panelTable.Visible = true;
-            panelHome.Visible = false;
-            panelOrder.Visible = false;
-            panelFood.Visible = false;
-            panelCategory.Visible = false;
-            panelAccount.Visible = false;
-        }
-        private void btnAccout_Click(object sender, EventArgs e)
-        {
-            panelAccount.Visible = true;
-            panelHome.Visible = false;
-            panelOrder.Visible = false;
-            panelFood.Visible = false;
-            panelCategory.Visible = false;
-            panelTable.Visible = false;
-        }
+        
 
         private void btnAddFood_Click(object sender, EventArgs e)
         {
@@ -262,6 +263,8 @@ namespace FastFoodManagement
             ResetTextBoxFood();
         }
 
+
+        // ------------- Category Section -------------
         private void dgvCategory_MouseClick(object sender, MouseEventArgs e)
         {
             var ht = dgvCategory.HitTest(e.X, e.Y);
@@ -331,7 +334,7 @@ namespace FastFoodManagement
 
         private void btnSearchCategory_Click(object sender, EventArgs e)
         {
-            dgvCategory.DataSource = DanhMucBLL.Instance.SearchDanhMuc(txtSearchCategory.Text);
+            bindingSource.DataSource = DanhMucBLL.Instance.SearchDanhMuc(txtSearchCategory.Text);
         }
 
         private void pnCategory_Click(object sender, EventArgs e)
@@ -358,7 +361,7 @@ namespace FastFoodManagement
 
         private void btnSearchFood_Click(object sender, EventArgs e)
         {
-            dgvFood.DataSource = SanPhamBLL.Instance.SearchSanPham(txtSearchFood.Text);
+            bindingSource1.DataSource = SanPhamBLL.Instance.SearchSanPham(txtSearchFood.Text);
         }
 
         private void Order_Load(object sender, EventArgs e)
@@ -413,6 +416,13 @@ namespace FastFoodManagement
                 btnSortFood.Visible = false;
                 btnUpdateFood.Visible = false;
             }
+        }
+
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            DanhMucBLL.Instance.AddDanhMuc(txtNameCategory.Text);
+            LoadDgvCategory();
+            dgvCategory.CurrentCell.Selected = false;
         }
     }
 }

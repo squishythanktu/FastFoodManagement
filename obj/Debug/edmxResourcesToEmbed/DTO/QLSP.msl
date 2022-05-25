@@ -13,6 +13,7 @@
     <EntitySetMapping Name="Bans">
       <EntityTypeMapping TypeName="PBL3Model.Ban">
         <MappingFragment StoreEntitySet="Ban">
+          <ScalarProperty Name="TenBan" ColumnName="TenBan" />
           <ScalarProperty Name="MaBan" ColumnName="MaBan" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
         </MappingFragment>
