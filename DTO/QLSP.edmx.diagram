@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="94a44c473f9840659164d8005ad56627" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="PBL3Model.Account" Width="1.5" PointX="2.875" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Ban" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.DanhMuc" Width="1.5" PointX="10" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.HoaDon" Width="1.5" PointX="7.625" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.HoaDonChiTiet" Width="1.5" PointX="10" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.NhanVien" Width="1.5" PointX="5.125" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.SanPham" Width="1.5" PointX="10" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Voucher" Width="1.5" PointX="7.625" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="PBL3Model.FK_NhanVien_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="PBL3Model.FK__HoaDon__MaBan__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="PBL3Model.FK__SanPham__MaDM__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="PBL3Model.FK__HoaDon__MaNV__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="PBL3Model.FK__HoaDon__MaVC__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="PBL3Model.FK__HoaDonChi__SoLuo__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="PBL3Model.FK__HoaDonChiT__MaSP__4AB81AF0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

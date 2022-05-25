@@ -22,3 +22,8 @@ D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodMa
 D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.csproj.CoreCompileInputs.cache
 D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.exe
 D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.pdb
+D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\bin\Debug\EntityFramework.dll
+D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\bin\Debug\EntityFramework.SqlServer.dll
+D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\bin\Debug\EntityFramework.xml
+D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\bin\Debug\EntityFramework.SqlServer.xml
+D:\Workspace\Practice\FastFoodManagement\FastFoodManagement\obj\Debug\FastFoodManagement.csproj.CopyComplete
