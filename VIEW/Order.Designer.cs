@@ -1448,11 +1448,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 870);
+            this.Controls.Add(this.panelOrder);
+            this.Controls.Add(this.panelCategory);
             this.Controls.Add(this.panelTable);
             this.Controls.Add(this.panelFood);
-            this.Controls.Add(this.panelCategory);
             this.Controls.Add(this.panelAccount);
-            this.Controls.Add(this.panelOrder);
             this.Controls.Add(this.panelHome);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

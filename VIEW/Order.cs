@@ -280,13 +280,23 @@ namespace FastFoodManagement
         // ------------- Food Section -------------
         private void btnAddFood_Click(object sender, EventArgs e)
         {
-            SanPhamBLL.Instance.AddSanPham(new SanPham
+            if (txtNameFood.Text == "" || cbDanhMucFood.SelectedIndex == -1 || txtGiaTienFood.Text == "")
             {
-                TenSP = txtNameFood.Text,
-                MaDM = ((DanhMucDTO)cbDanhMucFood.SelectedItem).MaDM,
-                GiaSP = Convert.ToInt32(txtGiaTienFood.Text),
-            });
-            LoadDgvFood();
+                MessageBox.Show("Bạn chưa nhập đầy đủ thông tin!",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+            }
+            else 
+            { 
+                SanPhamBLL.Instance.AddSanPham(new SanPham
+                {
+                    TenSP = txtNameFood.Text,
+                    MaDM = ((DanhMucDTO)cbDanhMucFood.SelectedItem).MaDM,
+                    GiaSP = Convert.ToInt32(txtGiaTienFood.Text),
+                });
+                LoadDgvFood();
+            }
         }
         private void btnUpdateFood_Click(object sender, EventArgs e)
         {
@@ -378,9 +388,19 @@ namespace FastFoodManagement
         // ------------- Category Section -------------
         private void btnAddCategory_Click(object sender, EventArgs e)
         {
-            DanhMucBLL.Instance.AddDanhMuc(txtNameCategory.Text);
-            LoadDgvCategory();
-            dgvCategory.CurrentCell.Selected = false;
+            if (txtNameCategory.Text == "")
+            {
+                MessageBox.Show("Bạn chưa nhập đầy đủ thông tin!",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+                DanhMucBLL.Instance.AddDanhMuc(txtNameCategory.Text);
+                LoadDgvCategory();
+                dgvCategory.CurrentCell.Selected = false;
+            }
         }
 
         private void btnUpdateCategory_Click(object sender, EventArgs e)
@@ -393,7 +413,7 @@ namespace FastFoodManagement
             });
             LoadDgvCategory();
         }
-
+        // Fix cai Del Category
         private void btnDeleteCategory_Click(object sender, EventArgs e)
         {
             if (dgvCategory.SelectedRows[0].Index == dgvCategory.Rows.Count - 1)
@@ -468,9 +488,20 @@ namespace FastFoodManagement
 
         private void btnAddTable_Click(object sender, EventArgs e)
         {
-            BanBLL.Instance.AddBan(txtNameTable.Text);
-            LoadDgvTable();
-            dgvTable.CurrentCell.Selected = false;
+            if (txtNameTable.Text == "")
+            {
+                MessageBox.Show("Bạn chưa nhập đầy đủ thông tin bàn!",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+
+                BanBLL.Instance.AddBan(txtNameTable.Text);
+                LoadDgvTable();
+                dgvTable.CurrentCell.Selected = false;
+            }
         }
 
         private void btnSearchTable_Click(object sender, EventArgs e)
@@ -552,7 +583,8 @@ namespace FastFoodManagement
             dgvTable.ClearSelection();
             ResetTextBoxFood();
         }
+        //LOAD TABLE 
 
-        
+
     }
 }

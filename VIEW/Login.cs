@@ -51,6 +51,7 @@ namespace FastFoodManagement
                 }
                 else
                 {
+                    txtPassword.Text = "";
                     MessageBox.Show("Thông tin đăng nhập không hợp lệ!",
                                     "Warning",
                                     MessageBoxButtons.OK,
@@ -95,6 +96,22 @@ namespace FastFoodManagement
                 Properties.Settings.Default.password = txtPassword.Text;
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Tab)
+            {
+                txtPassword.Focus();
+            }    
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode== Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }    
         }
     }
 }
