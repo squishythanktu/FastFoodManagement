@@ -8,14 +8,12 @@ namespace FastFoodManagement.DTO
 {
     public class BanDTO
     {
-        private string _MaBan;
+        private int _MaBan;
         private string _TenBan;
-        private string _MaHD;
         private bool _TrangThai;
 
-        public string MaBan { get => _MaBan; set => _MaBan = value; }
+        public int MaBan { get => _MaBan; set => _MaBan = value; }
         public string TenBan { get => _TenBan; set => _TenBan = value; }
-        public string MaHD { get => _MaHD; set => _MaHD = value; }
         public bool TrangThai { get => _TrangThai; set => _TrangThai = value; }
     }
 }

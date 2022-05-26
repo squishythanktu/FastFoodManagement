@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="94a44c473f9840659164d8005ad56627" Name="Diagram1" ZoomLevel="83">
+      <Diagram DiagramId="94a44c473f9840659164d8005ad56627" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="PBL3Model.Account" Width="1.5" PointX="2.875" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PBL3Model.Ban" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PBL3Model.Ban" Width="1.5" PointX="5.375" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PBL3Model.DanhMuc" Width="1.5" PointX="10" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="PBL3Model.HoaDon" Width="1.5" PointX="7.625" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PBL3Model.HoaDonChiTiet" Width="1.5" PointX="10" PointY="0.5" IsExpanded="true" />

@@ -217,7 +217,7 @@
             <PropertyRef Name="MaBan" />
           </Key>
           <Property Name="MaBan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TrangThai" Type="Boolean" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaBan__30F848ED" FromRole="Ban" ToRole="HoaDon" />
           <Property Name="TenBan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>

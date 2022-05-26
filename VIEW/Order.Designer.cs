@@ -37,7 +37,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDanhmuc = new System.Windows.Forms.Button();
             this.btRevenue = new System.Windows.Forms.Button();
-            this.btnAccout = new System.Windows.Forms.Button();
+            this.btnAccount = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnTable = new System.Windows.Forms.Button();
             this.btnFood = new System.Windows.Forms.Button();
@@ -56,6 +56,7 @@
             this.btnThanhToan = new System.Windows.Forms.Button();
             this.lbBill = new System.Windows.Forms.ListBox();
             this.panelFood = new System.Windows.Forms.Panel();
+            this.dgvFood = new System.Windows.Forms.DataGridView();
             this.pnFood = new System.Windows.Forms.Panel();
             this.txtGiaTienFood = new System.Windows.Forms.TextBox();
             this.btnSortFood = new System.Windows.Forms.Button();
@@ -73,6 +74,7 @@
             this.btnSearchFood = new System.Windows.Forms.Button();
             this.txtSearchFood = new System.Windows.Forms.TextBox();
             this.panelCategory = new System.Windows.Forms.Panel();
+            this.dgvCategory = new System.Windows.Forms.DataGridView();
             this.pnCategory = new System.Windows.Forms.Panel();
             this.btnSearchCategory = new System.Windows.Forms.Button();
             this.btnSortCategory = new System.Windows.Forms.Button();
@@ -93,9 +95,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelTable = new System.Windows.Forms.Panel();
             this.dgvTable = new System.Windows.Forms.DataGridView();
-            this.panel10 = new System.Windows.Forms.Panel();
+            this.pnTable = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtTrangThaiTable = new System.Windows.Forms.TextBox();
             this.btnSortTable = new System.Windows.Forms.Button();
             this.btnDelTable = new System.Windows.Forms.Button();
             this.btnUpdateTable = new System.Windows.Forms.Button();
@@ -127,8 +129,6 @@
             this.btnSortAccount = new System.Windows.Forms.Button();
             this.btnDeleteAccount = new System.Windows.Forms.Button();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
-            this.dgvCategory = new System.Windows.Forms.DataGridView();
-            this.dgvFood = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -136,8 +136,10 @@
             this.Table.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panelFood.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             this.pnFood.SuspendLayout();
             this.panelCategory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
             this.pnCategory.SuspendLayout();
             this.panelHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -145,12 +147,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
-            this.panel10.SuspendLayout();
+            this.pnTable.SuspendLayout();
             this.panelAccount.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -228,7 +228,7 @@
             this.panel2.BackColor = System.Drawing.Color.OldLace;
             this.panel2.Controls.Add(this.btnDanhmuc);
             this.panel2.Controls.Add(this.btRevenue);
-            this.panel2.Controls.Add(this.btnAccout);
+            this.panel2.Controls.Add(this.btnAccount);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.btnTable);
             this.panel2.Controls.Add(this.btnFood);
@@ -279,29 +279,29 @@
             this.btRevenue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btRevenue.UseVisualStyleBackColor = false;
             // 
-            // btnAccout
+            // btnAccount
             // 
-            this.btnAccout.BackColor = System.Drawing.Color.OldLace;
-            this.btnAccout.FlatAppearance.BorderSize = 0;
-            this.btnAccout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAccout.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAccout.ForeColor = System.Drawing.Color.Crimson;
-            this.btnAccout.Image = ((System.Drawing.Image)(resources.GetObject("btnAccout.Image")));
-            this.btnAccout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAccout.Location = new System.Drawing.Point(0, 544);
-            this.btnAccout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAccout.Name = "btnAccout";
-            this.btnAccout.Size = new System.Drawing.Size(253, 74);
-            this.btnAccout.TabIndex = 16;
-            this.btnAccout.Text = "     Account";
-            this.btnAccout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAccout.UseVisualStyleBackColor = false;
-            this.btnAccout.Click += new System.EventHandler(this.btnAccout_Click);
+            this.btnAccount.BackColor = System.Drawing.Color.OldLace;
+            this.btnAccount.FlatAppearance.BorderSize = 0;
+            this.btnAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAccount.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAccount.ForeColor = System.Drawing.Color.Crimson;
+            this.btnAccount.Image = ((System.Drawing.Image)(resources.GetObject("btnAccount.Image")));
+            this.btnAccount.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAccount.Location = new System.Drawing.Point(0, 544);
+            this.btnAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAccount.Name = "btnAccount";
+            this.btnAccount.Size = new System.Drawing.Size(253, 74);
+            this.btnAccount.TabIndex = 16;
+            this.btnAccount.Text = "     Account";
+            this.btnAccount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAccount.UseVisualStyleBackColor = false;
+            this.btnAccount.Click += new System.EventHandler(this.btnAccount_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(68, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(69, 12);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(117, 116);
@@ -540,6 +540,24 @@
             this.panelFood.TabIndex = 8;
             this.panelFood.Visible = false;
             // 
+            // dgvFood
+            // 
+            this.dgvFood.AllowUserToAddRows = false;
+            this.dgvFood.AllowUserToDeleteRows = false;
+            this.dgvFood.AllowUserToOrderColumns = true;
+            this.dgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFood.Location = new System.Drawing.Point(9, 7);
+            this.dgvFood.Name = "dgvFood";
+            this.dgvFood.ReadOnly = true;
+            this.dgvFood.RowHeadersWidth = 51;
+            this.dgvFood.RowTemplate.Height = 24;
+            this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFood.Size = new System.Drawing.Size(682, 821);
+            this.dgvFood.TabIndex = 11;
+            this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
+            this.dgvFood.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvFood_MouseClick);
+            // 
             // pnFood
             // 
             this.pnFood.BackColor = System.Drawing.Color.OldLace;
@@ -680,6 +698,7 @@
             // 
             // txtIDFood
             // 
+            this.txtIDFood.Enabled = false;
             this.txtIDFood.Location = new System.Drawing.Point(137, 183);
             this.txtIDFood.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtIDFood.Multiline = true;
@@ -744,6 +763,24 @@
             this.panelCategory.Size = new System.Drawing.Size(1060, 831);
             this.panelCategory.TabIndex = 0;
             this.panelCategory.Visible = false;
+            // 
+            // dgvCategory
+            // 
+            this.dgvCategory.AllowUserToAddRows = false;
+            this.dgvCategory.AllowUserToDeleteRows = false;
+            this.dgvCategory.AllowUserToOrderColumns = true;
+            this.dgvCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCategory.Location = new System.Drawing.Point(1, 7);
+            this.dgvCategory.Name = "dgvCategory";
+            this.dgvCategory.ReadOnly = true;
+            this.dgvCategory.RowHeadersWidth = 51;
+            this.dgvCategory.RowTemplate.Height = 24;
+            this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCategory.Size = new System.Drawing.Size(697, 813);
+            this.dgvCategory.TabIndex = 10;
+            this.dgvCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellClick);
+            this.dgvCategory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvCategory_MouseClick);
             // 
             // pnCategory
             // 
@@ -970,7 +1007,7 @@
             // panelTable
             // 
             this.panelTable.Controls.Add(this.dgvTable);
-            this.panelTable.Controls.Add(this.panel10);
+            this.panelTable.Controls.Add(this.pnTable);
             this.panelTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTable.Location = new System.Drawing.Point(255, 39);
             this.panelTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -981,59 +1018,68 @@
             // 
             // dgvTable
             // 
+            this.dgvTable.AllowUserToAddRows = false;
+            this.dgvTable.AllowUserToDeleteRows = false;
+            this.dgvTable.AllowUserToOrderColumns = true;
+            this.dgvTable.AllowUserToResizeColumns = false;
             this.dgvTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTable.Location = new System.Drawing.Point(0, 0);
             this.dgvTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvTable.Name = "dgvTable";
+            this.dgvTable.ReadOnly = true;
             this.dgvTable.RowHeadersWidth = 51;
             this.dgvTable.RowTemplate.Height = 24;
             this.dgvTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTable.Size = new System.Drawing.Size(697, 831);
             this.dgvTable.TabIndex = 8;
+            this.dgvTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTable_CellClick);
+            this.dgvTable.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvTable_MouseClick);
             // 
-            // panel10
+            // pnTable
             // 
-            this.panel10.BackColor = System.Drawing.Color.OldLace;
-            this.panel10.Controls.Add(this.label20);
-            this.panel10.Controls.Add(this.textBox6);
-            this.panel10.Controls.Add(this.btnSortTable);
-            this.panel10.Controls.Add(this.btnDelTable);
-            this.panel10.Controls.Add(this.btnUpdateTable);
-            this.panel10.Controls.Add(this.btnAddTable);
-            this.panel10.Controls.Add(this.label14);
-            this.panel10.Controls.Add(this.txtNameTable);
-            this.panel10.Controls.Add(this.txtIDTable);
-            this.panel10.Controls.Add(this.label15);
-            this.panel10.Controls.Add(this.label16);
-            this.panel10.Controls.Add(this.btnSearchTable);
-            this.panel10.Controls.Add(this.txtSearchTable);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel10.Location = new System.Drawing.Point(697, 0);
-            this.panel10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(363, 831);
-            this.panel10.TabIndex = 7;
+            this.pnTable.BackColor = System.Drawing.Color.OldLace;
+            this.pnTable.Controls.Add(this.label20);
+            this.pnTable.Controls.Add(this.txtTrangThaiTable);
+            this.pnTable.Controls.Add(this.btnSortTable);
+            this.pnTable.Controls.Add(this.btnDelTable);
+            this.pnTable.Controls.Add(this.btnUpdateTable);
+            this.pnTable.Controls.Add(this.btnAddTable);
+            this.pnTable.Controls.Add(this.label14);
+            this.pnTable.Controls.Add(this.txtNameTable);
+            this.pnTable.Controls.Add(this.txtIDTable);
+            this.pnTable.Controls.Add(this.label15);
+            this.pnTable.Controls.Add(this.label16);
+            this.pnTable.Controls.Add(this.btnSearchTable);
+            this.pnTable.Controls.Add(this.txtSearchTable);
+            this.pnTable.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnTable.Location = new System.Drawing.Point(697, 0);
+            this.pnTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnTable.Name = "pnTable";
+            this.pnTable.Size = new System.Drawing.Size(363, 831);
+            this.pnTable.TabIndex = 7;
+            this.pnTable.Click += new System.EventHandler(this.pnTable_Click);
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(19, 363);
+            this.label20.Location = new System.Drawing.Point(21, 363);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(108, 22);
             this.label20.TabIndex = 7;
             this.label20.Text = "Trạng thái:";
             // 
-            // textBox6
+            // txtTrangThaiTable
             // 
-            this.textBox6.Location = new System.Drawing.Point(129, 358);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(220, 31);
-            this.textBox6.TabIndex = 6;
+            this.txtTrangThaiTable.Enabled = false;
+            this.txtTrangThaiTable.Location = new System.Drawing.Point(135, 357);
+            this.txtTrangThaiTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTrangThaiTable.Multiline = true;
+            this.txtTrangThaiTable.Name = "txtTrangThaiTable";
+            this.txtTrangThaiTable.Size = new System.Drawing.Size(214, 36);
+            this.txtTrangThaiTable.TabIndex = 6;
             // 
             // btnSortTable
             // 
@@ -1060,6 +1106,7 @@
             this.btnDelTable.TabIndex = 2;
             this.btnDelTable.Text = "Xóa";
             this.btnDelTable.UseVisualStyleBackColor = false;
+            this.btnDelTable.Click += new System.EventHandler(this.btnDelTable_Click);
             // 
             // btnUpdateTable
             // 
@@ -1073,6 +1120,7 @@
             this.btnUpdateTable.TabIndex = 3;
             this.btnUpdateTable.Text = "Cập nhật";
             this.btnUpdateTable.UseVisualStyleBackColor = false;
+            this.btnUpdateTable.Click += new System.EventHandler(this.btnUpdateTable_Click);
             // 
             // btnAddTable
             // 
@@ -1086,12 +1134,13 @@
             this.btnAddTable.TabIndex = 1;
             this.btnAddTable.Text = "Thêm";
             this.btnAddTable.UseVisualStyleBackColor = false;
+            this.btnAddTable.Click += new System.EventHandler(this.btnAddTable_Click);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(16, 284);
+            this.label14.Location = new System.Drawing.Point(21, 284);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(90, 22);
             this.label14.TabIndex = 5;
@@ -1099,27 +1148,29 @@
             // 
             // txtNameTable
             // 
-            this.txtNameTable.Location = new System.Drawing.Point(129, 279);
+            this.txtNameTable.Location = new System.Drawing.Point(135, 279);
             this.txtNameTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNameTable.Multiline = true;
             this.txtNameTable.Name = "txtNameTable";
-            this.txtNameTable.Size = new System.Drawing.Size(220, 31);
+            this.txtNameTable.Size = new System.Drawing.Size(214, 36);
             this.txtNameTable.TabIndex = 4;
             // 
             // txtIDTable
             // 
-            this.txtIDTable.Location = new System.Drawing.Point(129, 204);
+            this.txtIDTable.Enabled = false;
+            this.txtIDTable.Location = new System.Drawing.Point(135, 199);
             this.txtIDTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtIDTable.Multiline = true;
             this.txtIDTable.Name = "txtIDTable";
-            this.txtIDTable.Size = new System.Drawing.Size(220, 31);
+            this.txtIDTable.Size = new System.Drawing.Size(214, 36);
             this.txtIDTable.TabIndex = 4;
+            this.txtIDTable.TextChanged += new System.EventHandler(this.txtIDTable_TextChanged);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(16, 209);
+            this.label15.Location = new System.Drawing.Point(21, 209);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(92, 22);
             this.label15.TabIndex = 3;
@@ -1148,6 +1199,7 @@
             this.btnSearchTable.TabIndex = 1;
             this.btnSearchTable.Text = "Tìm";
             this.btnSearchTable.UseVisualStyleBackColor = false;
+            this.btnSearchTable.Click += new System.EventHandler(this.btnSearchTable_Click);
             // 
             // txtSearchTable
             // 
@@ -1391,50 +1443,14 @@
             this.dgvAccount.Size = new System.Drawing.Size(1060, 831);
             this.dgvAccount.TabIndex = 0;
             // 
-            // dgvCategory
-            // 
-            this.dgvCategory.AllowUserToAddRows = false;
-            this.dgvCategory.AllowUserToDeleteRows = false;
-            this.dgvCategory.AllowUserToOrderColumns = true;
-            this.dgvCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategory.Location = new System.Drawing.Point(1, 7);
-            this.dgvCategory.Name = "dgvCategory";
-            this.dgvCategory.ReadOnly = true;
-            this.dgvCategory.RowHeadersWidth = 51;
-            this.dgvCategory.RowTemplate.Height = 24;
-            this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategory.Size = new System.Drawing.Size(697, 813);
-            this.dgvCategory.TabIndex = 10;
-            this.dgvCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellClick);
-            this.dgvCategory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvCategory_MouseClick);
-            // 
-            // dgvFood
-            // 
-            this.dgvFood.AllowUserToAddRows = false;
-            this.dgvFood.AllowUserToDeleteRows = false;
-            this.dgvFood.AllowUserToOrderColumns = true;
-            this.dgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFood.Location = new System.Drawing.Point(9, 7);
-            this.dgvFood.Name = "dgvFood";
-            this.dgvFood.ReadOnly = true;
-            this.dgvFood.RowHeadersWidth = 51;
-            this.dgvFood.RowTemplate.Height = 24;
-            this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFood.Size = new System.Drawing.Size(682, 821);
-            this.dgvFood.TabIndex = 11;
-            this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
-            this.dgvFood.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvFood_MouseClick);
-            // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 870);
+            this.Controls.Add(this.panelTable);
             this.Controls.Add(this.panelFood);
             this.Controls.Add(this.panelCategory);
-            this.Controls.Add(this.panelTable);
             this.Controls.Add(this.panelAccount);
             this.Controls.Add(this.panelOrder);
             this.Controls.Add(this.panelHome);
@@ -1457,9 +1473,11 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panelFood.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).EndInit();
             this.pnFood.ResumeLayout(false);
             this.pnFood.PerformLayout();
             this.panelCategory.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).EndInit();
             this.pnCategory.ResumeLayout(false);
             this.pnCategory.PerformLayout();
             this.panelHome.ResumeLayout(false);
@@ -1468,14 +1486,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
+            this.pnTable.ResumeLayout(false);
+            this.pnTable.PerformLayout();
             this.panelAccount.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1486,7 +1502,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btRevenue;
-        private System.Windows.Forms.Button btnAccout;
+        private System.Windows.Forms.Button btnAccount;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnTable;
         private System.Windows.Forms.Button btnFood;
@@ -1550,7 +1566,7 @@
         private System.Windows.Forms.Button btnDeleteCategory;
         private System.Windows.Forms.Button btnUpdateCategory;
         private System.Windows.Forms.Button btnAddCategory;
-        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel pnTable;
         private System.Windows.Forms.Button btnSortTable;
         private System.Windows.Forms.Button btnDelTable;
         private System.Windows.Forms.Button btnUpdateTable;
@@ -1576,7 +1592,7 @@
         private System.Windows.Forms.Button btnSearchAccount;
         private System.Windows.Forms.TextBox txtSearchAccount;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtTrangThaiTable;
         private System.Windows.Forms.ComboBox cbbChucVu;
         private System.Windows.Forms.DataGridView dgvTable;
         private System.Windows.Forms.Label lbPerson;

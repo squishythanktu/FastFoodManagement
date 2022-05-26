@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BanBLL.cs" />
     <Compile Include="BLL\DanhMucBLL.cs" />
     <Compile Include="BLL\SanPhamBLL.cs" />
     <Compile Include="DTO\Account.cs">
