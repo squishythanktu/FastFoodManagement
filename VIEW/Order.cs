@@ -296,7 +296,7 @@ namespace FastFoodManagement
         {
             bsTable.DataSource = BanBLL.Instance.GetAllBan();
             ResetTextBoxTable();
-            dgvTable.CurrentCell.Selected = false;
+            //dgvTable.CurrentCell.Selected = false;
         }
 
         private void ResetTextBoxTable()
