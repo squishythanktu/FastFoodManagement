@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BLL\BanBLL.cs" />
     <Compile Include="BLL\DanhMucBLL.cs" />
+    <Compile Include="BLL\OrderBLL.cs" />
     <Compile Include="BLL\SanPhamBLL.cs" />
     <Compile Include="DTO\Account.cs">
       <DependentUpon>QLSP.tt</DependentUpon>

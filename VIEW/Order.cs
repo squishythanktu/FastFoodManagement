@@ -16,6 +16,8 @@ namespace FastFoodManagement
     {
         demoPBL3 db = new demoPBL3();
 
+        public int soluongban = 0;
+
         public bool isThoat = true;
         public int ChucVu;
         public string Name;
@@ -27,7 +29,7 @@ namespace FastFoodManagement
 
         //data binding doesn't work when the lastest selection element is unselection by clicking on blank dgv
         //this all temp string (in which function has it) in order to solve that problem
-        
+
         private string txtTempIdCategory;
         private string txtTempNameCategory;
 
@@ -103,6 +105,7 @@ namespace FastFoodManagement
             dgvCategory.DataSource = bsCategory;
             dgvFood.DataSource = bsFood;
             dgvTable.DataSource = bsTable;
+            
 
             //Food
             LoadItemsCbDanhMuc();
@@ -116,7 +119,10 @@ namespace FastFoodManagement
             //Table
             LoadDgvTable();
             AddTableBinding();
-        }
+
+            //Order
+           //LoadButtonTable();
+        } 
 
 
         private void btnHome_Click_1(object sender, EventArgs e)
@@ -136,6 +142,61 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+
+            int soluongban = OrderBLL.Instance.demban();
+            string[] tenban = OrderBLL.Instance.getMangGomCacTenBan();
+
+
+            tbban.Controls.Clear();
+            int dem = 0;
+            for (int i = 0; i < tbban.ColumnCount; i++)
+            {
+                for (int j = 0; j < tbban.RowCount; j++)
+                {
+                    if (dem == soluongban)
+                        break;
+                    else
+                    {
+                        Button bnBan = new Button();
+                        bnBan.Text = tenban[dem].ToString();
+                        bnBan.AutoSize = false;
+                        bnBan.Dock = DockStyle.None;
+                        bnBan.TextAlign = ContentAlignment.MiddleCenter;
+                        bnBan.Width = bnBan.Height = 60;
+                        bnBan.Font = new Font("Source Sans Pro", 10, FontStyle.Bold);
+                        bnBan.ForeColor = Color.White;
+                        if (OrderBLL.Instance.checktrangthaiban(tenban[dem]))
+                        {
+                            bnBan.BackColor = Color.OrangeRed;
+                        }
+                        else
+                        {
+                            bnBan.BackColor = Color.LimeGreen;
+                        }
+
+                        bnBan.FlatStyle = FlatStyle.Standard;                      
+                        tbban.Controls.Add(bnBan);
+                        bnBan.Click += bnBan_Click;
+                        dem++;
+                    }
+                  
+                }
+            }
+        }
+        private void bnBan_Click(object sender, EventArgs e)
+        {
+            Button bnBan = sender as Button;
+            lbltenbancuabill.Text = bnBan.Text;
+            if (OrderBLL.Instance.checktrangthaiban(bnBan.Text)==false)
+            {
+                btnThanhToan.Enabled = false;
+            }
+            else
+            {
+                btnThanhToan.Enabled = true;
+
+            }
+
         }
 
         private void btnFood_Click_1(object sender, EventArgs e)
@@ -229,7 +290,7 @@ namespace FastFoodManagement
             txtIDCategory.Text = "";
             txtSearchCategory.Text = "";
         }
-       
+
         //LOAD TABLE
         private void LoadDgvTable()
         {
@@ -252,6 +313,8 @@ namespace FastFoodManagement
             txtNameTable.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "TenBan", true, DataSourceUpdateMode.Never));
             txtTrangThaiTable.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "TrangThai", true, DataSourceUpdateMode.Never));
         }
+        
+
         public event EventHandler Dangxuat;
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -262,9 +325,9 @@ namespace FastFoodManagement
         {
             if (isThoat)
             {
-                if (MessageBox.Show("Ban co muon thoat khong?", 
-                                    "Thoat chuong trinh", 
-                                    MessageBoxButtons.YesNo, 
+                if (MessageBox.Show("Ban co muon thoat khong?",
+                                    "Thoat chuong trinh",
+                                    MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Question) == DialogResult.Yes)
                     Application.Exit();
                 else return;
@@ -287,8 +350,8 @@ namespace FastFoodManagement
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Warning);
             }
-            else 
-            { 
+            else
+            {
                 SanPhamBLL.Instance.AddSanPham(new SanPham
                 {
                     TenSP = txtNameFood.Text,
@@ -406,10 +469,10 @@ namespace FastFoodManagement
         private void btnUpdateCategory_Click(object sender, EventArgs e)
         {
             txtTempNameCategory = txtNameCategory.Text;
-            DanhMucBLL.Instance.UpdateDanhMuc(new DanhMuc 
-            { 
-                MaDM = Convert.ToInt32(txtIDCategory.Text), 
-                TenDM = txtNameCategory.Text 
+            DanhMucBLL.Instance.UpdateDanhMuc(new DanhMuc
+            {
+                MaDM = Convert.ToInt32(txtIDCategory.Text),
+                TenDM = txtNameCategory.Text
             });
             LoadDgvCategory();
         }
@@ -427,7 +490,7 @@ namespace FastFoodManagement
                 txtTempNameCategory = dgvCategory.Rows[dgvCategory.SelectedRows[0].Index - 1].Cells[1].Value.ToString();
             }
             DanhMucBLL.Instance.DeleteDanhMuc(Convert.ToInt32(txtIDCategory.Text));
-            LoadDgvCategory(); 
+            LoadDgvCategory();
         }
 
         private void btnSearchCategory_Click(object sender, EventArgs e)
@@ -481,7 +544,7 @@ namespace FastFoodManagement
             ResetTextBoxCategory();
         }
 
-        
+
 
 
         //------------- Table Section -------------
@@ -512,7 +575,8 @@ namespace FastFoodManagement
         private void btnUpdateTable_Click(object sender, EventArgs e)
         {
             txtTempNameTable = txtNameTable.Text;
-            BanBLL.Instance.UpdateBan(new Ban{ 
+            BanBLL.Instance.UpdateBan(new Ban
+            {
                 MaBan = Convert.ToInt32(txtIDTable.Text),
                 TenBan = txtNameTable.Text,
                 TrangThai = Convert.ToBoolean(txtTrangThaiTable.Text)
@@ -540,12 +604,12 @@ namespace FastFoodManagement
 
         private void dgvTable_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvTable.SelectedRows[0].Cells[0].Value.ToString() == txtTempIdTable )
+            if (dgvTable.SelectedRows[0].Cells[0].Value.ToString() == txtTempIdTable)
             {
                 txtIDTable.Text = txtTempIdTable;
                 txtNameTable.Text = txtTempNameTable;
                 txtTrangThaiTable.Text = txtTempTrangThaiTable;
-            }    
+            }
             txtTempIdTable = txtIDTable.Text;
             txtTempNameTable = txtNameTable.Text;
             txtTempTrangThaiTable = txtTrangThaiTable.Text;
@@ -564,7 +628,7 @@ namespace FastFoodManagement
 
         private void txtIDTable_TextChanged(object sender, EventArgs e)
         {
-            if(txtIDTable.Text == "") //button add shows up when click nothing
+            if (txtIDTable.Text == "") //button add shows up when click nothing
             {
                 btnAddTable.Enabled = true;
                 btnUpdateTable.Enabled = false;
@@ -583,7 +647,10 @@ namespace FastFoodManagement
             dgvTable.ClearSelection();
             ResetTextBoxFood();
         }
-        //LOAD TABLE 
+
+       
+        //------------- Order Section -------------
+
 
 
     }

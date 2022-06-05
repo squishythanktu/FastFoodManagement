@@ -46,6 +46,8 @@
             this.panelOrder = new System.Windows.Forms.Panel();
             this.Table = new System.Windows.Forms.TabControl();
             this.tabTable = new System.Windows.Forms.TabPage();
+            this.pnBan = new System.Windows.Forms.Panel();
+            this.tbban = new System.Windows.Forms.TableLayoutPanel();
             this.tabOrder = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,7 +56,6 @@
             this.btnChuyenBan = new System.Windows.Forms.Button();
             this.cbChuyenBan = new System.Windows.Forms.ComboBox();
             this.btnThanhToan = new System.Windows.Forms.Button();
-            this.lbBill = new System.Windows.Forms.ListBox();
             this.panelFood = new System.Windows.Forms.Panel();
             this.dgvFood = new System.Windows.Forms.DataGridView();
             this.pnFood = new System.Windows.Forms.Panel();
@@ -129,11 +130,15 @@
             this.btnSortAccount = new System.Windows.Forms.Button();
             this.btnDeleteAccount = new System.Windows.Forms.Button();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
+            this.dgvBill = new System.Windows.Forms.DataGridView();
+            this.lbltenbancuabill = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelOrder.SuspendLayout();
             this.Table.SuspendLayout();
+            this.tabTable.SuspendLayout();
+            this.pnBan.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panelFood.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
@@ -151,6 +156,7 @@
             this.panelAccount.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -414,6 +420,7 @@
             // 
             // tabTable
             // 
+            this.tabTable.Controls.Add(this.pnBan);
             this.tabTable.Location = new System.Drawing.Point(4, 34);
             this.tabTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabTable.Name = "tabTable";
@@ -422,6 +429,41 @@
             this.tabTable.TabIndex = 0;
             this.tabTable.Text = "Table";
             this.tabTable.UseVisualStyleBackColor = true;
+            // 
+            // pnBan
+            // 
+            this.pnBan.Controls.Add(this.tbban);
+            this.pnBan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnBan.Location = new System.Drawing.Point(3, 2);
+            this.pnBan.Name = "pnBan";
+            this.pnBan.Size = new System.Drawing.Size(689, 812);
+            this.pnBan.TabIndex = 0;
+            // 
+            // tbban
+            // 
+            this.tbban.ColumnCount = 5;
+            this.tbban.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbban.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbban.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbban.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbban.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbban.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbban.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbban.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tbban.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tbban.Location = new System.Drawing.Point(0, 0);
+            this.tbban.Name = "tbban";
+            this.tbban.RowCount = 8;
+            this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tbban.Size = new System.Drawing.Size(689, 796);
+            this.tbban.TabIndex = 0;
             // 
             // tabOrder
             // 
@@ -437,13 +479,14 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.OldLace;
+            this.panel5.Controls.Add(this.lbltenbancuabill);
+            this.panel5.Controls.Add(this.dgvBill);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.txtThanhTien);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.btnChuyenBan);
             this.panel5.Controls.Add(this.cbChuyenBan);
             this.panel5.Controls.Add(this.btnThanhToan);
-            this.panel5.Controls.Add(this.lbBill);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel5.Location = new System.Drawing.Point(697, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -517,16 +560,6 @@
             this.btnThanhToan.TabIndex = 3;
             this.btnThanhToan.Text = "Thanh toán";
             this.btnThanhToan.UseVisualStyleBackColor = false;
-            // 
-            // lbBill
-            // 
-            this.lbBill.FormattingEnabled = true;
-            this.lbBill.ItemHeight = 16;
-            this.lbBill.Location = new System.Drawing.Point(21, 73);
-            this.lbBill.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lbBill.Name = "lbBill";
-            this.lbBill.Size = new System.Drawing.Size(317, 484);
-            this.lbBill.TabIndex = 0;
             // 
             // panelFood
             // 
@@ -1443,6 +1476,25 @@
             this.dgvAccount.Size = new System.Drawing.Size(1060, 831);
             this.dgvAccount.TabIndex = 0;
             // 
+            // dgvBill
+            // 
+            this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBill.Location = new System.Drawing.Point(20, 98);
+            this.dgvBill.Name = "dgvBill";
+            this.dgvBill.RowHeadersWidth = 51;
+            this.dgvBill.RowTemplate.Height = 24;
+            this.dgvBill.Size = new System.Drawing.Size(318, 468);
+            this.dgvBill.TabIndex = 9;
+            // 
+            // lbltenbancuabill
+            // 
+            this.lbltenbancuabill.AutoSize = true;
+            this.lbltenbancuabill.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltenbancuabill.Location = new System.Drawing.Point(142, 68);
+            this.lbltenbancuabill.Name = "lbltenbancuabill";
+            this.lbltenbancuabill.Size = new System.Drawing.Size(0, 23);
+            this.lbltenbancuabill.TabIndex = 10;
+            // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1470,6 +1522,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelOrder.ResumeLayout(false);
             this.Table.ResumeLayout(false);
+            this.tabTable.ResumeLayout(false);
+            this.pnBan.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panelFood.ResumeLayout(false);
@@ -1492,6 +1546,7 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1516,7 +1571,6 @@
         private System.Windows.Forms.Button btnChuyenBan;
         private System.Windows.Forms.ComboBox cbChuyenBan;
         private System.Windows.Forms.Button btnThanhToan;
-        private System.Windows.Forms.ListBox lbBill;
         private System.Windows.Forms.TabControl Table;
         private System.Windows.Forms.TabPage tabTable;
         private System.Windows.Forms.Panel panelFood;
@@ -1598,5 +1652,9 @@
         private System.Windows.Forms.Label lbPerson;
         private System.Windows.Forms.DataGridView dgvCategory;
         private System.Windows.Forms.DataGridView dgvFood;
+        private System.Windows.Forms.Panel pnBan;
+        private System.Windows.Forms.TableLayoutPanel tbban;
+        private System.Windows.Forms.DataGridView dgvBill;
+        private System.Windows.Forms.Label lbltenbancuabill;
     }
 }
