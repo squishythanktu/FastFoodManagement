@@ -1,5 +1,6 @@
 ﻿using FastFoodManagement.BLL;
 using FastFoodManagement.DTO;
+using FastFoodManagement.VIEW;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,8 +20,7 @@ namespace FastFoodManagement
         public int soluongban = 0;
 
         public bool isThoat = true;
-        public int ChucVu;
-        public string Name;
+        NhanVien nv = new NhanVien();
 
         BindingSource bsCategory = new BindingSource();
         BindingSource bsFood = new BindingSource();
@@ -41,17 +41,18 @@ namespace FastFoodManagement
         private string txtTempIdTable;
         private string txtTempNameTable;
         private string txtTempTrangThaiTable;
-        public Order()
+        public Order(NhanVien nv)
         {
             InitializeComponent();
             LoadAllComponent();
+            this.nv = nv;
         }
         private void Order_Load(object sender, EventArgs e)
         {
             //QL~0, NV~1
-            if (ChucVu == 0)
+            if (nv.ChucVu == 0)
             {
-                lbPerson.Text = Name + " - Quản Lý";
+                lbPerson.Text = nv.TenNV + " - Quản Lý";
                 btnAddAccount.Visible = true;
                 btnSortAccount.Visible = true;
                 btnDeleteAccount.Visible = true;
@@ -75,9 +76,9 @@ namespace FastFoodManagement
                 btnSortFood.Visible = true;
                 btnUpdateFood.Visible = true;
             }
-            if (ChucVu != 0)
+            if (nv.ChucVu != 0)
             {
-                lbPerson.Text = Name + " - Nhân Viên";
+                lbPerson.Text = nv.TenNV + " - Nhân Viên";
                 btnAddAccount.Visible = false;
                 btnSortAccount.Visible = false;
                 btnDeleteAccount.Visible = false;
@@ -143,8 +144,8 @@ namespace FastFoodManagement
             panelTable.Visible = false;
             panelAccount.Visible = false;
 
-            int soluongban = OrderBLL.Instance.demban();
-            string[] tenban = OrderBLL.Instance.getMangGomCacTenBan();
+            int soluongban = OrderBLL.Instance.DemBan();
+            string[] tenban = OrderBLL.Instance.getAllTableName();
 
 
             tbban.Controls.Clear();
@@ -165,7 +166,7 @@ namespace FastFoodManagement
                         bnBan.Width = bnBan.Height = 60;
                         bnBan.Font = new Font("Source Sans Pro", 10, FontStyle.Bold);
                         bnBan.ForeColor = Color.White;
-                        if (OrderBLL.Instance.checktrangthaiban(tenban[dem]))
+                        if (OrderBLL.Instance.CheckTrangThaiBan(tenban[dem]))
                         {
                             bnBan.BackColor = Color.OrangeRed;
                         }
@@ -187,7 +188,7 @@ namespace FastFoodManagement
         {
             Button bnBan = sender as Button;
             lbltenbancuabill.Text = bnBan.Text;
-            if (OrderBLL.Instance.checktrangthaiban(bnBan.Text)==false)
+            if (OrderBLL.Instance.CheckTrangThaiBan(bnBan.Text)==false)
             {
                 btnThanhToan.Enabled = false;
             }
@@ -648,7 +649,21 @@ namespace FastFoodManagement
             ResetTextBoxFood();
         }
 
-       
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            ChangePassword passwordform = new ChangePassword(nv);
+            passwordform.Show();
+            passwordform.d = new ChangePassword.MyDel(isChange);
+        }
+        public void isChange(bool check = false)
+        {
+            if (check == true)
+            {
+                Dangxuat(this, new EventArgs());
+            }
+        }
+
+
         //------------- Order Section -------------
 
 

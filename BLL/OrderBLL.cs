@@ -27,12 +27,12 @@ namespace FastFoodManagement.BLL
         }
         
 
-        public int demban()
+        public int DemBan()
         {
             return db.Bans.Count();
         }
 
-        public string[] getMangGomCacTenBan()
+        public string[] getAllTableName()
         {
             string[] result = new string[db.Bans.Count()];
             int i = 0;
@@ -44,7 +44,7 @@ namespace FastFoodManagement.BLL
             return result;
         }
 
-        public bool checktrangthaiban(string tenban)
+        public bool CheckTrangThaiBan(string tenban)
         {
             foreach(Ban item in db.Bans)
             {

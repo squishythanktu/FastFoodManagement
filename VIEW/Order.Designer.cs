@@ -50,6 +50,8 @@
             this.tbban = new System.Windows.Forms.TableLayoutPanel();
             this.tabOrder = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lbltenbancuabill = new System.Windows.Forms.Label();
+            this.dgvBill = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.txtThanhTien = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -130,8 +132,7 @@
             this.btnSortAccount = new System.Windows.Forms.Button();
             this.btnDeleteAccount = new System.Windows.Forms.Button();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
-            this.dgvBill = new System.Windows.Forms.DataGridView();
-            this.lbltenbancuabill = new System.Windows.Forms.Label();
+            this.btnChangePassword = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -140,6 +141,7 @@
             this.tabTable.SuspendLayout();
             this.pnBan.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
             this.panelFood.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             this.pnFood.SuspendLayout();
@@ -156,12 +158,12 @@
             this.panelAccount.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Crimson;
+            this.panel1.Controls.Add(this.btnChangePassword);
             this.panel1.Controls.Add(this.lbPerson);
             this.panel1.Controls.Add(this.btnMinimize);
             this.panel1.Controls.Add(this.btnLogout);
@@ -205,7 +207,7 @@
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.Gold;
-            this.btnLogout.Location = new System.Drawing.Point(1097, 1);
+            this.btnLogout.Location = new System.Drawing.Point(873, 0);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(105, 39);
@@ -462,7 +464,7 @@
             this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tbban.Size = new System.Drawing.Size(689, 796);
+            this.tbban.Size = new System.Drawing.Size(689, 793);
             this.tbban.TabIndex = 0;
             // 
             // tabOrder
@@ -493,6 +495,25 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(363, 831);
             this.panel5.TabIndex = 2;
+            // 
+            // lbltenbancuabill
+            // 
+            this.lbltenbancuabill.AutoSize = true;
+            this.lbltenbancuabill.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltenbancuabill.Location = new System.Drawing.Point(142, 68);
+            this.lbltenbancuabill.Name = "lbltenbancuabill";
+            this.lbltenbancuabill.Size = new System.Drawing.Size(0, 23);
+            this.lbltenbancuabill.TabIndex = 10;
+            // 
+            // dgvBill
+            // 
+            this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBill.Location = new System.Drawing.Point(20, 98);
+            this.dgvBill.Name = "dgvBill";
+            this.dgvBill.RowHeadersWidth = 51;
+            this.dgvBill.RowTemplate.Height = 24;
+            this.dgvBill.Size = new System.Drawing.Size(318, 468);
+            this.dgvBill.TabIndex = 9;
             // 
             // label2
             // 
@@ -580,13 +601,13 @@
             this.dgvFood.AllowUserToOrderColumns = true;
             this.dgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFood.Location = new System.Drawing.Point(9, 7);
+            this.dgvFood.Location = new System.Drawing.Point(1, 0);
             this.dgvFood.Name = "dgvFood";
             this.dgvFood.ReadOnly = true;
             this.dgvFood.RowHeadersWidth = 51;
             this.dgvFood.RowTemplate.Height = 24;
             this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFood.Size = new System.Drawing.Size(682, 821);
+            this.dgvFood.Size = new System.Drawing.Size(696, 834);
             this.dgvFood.TabIndex = 11;
             this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
             this.dgvFood.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvFood_MouseClick);
@@ -810,7 +831,7 @@
             this.dgvCategory.RowHeadersWidth = 51;
             this.dgvCategory.RowTemplate.Height = 24;
             this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategory.Size = new System.Drawing.Size(697, 813);
+            this.dgvCategory.Size = new System.Drawing.Size(697, 824);
             this.dgvCategory.TabIndex = 10;
             this.dgvCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellClick);
             this.dgvCategory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvCategory_MouseClick);
@@ -1476,35 +1497,32 @@
             this.dgvAccount.Size = new System.Drawing.Size(1060, 831);
             this.dgvAccount.TabIndex = 0;
             // 
-            // dgvBill
+            // btnChangePassword
             // 
-            this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBill.Location = new System.Drawing.Point(20, 98);
-            this.dgvBill.Name = "dgvBill";
-            this.dgvBill.RowHeadersWidth = 51;
-            this.dgvBill.RowTemplate.Height = 24;
-            this.dgvBill.Size = new System.Drawing.Size(318, 468);
-            this.dgvBill.TabIndex = 9;
-            // 
-            // lbltenbancuabill
-            // 
-            this.lbltenbancuabill.AutoSize = true;
-            this.lbltenbancuabill.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltenbancuabill.Location = new System.Drawing.Point(142, 68);
-            this.lbltenbancuabill.Name = "lbltenbancuabill";
-            this.lbltenbancuabill.Size = new System.Drawing.Size(0, 23);
-            this.lbltenbancuabill.TabIndex = 10;
+            this.btnChangePassword.BackColor = System.Drawing.Color.Crimson;
+            this.btnChangePassword.FlatAppearance.BorderSize = 0;
+            this.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePassword.ForeColor = System.Drawing.Color.Gold;
+            this.btnChangePassword.Location = new System.Drawing.Point(984, 0);
+            this.btnChangePassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(217, 39);
+            this.btnChangePassword.TabIndex = 6;
+            this.btnChangePassword.Text = "Change Password";
+            this.btnChangePassword.UseVisualStyleBackColor = false;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 870);
-            this.Controls.Add(this.panelOrder);
-            this.Controls.Add(this.panelCategory);
-            this.Controls.Add(this.panelTable);
-            this.Controls.Add(this.panelFood);
             this.Controls.Add(this.panelAccount);
+            this.Controls.Add(this.panelFood);
+            this.Controls.Add(this.panelTable);
+            this.Controls.Add(this.panelCategory);
+            this.Controls.Add(this.panelOrder);
             this.Controls.Add(this.panelHome);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -1526,6 +1544,7 @@
             this.pnBan.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
             this.panelFood.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).EndInit();
             this.pnFood.ResumeLayout(false);
@@ -1546,7 +1565,6 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1656,5 +1674,6 @@
         private System.Windows.Forms.TableLayoutPanel tbban;
         private System.Windows.Forms.DataGridView dgvBill;
         private System.Windows.Forms.Label lbltenbancuabill;
+        private System.Windows.Forms.Button btnChangePassword;
     }
 }
