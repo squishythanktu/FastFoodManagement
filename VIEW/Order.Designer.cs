@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Order));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnChangePassword = new System.Windows.Forms.Button();
             this.lbPerson = new System.Windows.Forms.Label();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@
             this.cbChuyenBan = new System.Windows.Forms.ComboBox();
             this.btnThanhToan = new System.Windows.Forms.Button();
             this.panelFood = new System.Windows.Forms.Panel();
-            this.dgvFood = new System.Windows.Forms.DataGridView();
             this.pnFood = new System.Windows.Forms.Panel();
             this.txtGiaTienFood = new System.Windows.Forms.TextBox();
             this.btnSortFood = new System.Windows.Forms.Button();
@@ -132,7 +132,15 @@
             this.btnSortAccount = new System.Windows.Forms.Button();
             this.btnDeleteAccount = new System.Windows.Forms.Button();
             this.dgvAccount = new System.Windows.Forms.DataGridView();
-            this.btnChangePassword = new System.Windows.Forms.Button();
+            this.panelRevenue = new System.Windows.Forms.Panel();
+            this.btnThongKeRevenue = new System.Windows.Forms.Button();
+            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.label23 = new System.Windows.Forms.Label();
+            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.dgvDoanhThu = new System.Windows.Forms.DataGridView();
+            this.dgvFood = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -143,7 +151,6 @@
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
             this.panelFood.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             this.pnFood.SuspendLayout();
             this.panelCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
@@ -158,6 +165,9 @@
             this.panelAccount.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
+            this.panelRevenue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDoanhThu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -174,6 +184,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1315, 39);
             this.panel1.TabIndex = 0;
+            // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.BackColor = System.Drawing.Color.Crimson;
+            this.btnChangePassword.FlatAppearance.BorderSize = 0;
+            this.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePassword.ForeColor = System.Drawing.Color.Gold;
+            this.btnChangePassword.Location = new System.Drawing.Point(984, 0);
+            this.btnChangePassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(217, 39);
+            this.btnChangePassword.TabIndex = 6;
+            this.btnChangePassword.Text = "Change Password";
+            this.btnChangePassword.UseVisualStyleBackColor = false;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
             // lbPerson
             // 
@@ -286,6 +312,7 @@
             this.btRevenue.Text = "     Revenue";
             this.btRevenue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btRevenue.UseVisualStyleBackColor = false;
+            this.btRevenue.Click += new System.EventHandler(this.btRevenue_Click);
             // 
             // btnAccount
             // 
@@ -594,24 +621,6 @@
             this.panelFood.TabIndex = 8;
             this.panelFood.Visible = false;
             // 
-            // dgvFood
-            // 
-            this.dgvFood.AllowUserToAddRows = false;
-            this.dgvFood.AllowUserToDeleteRows = false;
-            this.dgvFood.AllowUserToOrderColumns = true;
-            this.dgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFood.Location = new System.Drawing.Point(1, 0);
-            this.dgvFood.Name = "dgvFood";
-            this.dgvFood.ReadOnly = true;
-            this.dgvFood.RowHeadersWidth = 51;
-            this.dgvFood.RowTemplate.Height = 24;
-            this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFood.Size = new System.Drawing.Size(696, 834);
-            this.dgvFood.TabIndex = 11;
-            this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
-            this.dgvFood.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvFood_MouseClick);
-            // 
             // pnFood
             // 
             this.pnFood.BackColor = System.Drawing.Color.OldLace;
@@ -825,13 +834,13 @@
             this.dgvCategory.AllowUserToOrderColumns = true;
             this.dgvCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategory.Location = new System.Drawing.Point(1, 7);
+            this.dgvCategory.Location = new System.Drawing.Point(1, 0);
             this.dgvCategory.Name = "dgvCategory";
             this.dgvCategory.ReadOnly = true;
             this.dgvCategory.RowHeadersWidth = 51;
             this.dgvCategory.RowTemplate.Height = 24;
             this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategory.Size = new System.Drawing.Size(697, 824);
+            this.dgvCategory.Size = new System.Drawing.Size(697, 831);
             this.dgvCategory.TabIndex = 10;
             this.dgvCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellClick);
             this.dgvCategory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvCategory_MouseClick);
@@ -1072,24 +1081,16 @@
             // 
             // dgvTable
             // 
-            this.dgvTable.AllowUserToAddRows = false;
-            this.dgvTable.AllowUserToDeleteRows = false;
-            this.dgvTable.AllowUserToOrderColumns = true;
-            this.dgvTable.AllowUserToResizeColumns = false;
             this.dgvTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTable.Location = new System.Drawing.Point(0, 0);
-            this.dgvTable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvTable.Name = "dgvTable";
-            this.dgvTable.ReadOnly = true;
             this.dgvTable.RowHeadersWidth = 51;
             this.dgvTable.RowTemplate.Height = 24;
             this.dgvTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTable.Size = new System.Drawing.Size(697, 831);
             this.dgvTable.TabIndex = 8;
-            this.dgvTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTable_CellClick);
-            this.dgvTable.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvTable_MouseClick);
             // 
             // pnTable
             // 
@@ -1497,32 +1498,118 @@
             this.dgvAccount.Size = new System.Drawing.Size(1060, 831);
             this.dgvAccount.TabIndex = 0;
             // 
-            // btnChangePassword
+            // panelRevenue
             // 
-            this.btnChangePassword.BackColor = System.Drawing.Color.Crimson;
-            this.btnChangePassword.FlatAppearance.BorderSize = 0;
-            this.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePassword.ForeColor = System.Drawing.Color.Gold;
-            this.btnChangePassword.Location = new System.Drawing.Point(984, 0);
-            this.btnChangePassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(217, 39);
-            this.btnChangePassword.TabIndex = 6;
-            this.btnChangePassword.Text = "Change Password";
-            this.btnChangePassword.UseVisualStyleBackColor = false;
-            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
+            this.panelRevenue.BackColor = System.Drawing.Color.OldLace;
+            this.panelRevenue.Controls.Add(this.btnThongKeRevenue);
+            this.panelRevenue.Controls.Add(this.dtpToDate);
+            this.panelRevenue.Controls.Add(this.label23);
+            this.panelRevenue.Controls.Add(this.dtpFromDate);
+            this.panelRevenue.Controls.Add(this.label22);
+            this.panelRevenue.Controls.Add(this.label21);
+            this.panelRevenue.Controls.Add(this.dgvDoanhThu);
+            this.panelRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelRevenue.Location = new System.Drawing.Point(255, 39);
+            this.panelRevenue.Name = "panelRevenue";
+            this.panelRevenue.Size = new System.Drawing.Size(1060, 831);
+            this.panelRevenue.TabIndex = 0;
+            this.panelRevenue.Visible = false;
+            // 
+            // btnThongKeRevenue
+            // 
+            this.btnThongKeRevenue.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnThongKeRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongKeRevenue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnThongKeRevenue.Location = new System.Drawing.Point(833, 94);
+            this.btnThongKeRevenue.Name = "btnThongKeRevenue";
+            this.btnThongKeRevenue.Size = new System.Drawing.Size(166, 48);
+            this.btnThongKeRevenue.TabIndex = 12;
+            this.btnThongKeRevenue.Text = "Thống kê";
+            this.btnThongKeRevenue.UseVisualStyleBackColor = false;
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpToDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpToDate.Location = new System.Drawing.Point(403, 127);
+            this.dtpToDate.Name = "dtpToDate";
+            this.dtpToDate.Size = new System.Drawing.Size(374, 30);
+            this.dtpToDate.TabIndex = 11;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(307, 132);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(51, 25);
+            this.label23.TabIndex = 10;
+            this.label23.Text = "đến:";
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFromDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFromDate.Location = new System.Drawing.Point(403, 77);
+            this.dtpFromDate.Name = "dtpFromDate";
+            this.dtpFromDate.Size = new System.Drawing.Size(374, 30);
+            this.dtpFromDate.TabIndex = 8;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 20.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.Crimson;
+            this.label22.Location = new System.Drawing.Point(434, 12);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(201, 48);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "Revenue";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(26, 82);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(332, 25);
+            this.label21.TabIndex = 1;
+            this.label21.Text = "Chọn thời gian muốn xem doanh thu:";
+            // 
+            // dgvDoanhThu
+            // 
+            this.dgvDoanhThu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDoanhThu.Location = new System.Drawing.Point(31, 176);
+            this.dgvDoanhThu.Name = "dgvDoanhThu";
+            this.dgvDoanhThu.RowHeadersWidth = 51;
+            this.dgvDoanhThu.RowTemplate.Height = 24;
+            this.dgvDoanhThu.Size = new System.Drawing.Size(1005, 532);
+            this.dgvDoanhThu.TabIndex = 0;
+            // 
+            // dgvFood
+            // 
+            this.dgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFood.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFood.Location = new System.Drawing.Point(0, 0);
+            this.dgvFood.Name = "dgvFood";
+            this.dgvFood.RowHeadersWidth = 51;
+            this.dgvFood.RowTemplate.Height = 24;
+            this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFood.Size = new System.Drawing.Size(697, 831);
+            this.dgvFood.TabIndex = 7;
             // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 870);
-            this.Controls.Add(this.panelAccount);
             this.Controls.Add(this.panelFood);
             this.Controls.Add(this.panelTable);
             this.Controls.Add(this.panelCategory);
+            this.Controls.Add(this.panelRevenue);
             this.Controls.Add(this.panelOrder);
+            this.Controls.Add(this.panelAccount);
             this.Controls.Add(this.panelHome);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -1546,7 +1633,6 @@
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
             this.panelFood.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).EndInit();
             this.pnFood.ResumeLayout(false);
             this.pnFood.PerformLayout();
             this.panelCategory.ResumeLayout(false);
@@ -1565,6 +1651,10 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
+            this.panelRevenue.ResumeLayout(false);
+            this.panelRevenue.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDoanhThu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1666,14 +1756,22 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtTrangThaiTable;
         private System.Windows.Forms.ComboBox cbbChucVu;
-        private System.Windows.Forms.DataGridView dgvTable;
         private System.Windows.Forms.Label lbPerson;
         private System.Windows.Forms.DataGridView dgvCategory;
-        private System.Windows.Forms.DataGridView dgvFood;
         private System.Windows.Forms.Panel pnBan;
         private System.Windows.Forms.TableLayoutPanel tbban;
         private System.Windows.Forms.DataGridView dgvBill;
         private System.Windows.Forms.Label lbltenbancuabill;
         private System.Windows.Forms.Button btnChangePassword;
+        private System.Windows.Forms.Panel panelRevenue;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.DataGridView dgvDoanhThu;
+        private System.Windows.Forms.DateTimePicker dtpFromDate;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnThongKeRevenue;
+        private System.Windows.Forms.DateTimePicker dtpToDate;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.DataGridView dgvTable;
+        private System.Windows.Forms.DataGridView dgvFood;
     }
 }

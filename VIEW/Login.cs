@@ -71,18 +71,6 @@ namespace FastFoodManagement
             this.Show();
         }
 
-        private void ckbShowHide_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ckbShowHide.Checked)
-            {
-                txtPassword.UseSystemPasswordChar = true;
-            }
-            else
-            {
-                txtPassword.UseSystemPasswordChar = false;
-            }
-        }
-
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -123,5 +111,34 @@ namespace FastFoodManagement
         {
 
         }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            if(txtPassword.Text.Length >0)
+            {
+                picEyeOpen.Visible = true;
+                txtPassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                picEyeOpen.Visible = false;
+                picEyeClose.Visible = false;
+            }    
+        }
+
+        private void picEyeOpen_Click(object sender, EventArgs e)
+        {
+            picEyeOpen.Visible=false;
+            picEyeClose.Visible = true;
+            txtPassword.UseSystemPasswordChar = true;
+        }
+
+        private void picEyeClose_Click(object sender, EventArgs e)
+        {
+            picEyeOpen.Visible = true;
+            picEyeClose.Visible = false;
+            txtPassword.UseSystemPasswordChar = false;
+        }
+
     }
 }

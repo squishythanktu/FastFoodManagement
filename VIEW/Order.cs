@@ -121,8 +121,6 @@ namespace FastFoodManagement
             LoadDgvTable();
             AddTableBinding();
 
-            //Order
-           //LoadButtonTable();
         } 
 
 
@@ -134,6 +132,7 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
         }
         private void btnOrder_Click_1(object sender, EventArgs e)
         {
@@ -143,6 +142,7 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
 
             int soluongban = OrderBLL.Instance.DemBan();
             string[] tenban = OrderBLL.Instance.getAllTableName();
@@ -209,6 +209,7 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
         }
         private void btnDanhmuc_Click(object sender, EventArgs e)
         {
@@ -219,6 +220,7 @@ namespace FastFoodManagement
             panelFood.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
         }
 
         private void btnTable_Click(object sender, EventArgs e)
@@ -230,6 +232,7 @@ namespace FastFoodManagement
             panelFood.Visible = false;
             panelCategory.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
         }
         private void btnAccount_Click(object sender, EventArgs e)
         {
@@ -239,6 +242,17 @@ namespace FastFoodManagement
             panelFood.Visible = false;
             panelCategory.Visible = false;
             panelTable.Visible = false;
+            panelRevenue.Visible = false;
+        }
+        private void btRevenue_Click(object sender, EventArgs e)
+        {
+            panelRevenue.Visible = true;
+            panelHome.Visible = false;
+            panelOrder.Visible = false;
+            panelFood.Visible = false;
+            panelCategory.Visible = false;
+            panelTable.Visible = false;
+            panelAccount.Visible = false;
         }
 
         //LOAD FOOD
@@ -252,6 +266,7 @@ namespace FastFoodManagement
             bsFood.DataSource = SanPhamBLL.Instance.GetAllSanPham();
             ResetTextBoxFood();
             dgvFood.CurrentCell.Selected = false;
+            //dgvFood.Columns[0].Width = 65;
         }
 
         private void AddFoodBinding()
@@ -298,6 +313,7 @@ namespace FastFoodManagement
             bsTable.DataSource = BanBLL.Instance.GetAllBan();
             ResetTextBoxTable();
             dgvTable.CurrentCell.Selected = false;
+
         }
 
         private void ResetTextBoxTable()
@@ -326,8 +342,8 @@ namespace FastFoodManagement
         {
             if (isThoat)
             {
-                if (MessageBox.Show("Ban co muon thoat khong?",
-                                    "Thoat chuong trinh",
+                if (MessageBox.Show("Do you want to exit the program?",
+                                    "Exit",
                                     MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Question) == DialogResult.Yes)
                     Application.Exit();
@@ -435,6 +451,10 @@ namespace FastFoodManagement
                 txtNameFood.Text = txtTempNameFood;
                 txtGiaTienFood.Text = txtTempGiaTienFood;
                 cbDanhMucFood.SelectedIndex = tempCbDanhMucFood.MaDM - 1;
+            }
+            else
+            {
+
             }
             //set temp info
             txtTempIdFood = txtIDFood.Text;
@@ -662,6 +682,8 @@ namespace FastFoodManagement
                 Dangxuat(this, new EventArgs());
             }
         }
+
+       
 
 
         //------------- Order Section -------------
