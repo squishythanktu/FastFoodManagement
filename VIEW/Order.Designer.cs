@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Order));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lbPerson = new System.Windows.Forms.Label();
-            this.btnMinimize = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDanhmuc = new System.Windows.Forms.Button();
-            this.btRevenue = new System.Windows.Forms.Button();
+            this.btnRevenue = new System.Windows.Forms.Button();
             this.btnAccount = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnTable = new System.Windows.Forms.Button();
@@ -49,9 +47,15 @@
             this.pnBan = new System.Windows.Forms.Panel();
             this.tbban = new System.Windows.Forms.TableLayoutPanel();
             this.tabOrder = new System.Windows.Forms.TabPage();
+            this.dgvOrder = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtThanhTien = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.btnClearAll = new System.Windows.Forms.Button();
+            this.numSoLuong = new System.Windows.Forms.NumericUpDown();
+            this.btnThemMon = new System.Windows.Forms.Button();
+            this.lbNumThanhTien = new System.Windows.Forms.Label();
+            this.dgvBill = new System.Windows.Forms.DataGridView();
+            this.lbltenbancuabill = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnChuyenBan = new System.Windows.Forms.Button();
             this.cbChuyenBan = new System.Windows.Forms.ComboBox();
@@ -111,11 +115,16 @@
             this.btnSearchTable = new System.Windows.Forms.Button();
             this.txtSearchTable = new System.Windows.Forms.TextBox();
             this.panelAccount = new System.Windows.Forms.Panel();
+            this.dgvAccount = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.cbbChucVu = new System.Windows.Forms.ComboBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbChucVuNhanVien = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.txtDiaChi = new System.Windows.Forms.TextBox();
-            this.txtSDT = new System.Windows.Forms.TextBox();
+            this.txtDiaChiNhanVien = new System.Windows.Forms.TextBox();
+            this.txtSDTNhanVien = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -126,20 +135,36 @@
             this.txtSearchAccount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddAccount = new System.Windows.Forms.Button();
-            this.btnEditAccount = new System.Windows.Forms.Button();
+            this.btnUpdateAccount = new System.Windows.Forms.Button();
             this.btnSortAccount = new System.Windows.Forms.Button();
             this.btnDeleteAccount = new System.Windows.Forms.Button();
-            this.dgvAccount = new System.Windows.Forms.DataGridView();
-            this.dgvBill = new System.Windows.Forms.DataGridView();
-            this.lbltenbancuabill = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.panelRevenue = new System.Windows.Forms.Panel();
+            this.lbSoTienDoanhThu = new System.Windows.Forms.Label();
+            this.lbDoanhThu = new System.Windows.Forms.Label();
+            this.dgvRevenue = new System.Windows.Forms.DataGridView();
+            this.btnThongKe = new System.Windows.Forms.Button();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
+            this.label24 = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lbPerson = new System.Windows.Forms.Label();
+            this.btnMinimize = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelOrder.SuspendLayout();
             this.Table.SuspendLayout();
             this.tabTable.SuspendLayout();
             this.pnBan.SuspendLayout();
+            this.tabOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
             this.panelFood.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             this.pnFood.SuspendLayout();
@@ -154,86 +179,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
             this.pnTable.SuspendLayout();
             this.panelAccount.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.panelRevenue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRevenue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Crimson;
-            this.panel1.Controls.Add(this.lbPerson);
-            this.panel1.Controls.Add(this.btnMinimize);
-            this.panel1.Controls.Add(this.btnLogout);
-            this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1315, 39);
-            this.panel1.TabIndex = 0;
-            // 
-            // lbPerson
-            // 
-            this.lbPerson.AutoSize = true;
-            this.lbPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPerson.ForeColor = System.Drawing.Color.Gold;
-            this.lbPerson.Location = new System.Drawing.Point(9, 9);
-            this.lbPerson.Name = "lbPerson";
-            this.lbPerson.Size = new System.Drawing.Size(0, 22);
-            this.lbPerson.TabIndex = 4;
-            // 
-            // btnMinimize
-            // 
-            this.btnMinimize.FlatAppearance.BorderSize = 0;
-            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold);
-            this.btnMinimize.ForeColor = System.Drawing.Color.Gold;
-            this.btnMinimize.Location = new System.Drawing.Point(1207, 0);
-            this.btnMinimize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(51, 39);
-            this.btnMinimize.TabIndex = 2;
-            this.btnMinimize.Text = "━";
-            this.btnMinimize.UseVisualStyleBackColor = true;
-            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.BackColor = System.Drawing.Color.Crimson;
-            this.btnLogout.FlatAppearance.BorderSize = 0;
-            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.Color.Gold;
-            this.btnLogout.Location = new System.Drawing.Point(1097, 1);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(105, 39);
-            this.btnLogout.TabIndex = 1;
-            this.btnLogout.Text = "Log out";
-            this.btnLogout.UseVisualStyleBackColor = false;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.ForeColor = System.Drawing.Color.Gold;
-            this.btnExit.Location = new System.Drawing.Point(1263, 0);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(51, 39);
-            this.btnExit.TabIndex = 0;
-            this.btnExit.Text = "X";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.OldLace;
             this.panel2.Controls.Add(this.btnDanhmuc);
-            this.panel2.Controls.Add(this.btRevenue);
+            this.panel2.Controls.Add(this.btnRevenue);
             this.panel2.Controls.Add(this.btnAccount);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.btnTable);
@@ -247,6 +205,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(255, 831);
             this.panel2.TabIndex = 1;
+            this.panel2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnAccount_Click);
             // 
             // btnDanhmuc
             // 
@@ -267,23 +226,24 @@
             this.btnDanhmuc.UseVisualStyleBackColor = false;
             this.btnDanhmuc.Click += new System.EventHandler(this.btnDanhmuc_Click);
             // 
-            // btRevenue
+            // btnRevenue
             // 
-            this.btRevenue.BackColor = System.Drawing.Color.OldLace;
-            this.btRevenue.FlatAppearance.BorderSize = 0;
-            this.btRevenue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btRevenue.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btRevenue.ForeColor = System.Drawing.Color.Crimson;
-            this.btRevenue.Image = ((System.Drawing.Image)(resources.GetObject("btRevenue.Image")));
-            this.btRevenue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btRevenue.Location = new System.Drawing.Point(0, 757);
-            this.btRevenue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btRevenue.Name = "btRevenue";
-            this.btRevenue.Size = new System.Drawing.Size(253, 74);
-            this.btRevenue.TabIndex = 17;
-            this.btRevenue.Text = "     Revenue";
-            this.btRevenue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btRevenue.UseVisualStyleBackColor = false;
+            this.btnRevenue.BackColor = System.Drawing.Color.OldLace;
+            this.btnRevenue.FlatAppearance.BorderSize = 0;
+            this.btnRevenue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRevenue.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRevenue.ForeColor = System.Drawing.Color.Crimson;
+            this.btnRevenue.Image = ((System.Drawing.Image)(resources.GetObject("btnRevenue.Image")));
+            this.btnRevenue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRevenue.Location = new System.Drawing.Point(0, 757);
+            this.btnRevenue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRevenue.Name = "btnRevenue";
+            this.btnRevenue.Size = new System.Drawing.Size(253, 74);
+            this.btnRevenue.TabIndex = 17;
+            this.btnRevenue.Text = "     Revenue";
+            this.btnRevenue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRevenue.UseVisualStyleBackColor = false;
+            this.btnRevenue.Click += new System.EventHandler(this.btnRevenue_Click);
             // 
             // btnAccount
             // 
@@ -462,12 +422,13 @@
             this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tbban.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tbban.Size = new System.Drawing.Size(689, 796);
+            this.tbban.Size = new System.Drawing.Size(689, 793);
             this.tbban.TabIndex = 0;
             // 
             // tabOrder
             // 
             this.tabOrder.BackColor = System.Drawing.Color.Transparent;
+            this.tabOrder.Controls.Add(this.dgvOrder);
             this.tabOrder.Location = new System.Drawing.Point(4, 34);
             this.tabOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabOrder.Name = "tabOrder";
@@ -476,13 +437,33 @@
             this.tabOrder.TabIndex = 1;
             this.tabOrder.Text = "Order";
             // 
+            // dgvOrder
+            // 
+            this.dgvOrder.AllowUserToAddRows = false;
+            this.dgvOrder.AllowUserToDeleteRows = false;
+            this.dgvOrder.AllowUserToOrderColumns = true;
+            this.dgvOrder.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvOrder.BackgroundColor = System.Drawing.Color.OldLace;
+            this.dgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrder.Location = new System.Drawing.Point(9, 5);
+            this.dgvOrder.Name = "dgvOrder";
+            this.dgvOrder.ReadOnly = true;
+            this.dgvOrder.RowHeadersWidth = 51;
+            this.dgvOrder.RowTemplate.Height = 24;
+            this.dgvOrder.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOrder.Size = new System.Drawing.Size(683, 787);
+            this.dgvOrder.TabIndex = 12;
+            // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.OldLace;
-            this.panel5.Controls.Add(this.lbltenbancuabill);
+            this.panel5.Controls.Add(this.label21);
+            this.panel5.Controls.Add(this.btnClearAll);
+            this.panel5.Controls.Add(this.numSoLuong);
+            this.panel5.Controls.Add(this.btnThemMon);
+            this.panel5.Controls.Add(this.lbNumThanhTien);
             this.panel5.Controls.Add(this.dgvBill);
-            this.panel5.Controls.Add(this.label2);
-            this.panel5.Controls.Add(this.txtThanhTien);
+            this.panel5.Controls.Add(this.lbltenbancuabill);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.btnChuyenBan);
             this.panel5.Controls.Add(this.cbChuyenBan);
@@ -494,26 +475,100 @@
             this.panel5.Size = new System.Drawing.Size(363, 831);
             this.panel5.TabIndex = 2;
             // 
-            // label2
+            // label21
             // 
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Crimson;
-            this.label2.Location = new System.Drawing.Point(19, 572);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 30);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Thành tiền";
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Crimson;
+            this.label21.Location = new System.Drawing.Point(12, 626);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(150, 31);
+            this.label21.TabIndex = 19;
+            this.label21.Text = "Thành tiền:";
             // 
-            // txtThanhTien
+            // btnClearAll
             // 
-            this.txtThanhTien.Enabled = false;
-            this.txtThanhTien.Location = new System.Drawing.Point(21, 610);
-            this.txtThanhTien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtThanhTien.Multiline = true;
-            this.txtThanhTien.Name = "txtThanhTien";
-            this.txtThanhTien.Size = new System.Drawing.Size(317, 38);
-            this.txtThanhTien.TabIndex = 7;
+            this.btnClearAll.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnClearAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearAll.ForeColor = System.Drawing.Color.Transparent;
+            this.btnClearAll.Location = new System.Drawing.Point(7, 544);
+            this.btnClearAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(135, 50);
+            this.btnClearAll.TabIndex = 17;
+            this.btnClearAll.Text = "Clear all";
+            this.btnClearAll.UseVisualStyleBackColor = false;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
+            // 
+            // numSoLuong
+            // 
+            this.numSoLuong.Cursor = System.Windows.Forms.Cursors.Default;
+            this.numSoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numSoLuong.Location = new System.Drawing.Point(309, 553);
+            this.numSoLuong.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numSoLuong.Name = "numSoLuong";
+            this.numSoLuong.Size = new System.Drawing.Size(40, 30);
+            this.numSoLuong.TabIndex = 16;
+            this.numSoLuong.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // btnThemMon
+            // 
+            this.btnThemMon.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnThemMon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemMon.ForeColor = System.Drawing.Color.Transparent;
+            this.btnThemMon.Location = new System.Drawing.Point(168, 544);
+            this.btnThemMon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnThemMon.Name = "btnThemMon";
+            this.btnThemMon.Size = new System.Drawing.Size(135, 50);
+            this.btnThemMon.TabIndex = 15;
+            this.btnThemMon.Text = "Thêm món";
+            this.btnThemMon.UseVisualStyleBackColor = false;
+            this.btnThemMon.Click += new System.EventHandler(this.btnThemMon_Click);
+            // 
+            // lbNumThanhTien
+            // 
+            this.lbNumThanhTien.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbNumThanhTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNumThanhTien.ForeColor = System.Drawing.Color.Crimson;
+            this.lbNumThanhTien.Location = new System.Drawing.Point(191, 627);
+            this.lbNumThanhTien.Name = "lbNumThanhTien";
+            this.lbNumThanhTien.Size = new System.Drawing.Size(129, 30);
+            this.lbNumThanhTien.TabIndex = 14;
+            this.lbNumThanhTien.Text = "0 đ";
+            // 
+            // dgvBill
+            // 
+            this.dgvBill.AllowUserToAddRows = false;
+            this.dgvBill.AllowUserToDeleteRows = false;
+            this.dgvBill.AllowUserToOrderColumns = true;
+            this.dgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBill.BackgroundColor = System.Drawing.Color.OldLace;
+            this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBill.Location = new System.Drawing.Point(9, 81);
+            this.dgvBill.Name = "dgvBill";
+            this.dgvBill.ReadOnly = true;
+            this.dgvBill.RowHeadersWidth = 51;
+            this.dgvBill.RowTemplate.Height = 24;
+            this.dgvBill.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBill.Size = new System.Drawing.Size(344, 451);
+            this.dgvBill.TabIndex = 13;
+            // 
+            // lbltenbancuabill
+            // 
+            this.lbltenbancuabill.AutoSize = true;
+            this.lbltenbancuabill.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltenbancuabill.Location = new System.Drawing.Point(168, 49);
+            this.lbltenbancuabill.Name = "lbltenbancuabill";
+            this.lbltenbancuabill.Size = new System.Drawing.Size(0, 23);
+            this.lbltenbancuabill.TabIndex = 10;
             // 
             // label3
             // 
@@ -531,35 +586,41 @@
             this.btnChuyenBan.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnChuyenBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChuyenBan.ForeColor = System.Drawing.Color.Transparent;
-            this.btnChuyenBan.Location = new System.Drawing.Point(21, 670);
+            this.btnChuyenBan.Location = new System.Drawing.Point(21, 683);
             this.btnChuyenBan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnChuyenBan.Name = "btnChuyenBan";
             this.btnChuyenBan.Size = new System.Drawing.Size(135, 50);
             this.btnChuyenBan.TabIndex = 5;
             this.btnChuyenBan.Text = "Chuyển bàn";
             this.btnChuyenBan.UseVisualStyleBackColor = false;
+            this.btnChuyenBan.Click += new System.EventHandler(this.btnChuyenBan_Click);
             // 
             // cbChuyenBan
             // 
+            this.cbChuyenBan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbChuyenBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbChuyenBan.FormattingEnabled = true;
-            this.cbChuyenBan.Location = new System.Drawing.Point(175, 684);
+            this.cbChuyenBan.Location = new System.Drawing.Point(175, 697);
             this.cbChuyenBan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbChuyenBan.Name = "cbChuyenBan";
-            this.cbChuyenBan.Size = new System.Drawing.Size(163, 24);
+            this.cbChuyenBan.Size = new System.Drawing.Size(163, 26);
             this.cbChuyenBan.TabIndex = 4;
+            this.cbChuyenBan.SelectedIndexChanged += new System.EventHandler(this.cbChuyenBan_SelectedIndexChanged);
             // 
             // btnThanhToan
             // 
+            this.btnThanhToan.AutoSize = true;
             this.btnThanhToan.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnThanhToan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThanhToan.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThanhToan.ForeColor = System.Drawing.Color.Transparent;
-            this.btnThanhToan.Location = new System.Drawing.Point(175, 734);
+            this.btnThanhToan.Location = new System.Drawing.Point(20, 757);
             this.btnThanhToan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnThanhToan.Name = "btnThanhToan";
-            this.btnThanhToan.Size = new System.Drawing.Size(167, 50);
+            this.btnThanhToan.Size = new System.Drawing.Size(333, 63);
             this.btnThanhToan.TabIndex = 3;
             this.btnThanhToan.Text = "Thanh toán";
             this.btnThanhToan.UseVisualStyleBackColor = false;
+            this.btnThanhToan.Click += new System.EventHandler(this.btnThanhToan_Click);
             // 
             // panelFood
             // 
@@ -580,13 +641,13 @@
             this.dgvFood.AllowUserToOrderColumns = true;
             this.dgvFood.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFood.Location = new System.Drawing.Point(9, 7);
+            this.dgvFood.Location = new System.Drawing.Point(1, 0);
             this.dgvFood.Name = "dgvFood";
             this.dgvFood.ReadOnly = true;
             this.dgvFood.RowHeadersWidth = 51;
             this.dgvFood.RowTemplate.Height = 24;
             this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFood.Size = new System.Drawing.Size(682, 821);
+            this.dgvFood.Size = new System.Drawing.Size(696, 834);
             this.dgvFood.TabIndex = 11;
             this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
             this.dgvFood.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvFood_MouseClick);
@@ -679,6 +740,7 @@
             // 
             // cbDanhMucFood
             // 
+            this.cbDanhMucFood.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDanhMucFood.FormattingEnabled = true;
             this.cbDanhMucFood.Location = new System.Drawing.Point(137, 352);
             this.cbDanhMucFood.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -804,13 +866,13 @@
             this.dgvCategory.AllowUserToOrderColumns = true;
             this.dgvCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategory.Location = new System.Drawing.Point(1, 7);
+            this.dgvCategory.Location = new System.Drawing.Point(0, 3);
             this.dgvCategory.Name = "dgvCategory";
             this.dgvCategory.ReadOnly = true;
             this.dgvCategory.RowHeadersWidth = 51;
             this.dgvCategory.RowTemplate.Height = 24;
             this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategory.Size = new System.Drawing.Size(697, 813);
+            this.dgvCategory.Size = new System.Drawing.Size(697, 864);
             this.dgvCategory.TabIndex = 10;
             this.dgvCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategory_CellClick);
             this.dgvCategory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvCategory_MouseClick);
@@ -970,10 +1032,10 @@
             this.panelHome.Controls.Add(this.pictureBox4);
             this.panelHome.Controls.Add(this.pictureBox2);
             this.panelHome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelHome.Location = new System.Drawing.Point(255, 39);
+            this.panelHome.Location = new System.Drawing.Point(0, 39);
             this.panelHome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelHome.Name = "panelHome";
-            this.panelHome.Size = new System.Drawing.Size(1060, 831);
+            this.panelHome.Size = new System.Drawing.Size(1315, 831);
             this.panelHome.TabIndex = 2;
             // 
             // labelSdt
@@ -1032,7 +1094,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1060, 834);
+            this.pictureBox2.Size = new System.Drawing.Size(1315, 834);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
@@ -1245,8 +1307,8 @@
             // 
             // panelAccount
             // 
-            this.panelAccount.Controls.Add(this.panel4);
             this.panelAccount.Controls.Add(this.dgvAccount);
+            this.panelAccount.Controls.Add(this.panel4);
             this.panelAccount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAccount.Location = new System.Drawing.Point(255, 39);
             this.panelAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1255,13 +1317,35 @@
             this.panelAccount.TabIndex = 8;
             this.panelAccount.Visible = false;
             // 
+            // dgvAccount
+            // 
+            this.dgvAccount.AllowUserToAddRows = false;
+            this.dgvAccount.AllowUserToDeleteRows = false;
+            this.dgvAccount.AllowUserToOrderColumns = true;
+            this.dgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccount.Location = new System.Drawing.Point(1, -1);
+            this.dgvAccount.Name = "dgvAccount";
+            this.dgvAccount.ReadOnly = true;
+            this.dgvAccount.RowHeadersWidth = 51;
+            this.dgvAccount.RowTemplate.Height = 24;
+            this.dgvAccount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAccount.Size = new System.Drawing.Size(696, 834);
+            this.dgvAccount.TabIndex = 12;
+            this.dgvAccount.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccount_CellClick);
+            this.dgvAccount.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvAccount_MouseClick);
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.OldLace;
-            this.panel4.Controls.Add(this.cbbChucVu);
+            this.panel4.Controls.Add(this.txtPassword);
+            this.panel4.Controls.Add(this.label22);
+            this.panel4.Controls.Add(this.txtUsername);
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.cbChucVuNhanVien);
             this.panel4.Controls.Add(this.label19);
-            this.panel4.Controls.Add(this.txtDiaChi);
-            this.panel4.Controls.Add(this.txtSDT);
+            this.panel4.Controls.Add(this.txtDiaChiNhanVien);
+            this.panel4.Controls.Add(this.txtSDTNhanVien);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.label13);
             this.panel4.Controls.Add(this.label17);
@@ -1272,7 +1356,7 @@
             this.panel4.Controls.Add(this.txtSearchAccount);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.btnAddAccount);
-            this.panel4.Controls.Add(this.btnEditAccount);
+            this.panel4.Controls.Add(this.btnUpdateAccount);
             this.panel4.Controls.Add(this.btnSortAccount);
             this.panel4.Controls.Add(this.btnDeleteAccount);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
@@ -1281,15 +1365,55 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(363, 831);
             this.panel4.TabIndex = 8;
+            this.panel4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnAccount_Click);
             // 
-            // cbbChucVu
+            // txtPassword
             // 
-            this.cbbChucVu.FormattingEnabled = true;
-            this.cbbChucVu.Location = new System.Drawing.Point(136, 463);
-            this.cbbChucVu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbbChucVu.Name = "cbbChucVu";
-            this.cbbChucVu.Size = new System.Drawing.Size(212, 24);
-            this.cbbChucVu.TabIndex = 22;
+            this.txtPassword.Location = new System.Drawing.Point(137, 598);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPassword.Multiline = true;
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(212, 32);
+            this.txtPassword.TabIndex = 26;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(21, 602);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(97, 22);
+            this.label22.TabIndex = 25;
+            this.label22.Text = "Mật khẩu:";
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(136, 527);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtUsername.Multiline = true;
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(212, 32);
+            this.txtUsername.TabIndex = 24;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(20, 531);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 22);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Tài khoản:";
+            // 
+            // cbChucVuNhanVien
+            // 
+            this.cbChucVuNhanVien.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbChucVuNhanVien.FormattingEnabled = true;
+            this.cbChucVuNhanVien.Location = new System.Drawing.Point(136, 463);
+            this.cbChucVuNhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbChucVuNhanVien.Name = "cbChucVuNhanVien";
+            this.cbChucVuNhanVien.Size = new System.Drawing.Size(212, 24);
+            this.cbChucVuNhanVien.TabIndex = 22;
             // 
             // label19
             // 
@@ -1301,23 +1425,23 @@
             this.label19.TabIndex = 21;
             this.label19.Text = "Chức vụ:";
             // 
-            // txtDiaChi
+            // txtDiaChiNhanVien
             // 
-            this.txtDiaChi.Location = new System.Drawing.Point(135, 318);
-            this.txtDiaChi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtDiaChi.Multiline = true;
-            this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(212, 32);
-            this.txtDiaChi.TabIndex = 20;
+            this.txtDiaChiNhanVien.Location = new System.Drawing.Point(135, 318);
+            this.txtDiaChiNhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtDiaChiNhanVien.Multiline = true;
+            this.txtDiaChiNhanVien.Name = "txtDiaChiNhanVien";
+            this.txtDiaChiNhanVien.Size = new System.Drawing.Size(212, 32);
+            this.txtDiaChiNhanVien.TabIndex = 20;
             // 
-            // txtSDT
+            // txtSDTNhanVien
             // 
-            this.txtSDT.Location = new System.Drawing.Point(135, 386);
-            this.txtSDT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtSDT.Multiline = true;
-            this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(212, 32);
-            this.txtSDT.TabIndex = 19;
+            this.txtSDTNhanVien.Location = new System.Drawing.Point(135, 386);
+            this.txtSDTNhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSDTNhanVien.Multiline = true;
+            this.txtSDTNhanVien.Name = "txtSDTNhanVien";
+            this.txtSDTNhanVien.Size = new System.Drawing.Size(212, 32);
+            this.txtSDTNhanVien.TabIndex = 19;
             // 
             // label12
             // 
@@ -1360,12 +1484,14 @@
             // 
             // txtIDNhanVien
             // 
+            this.txtIDNhanVien.Enabled = false;
             this.txtIDNhanVien.Location = new System.Drawing.Point(135, 176);
             this.txtIDNhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtIDNhanVien.Multiline = true;
             this.txtIDNhanVien.Name = "txtIDNhanVien";
             this.txtIDNhanVien.Size = new System.Drawing.Size(212, 32);
             this.txtIDNhanVien.TabIndex = 14;
+            this.txtIDNhanVien.TextChanged += new System.EventHandler(this.txtIDNhanVien_TextChanged);
             // 
             // label18
             // 
@@ -1389,6 +1515,7 @@
             this.btnSearchAccount.TabIndex = 11;
             this.btnSearchAccount.Text = "Tìm";
             this.btnSearchAccount.UseVisualStyleBackColor = false;
+            this.btnSearchAccount.Click += new System.EventHandler(this.btnSearchAccount_Click);
             // 
             // txtSearchAccount
             // 
@@ -1415,33 +1542,35 @@
             this.btnAddAccount.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnAddAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddAccount.ForeColor = System.Drawing.Color.Transparent;
-            this.btnAddAccount.Location = new System.Drawing.Point(20, 537);
+            this.btnAddAccount.Location = new System.Drawing.Point(25, 684);
             this.btnAddAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddAccount.Name = "btnAddAccount";
             this.btnAddAccount.Size = new System.Drawing.Size(149, 46);
             this.btnAddAccount.TabIndex = 1;
             this.btnAddAccount.Text = "Add";
             this.btnAddAccount.UseVisualStyleBackColor = false;
+            this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
-            // btnEditAccount
+            // btnUpdateAccount
             // 
-            this.btnEditAccount.BackColor = System.Drawing.Color.MidnightBlue;
-            this.btnEditAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditAccount.ForeColor = System.Drawing.Color.Transparent;
-            this.btnEditAccount.Location = new System.Drawing.Point(197, 537);
-            this.btnEditAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnEditAccount.Name = "btnEditAccount";
-            this.btnEditAccount.Size = new System.Drawing.Size(149, 46);
-            this.btnEditAccount.TabIndex = 3;
-            this.btnEditAccount.Text = "Edit";
-            this.btnEditAccount.UseVisualStyleBackColor = false;
+            this.btnUpdateAccount.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnUpdateAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateAccount.ForeColor = System.Drawing.Color.Transparent;
+            this.btnUpdateAccount.Location = new System.Drawing.Point(202, 684);
+            this.btnUpdateAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnUpdateAccount.Name = "btnUpdateAccount";
+            this.btnUpdateAccount.Size = new System.Drawing.Size(149, 46);
+            this.btnUpdateAccount.TabIndex = 3;
+            this.btnUpdateAccount.Text = "Edit";
+            this.btnUpdateAccount.UseVisualStyleBackColor = false;
+            this.btnUpdateAccount.Click += new System.EventHandler(this.btnUpdateAccount_Click);
             // 
             // btnSortAccount
             // 
             this.btnSortAccount.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnSortAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSortAccount.ForeColor = System.Drawing.Color.Transparent;
-            this.btnSortAccount.Location = new System.Drawing.Point(197, 610);
+            this.btnSortAccount.Location = new System.Drawing.Point(202, 757);
             this.btnSortAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSortAccount.Name = "btnSortAccount";
             this.btnSortAccount.Size = new System.Drawing.Size(149, 46);
@@ -1454,59 +1583,236 @@
             this.btnDeleteAccount.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnDeleteAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteAccount.ForeColor = System.Drawing.Color.Transparent;
-            this.btnDeleteAccount.Location = new System.Drawing.Point(20, 610);
+            this.btnDeleteAccount.Location = new System.Drawing.Point(25, 757);
             this.btnDeleteAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDeleteAccount.Name = "btnDeleteAccount";
             this.btnDeleteAccount.Size = new System.Drawing.Size(149, 46);
             this.btnDeleteAccount.TabIndex = 2;
             this.btnDeleteAccount.Text = "Del";
             this.btnDeleteAccount.UseVisualStyleBackColor = false;
+            this.btnDeleteAccount.Click += new System.EventHandler(this.btnDeleteAccount_Click);
             // 
-            // dgvAccount
+            // panelRevenue
             // 
-            this.dgvAccount.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAccount.Location = new System.Drawing.Point(0, 0);
-            this.dgvAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgvAccount.Name = "dgvAccount";
-            this.dgvAccount.RowHeadersWidth = 51;
-            this.dgvAccount.RowTemplate.Height = 24;
-            this.dgvAccount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccount.Size = new System.Drawing.Size(1060, 831);
-            this.dgvAccount.TabIndex = 0;
+            this.panelRevenue.BackColor = System.Drawing.Color.OldLace;
+            this.panelRevenue.Controls.Add(this.lbSoTienDoanhThu);
+            this.panelRevenue.Controls.Add(this.lbDoanhThu);
+            this.panelRevenue.Controls.Add(this.dgvRevenue);
+            this.panelRevenue.Controls.Add(this.btnThongKe);
+            this.panelRevenue.Controls.Add(this.dateTimePickerTo);
+            this.panelRevenue.Controls.Add(this.label24);
+            this.panelRevenue.Controls.Add(this.chart1);
+            this.panelRevenue.Controls.Add(this.dateTimePickerFrom);
+            this.panelRevenue.Controls.Add(this.label23);
+            this.panelRevenue.Controls.Add(this.label26);
+            this.panelRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelRevenue.Location = new System.Drawing.Point(255, 39);
+            this.panelRevenue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelRevenue.Name = "panelRevenue";
+            this.panelRevenue.Size = new System.Drawing.Size(1060, 831);
+            this.panelRevenue.TabIndex = 9;
+            this.panelRevenue.Visible = false;
             // 
-            // dgvBill
+            // lbSoTienDoanhThu
             // 
-            this.dgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBill.Location = new System.Drawing.Point(20, 98);
-            this.dgvBill.Name = "dgvBill";
-            this.dgvBill.RowHeadersWidth = 51;
-            this.dgvBill.RowTemplate.Height = 24;
-            this.dgvBill.Size = new System.Drawing.Size(318, 468);
-            this.dgvBill.TabIndex = 9;
+            this.lbSoTienDoanhThu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbSoTienDoanhThu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSoTienDoanhThu.ForeColor = System.Drawing.Color.Crimson;
+            this.lbSoTienDoanhThu.Location = new System.Drawing.Point(770, 783);
+            this.lbSoTienDoanhThu.Name = "lbSoTienDoanhThu";
+            this.lbSoTienDoanhThu.Size = new System.Drawing.Size(205, 30);
+            this.lbSoTienDoanhThu.TabIndex = 21;
+            this.lbSoTienDoanhThu.Text = " ";
             // 
-            // lbltenbancuabill
+            // lbDoanhThu
             // 
-            this.lbltenbancuabill.AutoSize = true;
-            this.lbltenbancuabill.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltenbancuabill.Location = new System.Drawing.Point(142, 68);
-            this.lbltenbancuabill.Name = "lbltenbancuabill";
-            this.lbltenbancuabill.Size = new System.Drawing.Size(0, 23);
-            this.lbltenbancuabill.TabIndex = 10;
+            this.lbDoanhThu.AutoSize = true;
+            this.lbDoanhThu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDoanhThu.ForeColor = System.Drawing.Color.Crimson;
+            this.lbDoanhThu.Location = new System.Drawing.Point(615, 782);
+            this.lbDoanhThu.Name = "lbDoanhThu";
+            this.lbDoanhThu.Size = new System.Drawing.Size(147, 31);
+            this.lbDoanhThu.TabIndex = 20;
+            this.lbDoanhThu.Text = "Doanh thu:";
+            // 
+            // dgvRevenue
+            // 
+            this.dgvRevenue.AllowUserToAddRows = false;
+            this.dgvRevenue.AllowUserToDeleteRows = false;
+            this.dgvRevenue.AllowUserToOrderColumns = true;
+            this.dgvRevenue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvRevenue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRevenue.Location = new System.Drawing.Point(19, 168);
+            this.dgvRevenue.Name = "dgvRevenue";
+            this.dgvRevenue.ReadOnly = true;
+            this.dgvRevenue.RowHeadersWidth = 51;
+            this.dgvRevenue.RowTemplate.Height = 24;
+            this.dgvRevenue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRevenue.Size = new System.Drawing.Size(1027, 206);
+            this.dgvRevenue.TabIndex = 18;
+            // 
+            // btnThongKe
+            // 
+            this.btnThongKe.BackColor = System.Drawing.Color.MidnightBlue;
+            this.btnThongKe.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongKe.ForeColor = System.Drawing.Color.Transparent;
+            this.btnThongKe.Location = new System.Drawing.Point(872, 90);
+            this.btnThongKe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnThongKe.Name = "btnThongKe";
+            this.btnThongKe.Size = new System.Drawing.Size(152, 62);
+            this.btnThongKe.TabIndex = 16;
+            this.btnThongKe.Text = "Thống kê";
+            this.btnThongKe.UseVisualStyleBackColor = false;
+            this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click);
+            // 
+            // dateTimePickerTo
+            // 
+            this.dateTimePickerTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerTo.Location = new System.Drawing.Point(430, 130);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(381, 32);
+            this.dateTimePickerTo.TabIndex = 15;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(329, 136);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(54, 26);
+            this.label24.TabIndex = 14;
+            this.label24.Text = "đến:";
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(16, 383);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "DoanhThu";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(1025, 369);
+            this.chart1.TabIndex = 17;
+            this.chart1.Text = "chart1";
+            // 
+            // dateTimePickerFrom
+            // 
+            this.dateTimePickerFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(430, 77);
+            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(381, 32);
+            this.dateTimePickerFrom.TabIndex = 13;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(14, 82);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(375, 26);
+            this.label23.TabIndex = 12;
+            this.label23.Text = "Chọn thời gian muốn xem doanh thu: ";
+            // 
+            // label26
+            // 
+            this.label26.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 22.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.Crimson;
+            this.label26.Location = new System.Drawing.Point(372, 11);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(323, 50);
+            this.label26.TabIndex = 10;
+            this.label26.Text = "Revenue";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Crimson;
+            this.panel1.Controls.Add(this.lbPerson);
+            this.panel1.Controls.Add(this.btnMinimize);
+            this.panel1.Controls.Add(this.btnLogout);
+            this.panel1.Controls.Add(this.btnExit);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1315, 39);
+            this.panel1.TabIndex = 10;
+            // 
+            // lbPerson
+            // 
+            this.lbPerson.AutoSize = true;
+            this.lbPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPerson.ForeColor = System.Drawing.Color.Gold;
+            this.lbPerson.Location = new System.Drawing.Point(9, 9);
+            this.lbPerson.Name = "lbPerson";
+            this.lbPerson.Size = new System.Drawing.Size(0, 22);
+            this.lbPerson.TabIndex = 4;
+            // 
+            // btnMinimize
+            // 
+            this.btnMinimize.FlatAppearance.BorderSize = 0;
+            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold);
+            this.btnMinimize.ForeColor = System.Drawing.Color.Gold;
+            this.btnMinimize.Location = new System.Drawing.Point(1207, 0);
+            this.btnMinimize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(51, 39);
+            this.btnMinimize.TabIndex = 2;
+            this.btnMinimize.Text = "━";
+            this.btnMinimize.UseVisualStyleBackColor = true;
+            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.Crimson;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.Gold;
+            this.btnLogout.Location = new System.Drawing.Point(1097, 1);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(105, 39);
+            this.btnLogout.TabIndex = 1;
+            this.btnLogout.Text = "Log out";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.Gold;
+            this.btnExit.Location = new System.Drawing.Point(1263, 0);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(51, 39);
+            this.btnExit.TabIndex = 0;
+            this.btnExit.Text = "X";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 870);
-            this.Controls.Add(this.panelOrder);
-            this.Controls.Add(this.panelCategory);
             this.Controls.Add(this.panelTable);
+            this.Controls.Add(this.panelOrder);
             this.Controls.Add(this.panelFood);
+            this.Controls.Add(this.panelCategory);
+            this.Controls.Add(this.panelRevenue);
             this.Controls.Add(this.panelAccount);
-            this.Controls.Add(this.panelHome);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelHome);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1516,16 +1822,18 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Order";
             this.Load += new System.EventHandler(this.Order_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelOrder.ResumeLayout(false);
             this.Table.ResumeLayout(false);
             this.tabTable.ResumeLayout(false);
             this.pnBan.ResumeLayout(false);
+            this.tabOrder.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
             this.panelFood.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).EndInit();
             this.pnFood.ResumeLayout(false);
@@ -1543,20 +1851,22 @@
             this.pnTable.ResumeLayout(false);
             this.pnTable.PerformLayout();
             this.panelAccount.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBill)).EndInit();
+            this.panelRevenue.ResumeLayout(false);
+            this.panelRevenue.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRevenue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btRevenue;
+        private System.Windows.Forms.Button btnRevenue;
         private System.Windows.Forms.Button btnAccount;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnTable;
@@ -1565,8 +1875,6 @@
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.Panel panelOrder;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtThanhTien;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnChuyenBan;
         private System.Windows.Forms.ComboBox cbChuyenBan;
@@ -1601,9 +1909,8 @@
         private System.Windows.Forms.Panel panelTable;
         private System.Windows.Forms.Panel panelAccount;
         private System.Windows.Forms.Button btnAddAccount;
-        private System.Windows.Forms.DataGridView dgvAccount;
         private System.Windows.Forms.Button btnSortAccount;
-        private System.Windows.Forms.Button btnEditAccount;
+        private System.Windows.Forms.Button btnUpdateAccount;
         private System.Windows.Forms.Button btnDeleteAccount;
         private System.Windows.Forms.Panel pnCategory;
         private System.Windows.Forms.Label label9;
@@ -1613,8 +1920,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtSearchCategory;
         private System.Windows.Forms.TabPage tabOrder;
-        private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSortCategory;
         private System.Windows.Forms.Button btnDeleteCategory;
@@ -1635,8 +1940,8 @@
         private System.Windows.Forms.Button btnSearchCategory;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox txtDiaChi;
-        private System.Windows.Forms.TextBox txtSDT;
+        private System.Windows.Forms.TextBox txtDiaChiNhanVien;
+        private System.Windows.Forms.TextBox txtSDTNhanVien;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label17;
@@ -1647,14 +1952,40 @@
         private System.Windows.Forms.TextBox txtSearchAccount;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtTrangThaiTable;
-        private System.Windows.Forms.ComboBox cbbChucVu;
+        private System.Windows.Forms.ComboBox cbChucVuNhanVien;
         private System.Windows.Forms.DataGridView dgvTable;
-        private System.Windows.Forms.Label lbPerson;
         private System.Windows.Forms.DataGridView dgvCategory;
         private System.Windows.Forms.DataGridView dgvFood;
         private System.Windows.Forms.Panel pnBan;
-        private System.Windows.Forms.TableLayoutPanel tbban;
-        private System.Windows.Forms.DataGridView dgvBill;
         private System.Windows.Forms.Label lbltenbancuabill;
+        private System.Windows.Forms.DataGridView dgvOrder;
+        private System.Windows.Forms.DataGridView dgvBill;
+        private System.Windows.Forms.Button btnClearAll;
+        private System.Windows.Forms.NumericUpDown numSoLuong;
+        private System.Windows.Forms.Button btnThemMon;
+        private System.Windows.Forms.Label lbNumThanhTien;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TableLayoutPanel tbban;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dgvAccount;
+        private System.Windows.Forms.Panel panelRevenue;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lbPerson;
+        private System.Windows.Forms.Button btnMinimize;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnThongKe;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.DataGridView dgvRevenue;
+        private System.Windows.Forms.Label lbSoTienDoanhThu;
+        private System.Windows.Forms.Label lbDoanhThu;
     }
 }

@@ -26,16 +26,22 @@ namespace FastFoodManagement.BLL
         }
         public List<BanDTO> GetAllBan()
         {
-            List<BanDTO> list = new List<BanDTO>();
-            foreach (Ban ban in db.Bans)
+            //List<BanDTO> list = new List<BanDTO>();
+            //foreach (Ban ban in db.Bans)
+            //{
+            //    BanDTO temp = new BanDTO();
+            //    temp.MaBan = ban.MaBan;
+            //    temp.TenBan = ban.TenBan;
+            //    temp.TrangThai = ban.TrangThai;
+            //    list.Add(temp);
+            //}
+            return db.Bans.Select(p => new BanDTO()
             {
-                BanDTO temp = new BanDTO();
-                temp.MaBan = ban.MaBan;
-                temp.TenBan = ban.TenBan;
-                temp.TrangThai = ban.TrangThai;
-                list.Add(temp);
-            }
-            return list;
+                MaBan = p.MaBan,
+                TenBan = p.TenBan,
+                TrangThai = p.TrangThai,
+            }).ToList();
+            //return list;
         }
         public void AddBan(string nameBan)
         {
@@ -76,6 +82,19 @@ namespace FastFoodManagement.BLL
                 banDTOs.Add(temp);
             }
             return banDTOs;
+        }
+
+        public List<CBBItemBan> GetAllCBBItemBan()
+        {
+            List<CBBItemBan> bans = new List<CBBItemBan>();
+            foreach (Ban ban in db.Bans)
+            {
+                CBBItemBan cBBItemBan = new CBBItemBan();
+                cBBItemBan.Value = ban.MaBan;
+                cBBItemBan.Text = ban.TenBan;
+                bans.Add(cBBItemBan);
+            }
+            return bans;
         }
     }
 }

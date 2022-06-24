@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FastFoodManagement.DTO
 {
-    public class CBBItem
+    public class CBBItemBan
     {
         public int Value { get; set; }
         public string Text { get; set; }

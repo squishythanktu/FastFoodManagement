@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="PBL3ModelStoreContainer" CdmEntityContainer="demoPBL3">
-    <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="PBL3Model.Account">
-        <MappingFragment StoreEntitySet="Account">
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
-          <ScalarProperty Name="MaAcc" ColumnName="MaAcc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Bans">
       <EntityTypeMapping TypeName="PBL3Model.Ban">
         <MappingFragment StoreEntitySet="Ban">
@@ -30,6 +21,7 @@
     <EntitySetMapping Name="HoaDons">
       <EntityTypeMapping TypeName="PBL3Model.HoaDon">
         <MappingFragment StoreEntitySet="HoaDon">
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
           <ScalarProperty Name="MaHD" ColumnName="MaHD" />
           <ScalarProperty Name="ThoiGianVao" ColumnName="ThoiGianVao" />
           <ScalarProperty Name="MaNV" ColumnName="MaNV" />
@@ -50,18 +42,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NhanViens">
-      <EntityTypeMapping TypeName="PBL3Model.NhanVien">
-        <MappingFragment StoreEntitySet="NhanVien">
-          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
-          <ScalarProperty Name="TenNV" ColumnName="TenNV" />
-          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-          <ScalarProperty Name="SDT" ColumnName="SDT" />
-          <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
-          <ScalarProperty Name="MaAcc" ColumnName="MaAcc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SanPhams">
       <EntityTypeMapping TypeName="PBL3Model.SanPham">
         <MappingFragment StoreEntitySet="SanPham">
@@ -78,6 +58,26 @@
           <ScalarProperty Name="MaVC" ColumnName="MaVC" />
           <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
           <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="PBL3Model.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="MaAcc" ColumnName="MaAcc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhanViens">
+      <EntityTypeMapping TypeName="PBL3Model.NhanVien">
+        <MappingFragment StoreEntitySet="NhanVien">
+          <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

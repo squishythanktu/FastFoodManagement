@@ -1,5 +1,6 @@
 ﻿using FastFoodManagement.BLL;
 using FastFoodManagement.DTO;
+using FastFoodManagement.VIEW;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,13 +20,20 @@ namespace FastFoodManagement
         public int soluongban = 0;
 
         public bool isThoat = true;
-        public int ChucVu;
-        public string Name;
+        NhanVien nv = new NhanVien();
+
+        private int IdBan;
+
+        private Button btnBanLast;
+        private CBBItemBan itemBan;
 
         BindingSource bsCategory = new BindingSource();
         BindingSource bsFood = new BindingSource();
         BindingSource bsTable = new BindingSource();
+        BindingSource bsOrder = new BindingSource();
+        BindingSource bsAccount = new BindingSource();
 
+        private List<Button> listBan = new List<Button>();
 
         //data binding doesn't work when the lastest selection element is unselection by clicking on blank dgv
         //this all temp string (in which function has it) in order to solve that problem
@@ -41,21 +49,32 @@ namespace FastFoodManagement
         private string txtTempIdTable;
         private string txtTempNameTable;
         private string txtTempTrangThaiTable;
-        public Order()
+        private int tempIdBan;
+
+        private string txtTempIdNhanVien;
+        private string txtTempTenNhanVien;
+        private string txtTempDiaChiNhanVien;
+        private string txtTempSDTNhanVien;
+        private string txtTempUsername;
+        private string txtTempPassword;
+        private CbbItemChucVu cbTempCbChucVu;
+
+        public Order(NhanVien nv)
         {
             InitializeComponent();
             LoadAllComponent();
+            this.nv = nv;
         }
         private void Order_Load(object sender, EventArgs e)
         {
             //QL~0, NV~1
-            if (ChucVu == 0)
+            if (nv.ChucVu == 0)
             {
-                lbPerson.Text = Name + " - Quản Lý";
+                //lbPerson.Text = nv.TenNV + " - Quản Lý";
                 btnAddAccount.Visible = true;
                 btnSortAccount.Visible = true;
                 btnDeleteAccount.Visible = true;
-                btnEditAccount.Visible = true;
+                btnUpdateAccount.Visible = true;
 
                 //vo hieu hoa chuc nang Table
                 btnAddTable.Visible = true;
@@ -75,13 +94,13 @@ namespace FastFoodManagement
                 btnSortFood.Visible = true;
                 btnUpdateFood.Visible = true;
             }
-            if (ChucVu != 0)
+            if (nv.ChucVu != 0)
             {
-                lbPerson.Text = Name + " - Nhân Viên";
+                //lbPerson.Text = nv.TenNV + " - Nhân Viên";
                 btnAddAccount.Visible = false;
                 btnSortAccount.Visible = false;
                 btnDeleteAccount.Visible = false;
-                btnEditAccount.Visible = false;
+                btnUpdateAccount.Visible = false;
 
                 btnAddTable.Visible = false;
                 btnDelTable.Visible = false;
@@ -105,7 +124,8 @@ namespace FastFoodManagement
             dgvCategory.DataSource = bsCategory;
             dgvFood.DataSource = bsFood;
             dgvTable.DataSource = bsTable;
-            
+            dgvOrder.DataSource = bsOrder;
+            dgvAccount.DataSource = bsAccount;
 
             //Food
             LoadItemsCbDanhMuc();
@@ -121,10 +141,21 @@ namespace FastFoodManagement
             AddTableBinding();
 
             //Order
-           //LoadButtonTable();
-        } 
+            //LoadButtonTable();
+            LoadDgvOrder();
+
+            LoadFormOrderComponent();
 
 
+            //Acount
+            LoadItemsCbAccount();
+            LoadDgvAccount();
+            AddAccountBinding();
+        }
+
+
+
+        #region Menu Section
         private void btnHome_Click_1(object sender, EventArgs e)
         {
             panelHome.Visible = true;
@@ -133,6 +164,7 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
         }
         private void btnOrder_Click_1(object sender, EventArgs e)
         {
@@ -142,9 +174,14 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+            btnChuyenBan.Enabled = false;
+            panelRevenue.Visible = false;
 
-            int soluongban = OrderBLL.Instance.demban();
-            string[] tenban = OrderBLL.Instance.getMangGomCacTenBan();
+            LoadDgvOrder();
+            
+
+            int soluongban = OrderBLL.Instance.DemBan();
+            string[] tenban = OrderBLL.Instance.getAllTableName();
 
 
             tbban.Controls.Clear();
@@ -165,7 +202,8 @@ namespace FastFoodManagement
                         bnBan.Width = bnBan.Height = 60;
                         bnBan.Font = new Font("Source Sans Pro", 10, FontStyle.Bold);
                         bnBan.ForeColor = Color.White;
-                        if (OrderBLL.Instance.checktrangthaiban(tenban[dem]))
+
+                        if (OrderBLL.Instance.CheckTrangThaiBan(tenban[dem]))
                         {
                             bnBan.BackColor = Color.OrangeRed;
                         }
@@ -174,31 +212,17 @@ namespace FastFoodManagement
                             bnBan.BackColor = Color.LimeGreen;
                         }
 
-                        bnBan.FlatStyle = FlatStyle.Standard;                      
+                        bnBan.FlatStyle = FlatStyle.Standard;
                         tbban.Controls.Add(bnBan);
+                        listBan.Add(bnBan);
                         bnBan.Click += bnBan_Click;
                         dem++;
                     }
-                  
+
                 }
             }
+            //bnBan_Click(sender, new EventArgs());
         }
-        private void bnBan_Click(object sender, EventArgs e)
-        {
-            Button bnBan = sender as Button;
-            lbltenbancuabill.Text = bnBan.Text;
-            if (OrderBLL.Instance.checktrangthaiban(bnBan.Text)==false)
-            {
-                btnThanhToan.Enabled = false;
-            }
-            else
-            {
-                btnThanhToan.Enabled = true;
-
-            }
-
-        }
-
         private void btnFood_Click_1(object sender, EventArgs e)
         {
             LoadDgvFood();
@@ -208,6 +232,11 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
+            dgvFood.CurrentCell.Selected = false;
+            ResetTextBoxFood();
+            cbDanhMucFood.Items.Clear();
+            LoadItemsCbDanhMuc();
         }
         private void btnDanhmuc_Click(object sender, EventArgs e)
         {
@@ -218,17 +247,24 @@ namespace FastFoodManagement
             panelFood.Visible = false;
             panelTable.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
+            dgvCategory.CurrentCell.Selected = false;
+            ResetTextBoxCategory();
         }
 
         private void btnTable_Click(object sender, EventArgs e)
         {
-            LoadDgvTable();
+            
             panelTable.Visible = true;
             panelHome.Visible = false;
             panelOrder.Visible = false;
             panelFood.Visible = false;
             panelCategory.Visible = false;
             panelAccount.Visible = false;
+            panelRevenue.Visible = false;
+            dgvTable.CurrentCell.Selected = false;
+            ResetTextBoxTable();
+            LoadDgvTable();
         }
         private void btnAccount_Click(object sender, EventArgs e)
         {
@@ -238,83 +274,23 @@ namespace FastFoodManagement
             panelFood.Visible = false;
             panelCategory.Visible = false;
             panelTable.Visible = false;
+            panelRevenue.Visible = false;
+            dgvAccount.CurrentCell.Selected = false;
+            ResetTextBoxAccount();
         }
 
-        //LOAD FOOD
-        private void LoadItemsCbDanhMuc()
+        private void btnRevenue_Click(object sender, EventArgs e)
         {
-            cbDanhMucFood.Items.AddRange(DanhMucBLL.Instance.GetAllDanhMuc().ToArray());
-            cbDanhMucFood.SelectedIndex = 0;
+            panelRevenue.Visible = true;
+            panelHome.Visible = false;
+            panelOrder.Visible = false;
+            panelFood.Visible = false;
+            panelCategory.Visible = false;
+            panelTable.Visible = false;
         }
-        private void LoadDgvFood()
-        {
-            bsFood.DataSource = SanPhamBLL.Instance.GetAllSanPham();
-            ResetTextBoxFood();
-            dgvFood.CurrentCell.Selected = false;
-        }
+        #endregion
 
-        private void AddFoodBinding()
-        {
-            txtIDFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "MaSP", true, DataSourceUpdateMode.Never));
-            txtNameFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "TenSP", true, DataSourceUpdateMode.Never));
-            txtGiaTienFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "Gia", true, DataSourceUpdateMode.Never));
-            cbDanhMucFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "TenDM", true, DataSourceUpdateMode.Never));
-        }
-
-        private void ResetTextBoxFood()
-        {
-            txtIDFood.Text = "";
-            txtNameFood.Text = "";
-            txtGiaTienFood.Text = "";
-            cbDanhMucFood.SelectedIndex = -1;
-            txtSearchFood.Text = "";
-        }
-
-        //LOAD CATEGORY
-        private void LoadDgvCategory()
-        {
-            bsCategory.DataSource = DanhMucBLL.Instance.GetAllDanhMuc();
-            ResetTextBoxCategory();
-            dgvCategory.CurrentCell.Selected = false;
-        }
-
-        private void AddCategoryBinding()
-        {
-            txtIDCategory.DataBindings.Add(new Binding("Text", dgvCategory.DataSource, "MaDM", true, DataSourceUpdateMode.Never));
-            txtNameCategory.DataBindings.Add(new Binding("Text", dgvCategory.DataSource, "TenDM", true, DataSourceUpdateMode.Never));
-        }
-
-        private void ResetTextBoxCategory()
-        {
-            txtNameCategory.Text = "";
-            txtIDCategory.Text = "";
-            txtSearchCategory.Text = "";
-        }
-
-        //LOAD TABLE
-        private void LoadDgvTable()
-        {
-            bsTable.DataSource = BanBLL.Instance.GetAllBan();
-            ResetTextBoxTable();
-            //dgvTable.CurrentCell.Selected = false;
-        }
-
-        private void ResetTextBoxTable()
-        {
-            txtSearchTable.Text = "";
-            txtIDTable.Text = "";
-            txtNameTable.Text = "";
-            txtTrangThaiTable.Text = "";
-        }
-
-        private void AddTableBinding()
-        {
-            txtIDTable.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "MaBan", true, DataSourceUpdateMode.Never));
-            txtNameTable.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "TenBan", true, DataSourceUpdateMode.Never));
-            txtTrangThaiTable.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "TrangThai", true, DataSourceUpdateMode.Never));
-        }
-        
-
+ 
         public event EventHandler Dangxuat;
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -341,6 +317,28 @@ namespace FastFoodManagement
 
 
         // ------------- Food Section -------------
+        #region Food Section
+        private void LoadDgvFood()
+        {
+            bsFood.DataSource = SanPhamBLL.Instance.GetAllSanPham();
+            ResetTextBoxFood();
+            dgvFood.CurrentCell.Selected = false;
+        }
+        private void AddFoodBinding()
+        {
+            txtIDFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "MaSP", true, DataSourceUpdateMode.Never));
+            txtNameFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "TenSP", true, DataSourceUpdateMode.Never));
+            txtGiaTienFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "Gia", true, DataSourceUpdateMode.Never));
+            cbDanhMucFood.DataBindings.Add(new Binding("Text", dgvFood.DataSource, "TenDM", true, DataSourceUpdateMode.Never));
+        }
+        private void ResetTextBoxFood()
+        {
+            txtIDFood.Text = "";
+            txtNameFood.Text = "";
+            txtGiaTienFood.Text = "";
+            cbDanhMucFood.SelectedIndex = -1;
+            txtSearchFood.Text = "";
+        }
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             if (txtNameFood.Text == "" || cbDanhMucFood.SelectedIndex == -1 || txtGiaTienFood.Text == "")
@@ -384,6 +382,7 @@ namespace FastFoodManagement
             {
                 txtTempIdFood = dgvFood.Rows[dgvFood.Rows.Count - 2].Cells[0].Value.ToString();
                 txtTempNameFood = dgvFood.Rows[dgvFood.Rows.Count - 2].Cells[1].Value.ToString();
+                tempCbDanhMucFood.TenDM = dgvFood.Rows[dgvFood.Rows.Count - 2].Cells[2].Value.ToString();
             }
             else
             {
@@ -392,6 +391,7 @@ namespace FastFoodManagement
             }
             SanPhamBLL.Instance.DeleteSanPham(Convert.ToInt32(txtIDFood.Text));
             LoadDgvFood();
+            
         }
 
         private void btnSearchFood_Click(object sender, EventArgs e)
@@ -433,7 +433,15 @@ namespace FastFoodManagement
                 txtIDFood.Text = txtTempIdFood;
                 txtNameFood.Text = txtTempNameFood;
                 txtGiaTienFood.Text = txtTempGiaTienFood;
-                cbDanhMucFood.SelectedIndex = tempCbDanhMucFood.MaDM - 1;
+                foreach (var i in cbDanhMucFood.Items)
+                {
+                    if (i.ToString() == tempCbDanhMucFood.TenDM)
+                    {
+                        cbDanhMucFood.SelectedItem = i;
+                        break;
+                    }
+                }
+
             }
             //set temp info
             txtTempIdFood = txtIDFood.Text;
@@ -446,9 +454,32 @@ namespace FastFoodManagement
             dgvFood.ClearSelection();
             ResetTextBoxFood();
         }
-
+        #endregion
 
         // ------------- Category Section -------------
+        #region Category Section
+        private void LoadItemsCbDanhMuc()
+        {
+            cbDanhMucFood.Items.AddRange(DanhMucBLL.Instance.GetAllDanhMuc().ToArray());
+            cbDanhMucFood.SelectedIndex = 0;
+        }
+        private void AddCategoryBinding()
+        {
+            txtIDCategory.DataBindings.Add(new Binding("Text", dgvCategory.DataSource, "MaDM", true, DataSourceUpdateMode.Never));
+            txtNameCategory.DataBindings.Add(new Binding("Text", dgvCategory.DataSource, "TenDM", true, DataSourceUpdateMode.Never));
+        }
+        private void LoadDgvCategory()
+        {
+            bsCategory.DataSource = DanhMucBLL.Instance.GetAllDanhMuc();
+            ResetTextBoxCategory();
+            dgvCategory.CurrentCell.Selected = false;
+        }
+        private void ResetTextBoxCategory()
+        {
+            txtNameCategory.Text = "";
+            txtIDCategory.Text = "";
+            txtSearchCategory.Text = "";
+        }
         private void btnAddCategory_Click(object sender, EventArgs e)
         {
             if (txtNameCategory.Text == "")
@@ -543,12 +574,31 @@ namespace FastFoodManagement
             dgvCategory.ClearSelection();
             ResetTextBoxCategory();
         }
-
+        #endregion
 
 
 
         //------------- Table Section -------------
-
+        #region Table Section
+        private void LoadDgvTable()
+        {
+            bsTable.DataSource = BanBLL.Instance.GetAllBan();
+            ResetTextBoxTable();
+            dgvTable.CurrentCell.Selected = false;
+        }
+        private void ResetTextBoxTable()
+        {
+            txtSearchTable.Text = "";
+            txtIDTable.Text = "";
+            txtNameTable.Text = "";
+            txtTrangThaiTable.Text = "";
+        }
+        private void AddTableBinding()
+        {
+            txtIDTable.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "MaBan", true, DataSourceUpdateMode.Never));
+            txtNameTable.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "TenBan", true, DataSourceUpdateMode.Never));
+            txtTrangThaiTable.DataBindings.Add(new Binding("Text", dgvTable.DataSource, "TrangThai", true, DataSourceUpdateMode.Never));
+        }
         private void btnAddTable_Click(object sender, EventArgs e)
         {
             if (txtNameTable.Text == "")
@@ -586,6 +636,11 @@ namespace FastFoodManagement
 
         private void btnDelTable_Click(object sender, EventArgs e)
         {
+            if(txtTrangThaiTable.Text == "True")
+            {
+                MessageBox.Show("Bàn đang có người, không thể xóa");
+                return;
+            }
             if (dgvTable.SelectedRows[0].Index == dgvTable.Rows.Count - 1)
             {
                 txtTempIdTable = dgvTable.Rows[dgvTable.Rows.Count - 2].Cells[0].Value.ToString();
@@ -648,10 +703,444 @@ namespace FastFoodManagement
             ResetTextBoxFood();
         }
 
-       
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            ChangePassword passwordform = new ChangePassword(nv);
+            passwordform.Show();
+            passwordform.d = new ChangePassword.MyDel(isChange);
+        }
+        public void isChange(bool check = false)
+        {
+            if (check == true)
+            {
+                Dangxuat(this, new EventArgs());
+            }
+        }
+        #endregion
+
         //------------- Order Section -------------
+        #region Order Section
+        private void LoadFormOrderComponent()
+        {
+            btnThanhToan.Enabled = false;
+            btnClearAll.Enabled = false;
+        }
+        void LoadDgvOrder()
+        {
+            bsOrder.DataSource = SanPhamBLL.Instance.GetAllSanPham();
+            //ResetTextBoxFood();
+            //dgvFood.CurrentCell.Selected = false;
+        }
+
+        //private void dgvOrder_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    if(OrderBLL.Instance.CheckTrangThaiBanWithHoaDon(IdBan)) OrderBLL.Instance.AddHoaDon(IdBan, nv.MaNV);
+        //    tempIdBan = IdBan;
+        //    int idHoaDonOfBan = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
+        //    OrderBLL.Instance.AddHoaDonChiTiet(new HoaDonChiTiet
+        //    {
+        //        MaHD = idHoaDonOfBan,
+        //        MaSP = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells[0].Value),
+        //        SoLuong = 1,
+        //        GiaTien = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells[2].Value),
+        //    });
+        //    LoadDgvBill();
+        //    btnBanLast.BackColor = Color.OrangeRed;
+        //}
+
+        private void bnBan_Click(object sender, EventArgs e)
+        {
+            Button bnBan = sender as Button;
+            lbltenbancuabill.Text = bnBan.Text;
 
 
+
+            List<BanDTO> bans = OrderBLL.Instance.GetAllTable();
+            var mapTable = new Dictionary<string, int>();
+            for (int i = 0; i < bans.Count; i++)
+            {
+                mapTable[bans[i].TenBan] = bans[i].MaBan;
+            }
+            if (mapTable[bnBan.Text] != 0)
+            {
+                IdBan = mapTable[bnBan.Text];
+            }
+
+
+            LoadDgvBill();
+            btnBanLast = bnBan;
+            SetVisibleBtnIfHaveData();
+            LoadTongTienBill();
+            cbChuyenBan.Items.Clear();
+            LoadCBBItemBan();
+            //foreach (CBBItemBan i in cbChuyenBan.Items)
+            //{
+            //    if (i.Text == bnBan.Text)
+            //    {
+            //        cbChuyenBan.Items.Remove(i);
+            //        break;
+            //    }
+            //}
+            RemoveCbItemTableNotAvailible();
+
+            cbChuyenBan.SelectedIndex = -1;
+            btnChuyenBan.Enabled = false;
+        }
+
+        private void RemoveCbItemTableNotAvailible()
+        {
+            foreach (Button btn in listBan)
+            {
+                if (btn.BackColor == Color.OrangeRed)
+                {
+                    foreach (CBBItemBan i in cbChuyenBan.Items)
+                    {
+                        if (i.Text == btn.Text)
+                        {
+                            cbChuyenBan.Items.Remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void LoadTongTienBill()
+        {
+            int tongTien = 0;
+            foreach (DataGridViewRow i in dgvBill.Rows)
+            {
+                tongTien += Convert.ToInt32(i.Cells[2].Value);
+            }
+            lbNumThanhTien.Text = tongTien.ToString() + " đ";
+        }
+
+        private void LoadDgvBill()
+        {
+            int IdHoaDon = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
+            dgvBill.DataSource = OrderBLL.Instance.GetAllHDCTByIdHoaDon(IdHoaDon);
+            SetAlignmentItem();
+        }
+
+        private void SetAlignmentItem()
+        {
+            dgvBill.Columns[0].Width = 120;
+            dgvBill.Columns[1].Width = 24;
+            dgvBill.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvBill.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            int idHoaDonOfBan = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
+            OrderBLL.Instance.ThanhToanHoaDon(idHoaDonOfBan, Convert.ToInt32(lbNumThanhTien.Text.Remove(lbNumThanhTien.Text.Length - 2)));
+            LoadDgvBill();
+            SetColorBtnBan();
+            OrderBLL.Instance.SetTrangThaiBan(IdBan, false);
+            SetVisibleBtnIfHaveData();
+        }
+
+        private void btnThemMon_Click(object sender, EventArgs e)
+        {
+            if (OrderBLL.Instance.CheckTrangThaiBanWithHoaDon(IdBan)) OrderBLL.Instance.AddHoaDon(IdBan, nv.MaNV);
+            int idHoaDonOfBan = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
+            OrderBLL.Instance.AddHoaDonChiTiet(new HoaDonChiTiet
+            {
+                MaHD = idHoaDonOfBan,
+                MaSP = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells[0].Value),
+                SoLuong = Convert.ToInt32(numSoLuong.Value),
+                GiaTien = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells[2].Value),
+            });
+            LoadDgvBill();
+
+
+            numSoLuong.Value = 1;
+
+            SetVisibleBtnIfHaveData();
+            LoadTongTienBill();
+            SetColorBtnBan();
+            RemoveCbItemTableNotAvailible();
+        }
+
+        private void SetVisibleBtnIfHaveData()
+        {
+            if (dgvBill.Rows.Count == 0)
+            {
+                btnThanhToan.Enabled = false;
+                btnClearAll.Enabled = false;
+                lbNumThanhTien.Text = "0 đ";
+                cbChuyenBan.Enabled = false;
+            }
+            else
+            {
+                btnThanhToan.Enabled = true;
+                btnClearAll.Enabled = true;
+                cbChuyenBan.Enabled = true;
+            }
+
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            OrderBLL.Instance.DeleteHoaDonChiTiet(IdBan);
+            int idHoaDonOfBan = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
+            LoadDgvBill();
+            SetColorBtnBan();
+            SetVisibleBtnIfHaveData();
+            OrderBLL.Instance.SetTrangThaiBan(IdBan, false);
+            lbNumThanhTien.Text = "0 đ";
+        }
+
+        private void LoadCBBItemBan()
+        {
+            cbChuyenBan.Items.AddRange(BanBLL.Instance.GetAllCBBItemBan().ToArray());
+        }
+
+        private void btnChuyenBan_Click(object sender, EventArgs e)
+        {
+            OrderBLL.Instance.ChuyenBan(OrderBLL.Instance.FindIdHoaDonOfBan(IdBan),
+                ((CBBItemBan)cbChuyenBan.SelectedItem).Value, IdBan);
+            LoadDgvBill();
+
+            foreach (Button btn in listBan)
+            {
+                if (btn.Text == cbChuyenBan.SelectedItem.ToString())
+                {
+                    btn.BackColor = Color.OrangeRed;
+                    break;
+                }
+            }
+            SetVisibleBtnIfHaveData();
+            SetColorBtnBan();
+        }
+
+        private void SetColorBtnBan()
+        {
+            if (dgvBill.Rows.Count > 0)
+            {
+                btnBanLast.BackColor = Color.OrangeRed;
+            }
+            else
+            {
+                btnBanLast.BackColor = Color.LimeGreen;
+            }
+        }
+
+        private void cbChuyenBan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbChuyenBan.SelectedIndex != -1)
+            {
+                btnChuyenBan.Enabled = true;
+            }
+        }
+#endregion
+
+        //------------- Acoount Section -------------
+        #region Account Section
+        private void LoadDgvAccount()
+        {
+            bsAccount.DataSource = AccountBLL.Instance.GetAllAccount();
+            ResetTextBoxAccount();
+            dgvAccount.CurrentCell.Selected = false;
+        }
+
+        private void LoadItemsCbAccount()
+        {
+            cbChucVuNhanVien.Items.AddRange(AccountBLL.Instance.GetAllChucVu().ToArray());
+            cbChucVuNhanVien.SelectedIndex = 0;
+        }
+
+        private void ResetTextBoxAccount()
+        {
+            txtIDNhanVien.Text = "";
+            txtTenNhanVien.Text = "";
+            txtDiaChiNhanVien.Text = "";
+            txtSDTNhanVien.Text = "";
+            cbChucVuNhanVien.Text = "";
+            txtUsername.Text = "";
+            txtPassword.Text = "";
+        }
+
+        private void btnAddAccount_Click(object sender, EventArgs e)
+        {
+            AccountBLL.Instance.AddAccount(new NhanVien
+            { 
+                
+                TenNV = txtTenNhanVien.Text,
+                DiaChi = txtDiaChiNhanVien.Text,
+                SDT = txtSDTNhanVien.Text,
+                ChucVu = ((CbbItemChucVu)cbChucVuNhanVien.SelectedItem).MaCV,
+                Account = new Account
+                {
+                    Username = txtUsername.Text,
+                    PassWord = txtPassword.Text,
+                }
+                
+            });
+            LoadDgvAccount();
+        }
+
+
+        
+
+        private void pnAccount_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void dgvAccount_MouseClick(object sender, MouseEventArgs e)
+        {
+            var ht = dgvAccount.HitTest(e.X, e.Y);
+            if (ht.Type == DataGridViewHitTestType.None) //check if user clicked on blank dgv
+            {
+                dgvAccount.ClearSelection();
+                ResetTextBoxAccount();
+                btnUpdateAccount.Enabled = false;
+            }
+        }
+
+        private void AddAccountBinding()
+        {
+            txtIDNhanVien.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "MaNV", true, DataSourceUpdateMode.Never));
+            txtTenNhanVien.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "TenNV", true, DataSourceUpdateMode.Never));
+            txtDiaChiNhanVien.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "DiaChi", true, DataSourceUpdateMode.Never));
+            txtSDTNhanVien.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "SDT", true, DataSourceUpdateMode.Never));
+            cbChucVuNhanVien.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "ChucVu", true, DataSourceUpdateMode.Never));
+            txtUsername.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Username", true, DataSourceUpdateMode.Never));
+            txtPassword.DataBindings.Add(new Binding("Text", dgvAccount.DataSource, "Password", true, DataSourceUpdateMode.Never));
+        }
+
+        private void txtIDNhanVien_TextChanged(object sender, EventArgs e)
+        {
+            //button add shows up when click nothing
+            if (txtIDNhanVien.Text == "")
+            {
+                btnUpdateAccount.Enabled = false;
+                btnAddAccount.Enabled = true;
+                btnDeleteAccount.Enabled = false;
+            }
+            else //button delete and update are only enable when user click 1 row
+            {
+                btnUpdateAccount.Enabled = true;
+                btnAddAccount.Enabled = false;
+                btnDeleteAccount.Enabled = true;
+            }
+        }
+
+        private void dgvAccount_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvAccount.SelectedRows[0].Cells[0].Value.ToString() == txtTempIdNhanVien)
+            {
+                txtIDNhanVien.Text = txtTempIdNhanVien;
+                txtTenNhanVien.Text = txtTempTenNhanVien;
+                txtDiaChiNhanVien.Text = txtTempDiaChiNhanVien;
+                cbChucVuNhanVien.Text = cbTempCbChucVu.TenCV;
+                txtSDTNhanVien.Text = txtTempSDTNhanVien;
+                txtUsername.Text = txtTempUsername;
+                txtPassword.Text = txtTempPassword;
+            }
+            //set temp info
+            txtTempIdNhanVien = txtIDNhanVien.Text;
+            txtTempTenNhanVien = txtTenNhanVien.Text;
+            txtTempDiaChiNhanVien = txtDiaChiNhanVien.Text;
+            cbTempCbChucVu = ((CbbItemChucVu)cbChucVuNhanVien.SelectedItem);
+            txtTempSDTNhanVien = txtSDTNhanVien.Text;
+            txtTempUsername = txtUsername.Text;
+            txtTempPassword = txtPassword.Text;
+        }
+
+        private void btnUpdateAccount_Click(object sender, EventArgs e)
+        {
+            txtTempTenNhanVien = txtTenNhanVien.Text;
+            txtTempIdNhanVien = txtIDNhanVien.Text;
+            txtTempDiaChiNhanVien = txtDiaChiNhanVien.Text;
+            cbTempCbChucVu = (CbbItemChucVu)cbChucVuNhanVien.SelectedItem;
+            txtTempSDTNhanVien = txtSDTNhanVien.Text;
+            txtTempUsername = txtUsername.Text;
+            txtTempPassword = txtPassword.Text;
+            AccountBLL.Instance.UpdateAccount(new NhanVien
+            {
+                MaNV = Convert.ToInt32(txtIDNhanVien.Text),
+                TenNV = txtTenNhanVien.Text,
+                DiaChi = txtDiaChiNhanVien.Text,
+                SDT = txtSDTNhanVien.Text,
+                ChucVu = ((CbbItemChucVu)cbChucVuNhanVien.SelectedItem).MaCV,
+                Account = new Account
+                {
+                    Username = txtUsername.Text,
+                    PassWord = txtPassword.Text,
+                }
+            });
+            LoadDgvAccount();
+        }
+
+        private void btnDeleteAccount_Click(object sender, EventArgs e)
+        {
+            if (dgvAccount.SelectedRows[0].Index == dgvAccount.Rows.Count - 1)
+            {
+                txtTempIdNhanVien = dgvAccount.Rows[dgvAccount.Rows.Count - 2].Cells[0].Value.ToString();
+                txtTempTenNhanVien = dgvAccount.Rows[dgvAccount.Rows.Count - 2].Cells[1].Value.ToString();
+                txtTempDiaChiNhanVien = dgvAccount.Rows[dgvAccount.Rows.Count - 2].Cells[2].Value.ToString();
+                txtTempSDTNhanVien = dgvAccount.Rows[dgvAccount.Rows.Count - 2].Cells[3].Value.ToString();
+                cbTempCbChucVu.TenCV = dgvAccount.Rows[dgvAccount.Rows.Count -2].Cells[4].Value.ToString();
+                txtTempUsername = dgvAccount.Rows[dgvAccount.Rows.Count - 2].Cells[5].Value.ToString();
+                txtTempPassword = dgvAccount.Rows[dgvAccount.Rows.Count - 2].Cells[6].Value.ToString();
+            }
+            else
+            {
+                txtTempIdNhanVien = dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[0].Value.ToString();
+                txtTempTenNhanVien = dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[1].Value.ToString();
+                txtTempDiaChiNhanVien = dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[2].Value.ToString();
+                txtTempSDTNhanVien = dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[3].Value.ToString();
+                cbTempCbChucVu.TenCV = dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[4].Value.ToString();
+                txtTempUsername = dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[5].Value.ToString();
+                txtTempPassword = dgvAccount.Rows[dgvAccount.SelectedRows[0].Index].Cells[6].Value.ToString();
+            }
+            AccountBLL.Instance.DeleteAccount(Convert.ToInt32(txtIDNhanVien.Text));
+            LoadDgvAccount();
+
+        }
+
+        private void pnAccount_Click(object sender, MouseEventArgs e)
+        {
+            dgvAccount.ClearSelection();
+            ResetTextBoxAccount();
+        }
+
+        private void btnSearchAccount_Click(object sender, EventArgs e)
+        {
+            bsAccount.DataSource = AccountBLL.Instance.SearchAccount(txtSearchAccount.Text);
+        }
+
+
+
+
+
+        #endregion
+
+
+        //------------- Revenue Section -------------
+        #region Revenue Section
+        private void LoadDgvRevenue()
+        {
+            dgvRevenue.DataSource = HoaDonBLL.Instance.GetFromDateToDate(dateTimePickerFrom.Value, dateTimePickerTo.Value);
+        }
+
+        private void btnThongKe_Click(object sender, EventArgs e)
+        {
+            LoadDgvRevenue();
+            chart1.DataSource = HoaDonBLL.Instance.GetDoanhThuFromDateToDate(dateTimePickerFrom.Value, dateTimePickerTo.Value);
+            chart1.Series["DoanhThu"].XValueMember = "DateFrom";
+            chart1.Series["DoanhThu"].YValueMembers = "TongTien";
+            chart1.Invalidate();
+            int tongTien = 0;
+            foreach (DataGridViewRow i in dgvRevenue.Rows)
+            {
+                tongTien += Convert.ToInt32(i.Cells[3].Value);
+            }
+            lbSoTienDoanhThu.Text = tongTien.ToString() + " đ";
+        }
+        #endregion
 
     }
 }

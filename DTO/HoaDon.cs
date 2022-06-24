@@ -26,11 +26,12 @@ namespace FastFoodManagement.DTO
         public int MaBan { get; set; }
         public Nullable<int> MaVC { get; set; }
         public int TongTien { get; set; }
+        public bool IsPaid { get; set; }
     
         public virtual Ban Ban { get; set; }
-        public virtual NhanVien NhanVien { get; set; }
         public virtual Voucher Voucher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDonChiTiet> HoaDonChiTiets { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

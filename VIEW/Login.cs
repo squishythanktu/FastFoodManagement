@@ -1,4 +1,5 @@
 ﻿using FastFoodManagement.DTO;
+using FastFoodManagement.VIEW;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace FastFoodManagement
     public partial class Login : Form
     {
         demoPBL3 db = new demoPBL3();
+
         public Login()
         {
             InitializeComponent();
@@ -41,10 +43,10 @@ namespace FastFoodManagement
                 Account temp = db.Accounts.Where(x => x.Username == username && x.PassWord == password).FirstOrDefault();
                 if (temp != null)
                 {
-                    Order ord = new Order();
-                    NhanVien nv = db.NhanViens.Where(p => p.MaAcc == temp.MaAcc).FirstOrDefault();
-                    ord.ChucVu = nv.ChucVu;
-                    ord.Name = nv.TenNV;
+                    NhanVien nv = db.NhanViens.Where(p => p.Account.MaAcc == temp.MaAcc).FirstOrDefault();
+                    
+                    Order ord = new Order(nv);
+                    
                     ord.Show();
                     this.Hide();
                     ord.Dangxuat += Order_Dangxuat;
@@ -100,18 +102,28 @@ namespace FastFoodManagement
 
         private void txtUsername_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Tab)
+            if (e.KeyCode == Keys.Tab)
             {
                 txtPassword.Focus();
-            }    
+            }
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode== Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 btnLogin.PerformClick();
-            }    
+            }
+        }
+        private void lklbChangePass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ChangePassword passwordform = new ChangePassword();
+            passwordform.Show();
+            passwordform.d = new ChangePassword.MyDel(isChange);
+        }
+        public void isChange(bool check)
+        {
+
         }
     }
 }

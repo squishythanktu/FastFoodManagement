@@ -26,17 +26,19 @@ namespace FastFoodManagement.BLL
 
         public List<SanPhamDTO> GetAllSanPham()
         {
-            List<SanPhamDTO> sanPhams = new List<SanPhamDTO>();
-            foreach (SanPham sp in db.SanPhams)
-            {
-                SanPhamDTO sanPham = new SanPhamDTO();
-                sanPham.MaSP = sp.MaSP;
-                sanPham.TenSP = sp.TenSP;
-                sanPham.TenDM = sp.DanhMuc.TenDM;
-                sanPham.Gia = sp.GiaSP;
-                sanPhams.Add(sanPham);
-            }
-            return sanPhams;
+            //List<SanPhamDTO> sanPhams = new List<SanPhamDTO>();
+            //foreach (SanPham sp in db.SanPhams)
+            //{
+            //    SanPhamDTO sanPham = new SanPhamDTO();
+            //    sanPham.MaSP = sp.MaSP;
+            //    sanPham.TenSP = sp.TenSP;
+            //    sanPham.TenDM = sp.DanhMuc.TenDM;
+            //    sanPham.Gia = sp.GiaSP;
+            //    sanPhams.Add(sanPham);
+            //}
+            return db.SanPhams.Select(p => new SanPhamDTO() 
+            { MaSP = p.MaSP, TenSP = p.TenSP, Gia = p.GiaSP, TenDM = p.DanhMuc.TenDM }).ToList();
+            //return sanPhams;
         }
 
         public void AddSanPham(SanPham sanPham)

@@ -25,7 +25,6 @@ namespace FastFoodManagement.DTO
         public string DiaChi { get; set; }
         public string SDT { get; set; }
         public int ChucVu { get; set; }
-        public int MaAcc { get; set; }
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
