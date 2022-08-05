@@ -7,6 +7,7 @@
     <Property Name="MaAcc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="PassWord" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" />
   </EntityType>
   <EntityType Name="Ban">
     <Key>
@@ -15,6 +16,7 @@
     <Property Name="MaBan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TrangThai" Type="bit" Nullable="false" />
     <Property Name="TenBan" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDelete" Type="bit" />
   </EntityType>
   <EntityType Name="DanhMuc">
     <Key>
@@ -22,6 +24,7 @@
     </Key>
     <Property Name="MaDM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenDM" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" />
   </EntityType>
   <EntityType Name="HoaDon">
     <Key>
@@ -31,7 +34,6 @@
     <Property Name="ThoiGianVao" Type="date" Nullable="false" />
     <Property Name="MaNV" Type="int" Nullable="false" />
     <Property Name="MaBan" Type="int" Nullable="false" />
-    <Property Name="MaVC" Type="int" />
     <Property Name="TongTien" Type="int" Nullable="false" />
     <Property Name="IsPaid" Type="bit" Nullable="false" />
   </EntityType>
@@ -63,14 +65,7 @@
     <Property Name="TenSP" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="MaDM" Type="int" Nullable="false" />
     <Property Name="GiaSP" Type="float" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Voucher">
-    <Key>
-      <PropertyRef Name="MaVC" />
-    </Key>
-    <Property Name="MaVC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NgayBatDau" Type="datetime" />
-    <Property Name="NgayKetThuc" Type="datetime" />
+    <Property Name="IsDelete" Type="bit" />
   </EntityType>
   <Association Name="FK__HoaDonChi__SoLuo__49C3F6B7">
     <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
@@ -152,7 +147,6 @@
     <EntitySet Name="HoaDonChiTiet" EntityType="Self.HoaDonChiTiet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__HoaDonChi__SoLuo__49C3F6B7" Association="Self.FK__HoaDonChi__SoLuo__49C3F6B7">
       <End Role="HoaDon" EntitySet="HoaDon" />
       <End Role="HoaDonChiTiet" EntitySet="HoaDonChiTiet" />

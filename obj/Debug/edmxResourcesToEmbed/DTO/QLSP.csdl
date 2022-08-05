@@ -8,6 +8,7 @@
     <Property Name="TrangThai" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaBan__30F848ED" FromRole="Ban" ToRole="HoaDon" />
     <Property Name="TenBan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" />
   </EntityType>
   <EntityType Name="DanhMuc">
     <Key>
@@ -16,6 +17,7 @@
     <Property Name="MaDM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TenDM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaDM__2A4B4B5E" FromRole="DanhMuc" ToRole="SanPham" />
+    <Property Name="IsDelete" Type="Boolean" />
   </EntityType>
   <EntityType Name="HoaDon">
     <Key>
@@ -25,10 +27,8 @@
     <Property Name="ThoiGianVao" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="MaNV" Type="Int32" Nullable="false" />
     <Property Name="MaBan" Type="Int32" Nullable="false" />
-    <Property Name="MaVC" Type="Int32" />
     <Property Name="TongTien" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Ban" Relationship="Self.FK__HoaDon__MaBan__30F848ED" FromRole="HoaDon" ToRole="Ban" />
-    <NavigationProperty Name="Voucher" Relationship="Self.FK__HoaDon__MaVC__32E0915F" FromRole="HoaDon" ToRole="Voucher" />
     <NavigationProperty Name="HoaDonChiTiets" Relationship="Self.FK__HoaDonChi__SoLuo__49C3F6B7" FromRole="HoaDon" ToRole="HoaDonChiTiet" />
     <Property Name="IsPaid" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="NhanVien" Relationship="PBL3Model.FK_HoaDon_NhanVien1" FromRole="HoaDon" ToRole="NhanVien" />
@@ -55,15 +55,7 @@
     <Property Name="GiaSP" Type="Double" Nullable="false" />
     <NavigationProperty Name="DanhMuc" Relationship="Self.FK__SanPham__MaDM__2A4B4B5E" FromRole="SanPham" ToRole="DanhMuc" />
     <NavigationProperty Name="HoaDonChiTiets" Relationship="Self.FK__HoaDonChiT__MaSP__4AB81AF0" FromRole="SanPham" ToRole="HoaDonChiTiet" />
-  </EntityType>
-  <EntityType Name="Voucher">
-    <Key>
-      <PropertyRef Name="MaVC" />
-    </Key>
-    <Property Name="MaVC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
-    <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__MaVC__32E0915F" FromRole="Voucher" ToRole="HoaDon" />
+    <Property Name="IsDelete" Type="Boolean" />
   </EntityType>
   <Association Name="FK__HoaDon__MaBan__30F848ED">
     <End Role="Ban" Type="Self.Ban" Multiplicity="1" />
@@ -86,18 +78,6 @@
       </Principal>
       <Dependent Role="SanPham">
         <PropertyRef Name="MaDM" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__HoaDon__MaVC__32E0915F">
-    <End Role="Voucher" Type="Self.Voucher" Multiplicity="0..1" />
-    <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Voucher">
-        <PropertyRef Name="MaVC" />
-      </Principal>
-      <Dependent Role="HoaDon">
-        <PropertyRef Name="MaVC" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -131,7 +111,6 @@
     <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
     <EntitySet Name="HoaDonChiTiets" EntityType="Self.HoaDonChiTiet" />
     <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
-    <EntitySet Name="Vouchers" EntityType="Self.Voucher" />
     <AssociationSet Name="FK__HoaDon__MaBan__30F848ED" Association="Self.FK__HoaDon__MaBan__30F848ED">
       <End Role="Ban" EntitySet="Bans" />
       <End Role="HoaDon" EntitySet="HoaDons" />
@@ -139,10 +118,6 @@
     <AssociationSet Name="FK__SanPham__MaDM__2A4B4B5E" Association="Self.FK__SanPham__MaDM__2A4B4B5E">
       <End Role="DanhMuc" EntitySet="DanhMucs" />
       <End Role="SanPham" EntitySet="SanPhams" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HoaDon__MaVC__32E0915F" Association="Self.FK__HoaDon__MaVC__32E0915F">
-      <End Role="Voucher" EntitySet="Vouchers" />
-      <End Role="HoaDon" EntitySet="HoaDons" />
     </AssociationSet>
     <AssociationSet Name="FK__HoaDonChi__SoLuo__49C3F6B7" Association="Self.FK__HoaDonChi__SoLuo__49C3F6B7">
       <End Role="HoaDon" EntitySet="HoaDons" />
@@ -171,6 +146,7 @@
     <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="PassWord" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="NhanVien" Relationship="PBL3Model.FK_NhanVien_Account1" FromRole="Account" ToRole="NhanVien" />
+    <Property Name="IsDelete" Type="Boolean" />
   </EntityType>
   <EntityType Name="NhanVien">
     <Key>

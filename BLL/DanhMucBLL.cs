@@ -25,21 +25,18 @@ namespace FastFoodManagement.BLL
 
         public List<DanhMucDTO> GetAllDanhMuc()
         {
-            List<DanhMucDTO> danhMucs = new List<DanhMucDTO>();
-            foreach (DanhMuc dm in db.DanhMucs.ToList<DTO.DanhMuc>())
+            return db.DanhMucs.Where(p => p.IsDelete == false).Select(p => new DanhMucDTO()
             {
-                DanhMucDTO danhMuc = new DanhMucDTO();
-                danhMuc.MaDM = dm.MaDM;
-                danhMuc.TenDM = dm.TenDM;
-                danhMucs.Add(danhMuc);
-            }
-            return danhMucs;
+                MaDM = p.MaDM,
+                TenDM = p.TenDM,
+            }).ToList();
         }
 
         public void AddDanhMuc(string nameDanhMuc)
         {
             DanhMuc danhMuc = new DanhMuc();
             danhMuc.TenDM = nameDanhMuc;
+            danhMuc.IsDelete = false;
             db.DanhMucs.Add(danhMuc);
             db.SaveChanges();
         }
@@ -56,21 +53,18 @@ namespace FastFoodManagement.BLL
             var deleteCategory = db.DanhMucs.Find(idCategory);
             if (deleteCategory != null)
             {
-                db.DanhMucs.Remove(deleteCategory);
+                deleteCategory.IsDelete = true;
                 db.SaveChanges();
             }
         }
         public List<DanhMucDTO> SearchDanhMuc(string textSearch)
         {
-            List<DanhMucDTO> danhMucDTOs = new List<DanhMucDTO>();
-            foreach (DanhMuc i in db.DanhMucs.Where(p => SqlFunctions.PatIndex("%" + textSearch + "%", p.TenDM) > 0))
-            {
-                DanhMucDTO danhMucDTO = new DanhMucDTO();
-                danhMucDTO.MaDM = i.MaDM;
-                danhMucDTO.TenDM = i.TenDM;
-                danhMucDTOs.Add(danhMucDTO);
-            }
-            return danhMucDTOs;
+            return db.DanhMucs.Where(p => p.IsDelete == false && p.TenDM.Contains(textSearch))
+                .Select(p => new DanhMucDTO()
+                {
+                    MaDM = p.MaDM,
+                    TenDM = p.TenDM,
+                }).ToList();
         }
     }
 }

@@ -29,19 +29,12 @@ namespace FastFoodManagement.BLL
 
         public int DemBan()
         {
-            return db.Bans.Count();
+            return db.Bans.Where(p=>p.IsDelete == false).Count();
         }
 
         public string[] getAllTableName()
         {
-            string[] result = new string[db.Bans.Count()];
-            int i = 0;
-            foreach (Ban item in db.Bans)
-            {
-                result[i] = item.TenBan;
-                i++;
-            }
-            return result;
+            return db.Bans.Where(p => p.IsDelete == false).Select(p => p.TenBan).ToArray();
         }
 
         public bool CheckTrangThaiBan(string tenban)
@@ -52,24 +45,19 @@ namespace FastFoodManagement.BLL
                 {
                     return true;
                 }
-
             }
             return false;
-
         }
 
         public List<BanDTO> GetAllTable()
         {
-            List<BanDTO> bans = new List<BanDTO>();
-            foreach (Ban b in db.Bans)
-            {
-                BanDTO ban = new BanDTO();
-                ban.MaBan = b.MaBan;
-                ban.TenBan = b.TenBan;
-                ban.TrangThai = b.TrangThai;
-                bans.Add(ban);
-            }
-            return bans;
+            return db.Bans.Where(p => p.IsDelete == false)
+                .Select(p => new BanDTO()
+                {
+                    TenBan = p.TenBan,
+                    MaBan = p.MaBan,
+                    TrangThai = p.TrangThai,
+                }).ToList();
         }
 
         public void AddHoaDon(int idBan, int maNv)
@@ -88,7 +76,6 @@ namespace FastFoodManagement.BLL
 
         public int FindIdHoaDonOfBan(int idBan)
         {
-            //int idHoaDon = 0;
             if (db.HoaDons.Any())
             {
                 var idHoaDon = db.HoaDons.FirstOrDefault(x => x.MaBan == idBan && x.IsPaid == false);
@@ -117,36 +104,19 @@ namespace FastFoodManagement.BLL
 
         public List<HoaDonChiTietDTO> GetAllHDCTByIdHoaDon(int idHoaDon)
         {
-            List<HoaDonChiTietDTO> hdcts = new List<HoaDonChiTietDTO>();
-            string tenSP = "";
-            foreach (var hoaDon in db.HoaDonChiTiets)
+            return db.HoaDonChiTiets.Where(p => p.MaHD == idHoaDon && p.HoaDon.IsPaid == false).Select(p => new HoaDonChiTietDTO
             {
-                if (hoaDon.MaHD == idHoaDon && !hoaDon.HoaDon.IsPaid)
-                {
-                    foreach(var sanPham in db.SanPhams)
-                    {
-                        if (sanPham.MaSP == hoaDon.MaSP)
-                        {
-                            tenSP = sanPham.TenSP;
-                        }
-                    }
-                    HoaDonChiTietDTO hdct = new HoaDonChiTietDTO()
-                    {
-                        TenSP = tenSP,
-                        SL = hoaDon.SoLuong,
-                        GiaTien = hoaDon.SoLuong * hoaDon.GiaTien,
-                    };
-                    
-
-                    hdcts.Add(hdct);
-                }
-            }
-            return hdcts;
+                TenSP = p.SanPham.TenSP,
+                SL = p.SoLuong,
+                DonGia = p.GiaTien,
+                ThanhTien = p.SoLuong * p.GiaTien,
+                MaHDCT = p.MaHDCT,
+                MaSP = p.MaSP
+            }).ToList();
         }
 
         public bool CheckTrangThaiBanWithHoaDon(int idBan)
         {
-            //if (db.HoaDons.FirstOrDefault(x => x.MaBan == idBan).IsPaid) return true;
             var hoaDonWithIdBan = db.HoaDons.FirstOrDefault(x => x.MaBan == idBan);
             if(hoaDonWithIdBan == null) return true;
             if (db.HoaDons.FirstOrDefault(x => x.IsPaid == false && x.MaBan == idBan) != null) return false;
@@ -187,6 +157,13 @@ namespace FastFoodManagement.BLL
             db.HoaDons.FirstOrDefault(hoadon => hoadon.MaHD == idHoaDon).MaBan = idBanDaChuyen;
             db.Bans.FirstOrDefault(ban => ban.MaBan == idBanDaChuyen).TrangThai = true;
             db.Bans.FirstOrDefault(ban => ban.MaBan == idBanChuaChuyen).TrangThai = false;
+            db.SaveChanges();
+        }
+
+        public void DeleteOneHoaDonChiTiet(int idHDCT)
+        {
+            var deleteHDCT = db.HoaDonChiTiets.FirstOrDefault(p => p.MaHDCT == idHDCT);
+            db.HoaDonChiTiets.Remove(deleteHDCT);
             db.SaveChanges();
         }
     }

@@ -33,6 +33,21 @@ namespace FastFoodManagement.BLL
             return hoaDons;
         }
 
+        public List<HoaDonChiTietDTO> GetHDCTTheoMaHD(int maHD)
+        {
+            return db.HoaDonChiTiets.Where(p => p.MaHD == maHD).AsEnumerable().Select((p, i) => new HoaDonChiTietDTO()
+            {
+                TenSP = p.SanPham.TenSP,
+                DonGia = p.GiaTien,
+                ThanhTien = p.GiaTien*p.SoLuong,
+                SL = p.SoLuong,
+            }).ToList();
+        }
+        public HoaDon GetHDByMaHD(int maHD)
+        {
+            return db.HoaDons.Where(p => p.MaHD == maHD).FirstOrDefault();
+        }
+
         public List<HoaDonDTO> GetFromDateToDate(DateTime dateFrom, DateTime dateTo)
         {
             List<HoaDonDTO> result = new List<HoaDonDTO>();
@@ -51,18 +66,6 @@ namespace FastFoodManagement.BLL
                     });
                 }
             }
-
-            //return db.HoaDons.Where(hoadon => dateFrom <= hoadon.ThoiGianVao.Date && hoadon.ThoiGianVao.Date <= dateTo.Date)
-            //    .Select(hoaDon => new HoaDonDTO()
-            //    {
-            //        MaHD = hoaDon.MaHD,
-            //        TenBan = hoaDon.Ban.TenBan,
-            //        TenNV = hoaDon.NhanVien.TenNV,
-            //        ThoiGianVao = hoaDon.ThoiGianVao.ToString("dd-MM-yyyy"),
-            //        TongTien = hoaDon.TongTien,
-            //    }).ToList();
-
-
             return result;
         }
 
@@ -82,7 +85,6 @@ namespace FastFoodManagement.BLL
                     });
                 }
             }
-
             return result;
         }
     }

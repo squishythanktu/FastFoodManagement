@@ -21,28 +21,19 @@ namespace FastFoodManagement.BLL
                     _Instance = new SanPhamBLL();
                 return _Instance;
             }
-            private set {}
+            private set { }
         }
 
         public List<SanPhamDTO> GetAllSanPham()
         {
-            //List<SanPhamDTO> sanPhams = new List<SanPhamDTO>();
-            //foreach (SanPham sp in db.SanPhams)
-            //{
-            //    SanPhamDTO sanPham = new SanPhamDTO();
-            //    sanPham.MaSP = sp.MaSP;
-            //    sanPham.TenSP = sp.TenSP;
-            //    sanPham.TenDM = sp.DanhMuc.TenDM;
-            //    sanPham.Gia = sp.GiaSP;
-            //    sanPhams.Add(sanPham);
-            //}
-            return db.SanPhams.Select(p => new SanPhamDTO() 
+            return db.SanPhams.Where(p => p.IsDelete == false).Select(p => new SanPhamDTO()
             { MaSP = p.MaSP, TenSP = p.TenSP, Gia = p.GiaSP, TenDM = p.DanhMuc.TenDM }).ToList();
-            //return sanPhams;
+            
         }
 
         public void AddSanPham(SanPham sanPham)
         {
+            sanPham.IsDelete = false;
             db.SanPhams.Add(sanPham);
             db.SaveChanges();
         }
@@ -60,23 +51,20 @@ namespace FastFoodManagement.BLL
             var deleteFood = db.SanPhams.Find(idFood);
             if (deleteFood != null)
             {
-                db.SanPhams.Remove(deleteFood);
+                deleteFood.IsDelete = true;
                 db.SaveChanges();
             }
         }
-        public List<SanPhamDTO> SearchSanPham (string textSearch)
+        public List<SanPhamDTO> SearchSanPham(string textSearch)
         {
-            List<SanPhamDTO> sanPhamDTOs = new List<SanPhamDTO>();
-            foreach(SanPham i in db.SanPhams.Where(p => SqlFunctions.PatIndex("%" + textSearch + "%", p.TenSP) > 0))
+            return db.SanPhams.Where(p => p.IsDelete == false && p.TenSP.Contains(textSearch)).Select(p => new SanPhamDTO()
             {
-                SanPhamDTO sanPhamDTO = new SanPhamDTO();
-                sanPhamDTO.MaSP = i.MaSP;
-                sanPhamDTO.TenSP = i.TenSP;
-                sanPhamDTO.Gia = i.GiaSP;
-                sanPhamDTO.TenDM = i.DanhMuc.TenDM;
-                sanPhamDTOs.Add(sanPhamDTO);
-            }    
-            return sanPhamDTOs;
+                MaSP = p.MaSP,
+                TenSP = p.TenSP,
+                Gia = p.GiaSP,
+                TenDM = p.DanhMuc.TenDM,
+            }).ToList();
         }
+        
     }
 }

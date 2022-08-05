@@ -24,28 +24,21 @@ namespace FastFoodManagement.BLL
 
         public List<AccountDTO> GetAllAccount()
         {
-            List<AccountDTO> accounts = new List<AccountDTO>();
-            foreach (NhanVien nv in db.NhanViens.ToList())
+            return db.NhanViens.Where(p => p.Account.IsDelete == false).Select(p => new AccountDTO()
             {
-                accounts.Add(new AccountDTO().Clone(nv));
-            }
-            return accounts;
+                MaNV = p.MaNV,
+                TenNV = p.TenNV,
+                DiaChi = p.DiaChi,
+                SDT = p.SDT,
+                ChucVu = p.ChucVu == 0 ? "Quản lý" : "Nhân viên",
+                Username = p.Account.Username,
+                Password = p.Account.PassWord,
+            }).ToList();
         }
 
         public void AddAccount(NhanVien nv)
         {
-            //db.Accounts.Add(new Account
-            //{
-            //    Username = nv.Account.Username,
-            //    PassWord = nv.Account.PassWord,
-            //});
-            //db.SaveChanges();
-            //db.Accounts.Add(new Account()
-            //{
-            //    Username = nv.Account.Username,
-            //    PassWord = nv.Account.PassWord,
-            //});
-            
+            nv.Account.IsDelete = false;
             db.NhanViens.Add(nv);
             db.SaveChanges();
         }
@@ -79,21 +72,25 @@ namespace FastFoodManagement.BLL
             var deleteAccount = db.Accounts.Find(id);
             if (deleteNhanVien != null)
             {
-                db.NhanViens.Remove(deleteNhanVien);
-                db.Accounts.Remove(deleteAccount);
+                deleteAccount.IsDelete = true;
                 db.SaveChanges();
             }
         }
 
         public List<AccountDTO> SearchAccount(string text)
         {
-            List<AccountDTO> nvs = new List<AccountDTO>();
-            foreach (NhanVien nv in db.NhanViens.Where(x => x.TenNV.Contains(text)))
+            return db.NhanViens.Where(p => p.TenNV.Contains(text) && 
+                                        p.Account.IsDelete == false)
+                                .Select(p => new AccountDTO()
             {
-                nvs.Add(new AccountDTO().Clone(nv));
-            }
-
-            return nvs;
+                MaNV = p.MaNV,
+                TenNV = p.TenNV,
+                DiaChi = p.DiaChi,
+                SDT = p.SDT,
+                ChucVu = p.ChucVu == 0 ? "Quản lý" : "Nhân viên",
+                Username = p.Account.Username,
+                Password = p.Account.PassWord,
+            }).ToList();
         }
 
 

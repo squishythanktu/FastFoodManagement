@@ -17,6 +17,7 @@ namespace FastFoodManagement.DTO
         public int MaAcc { get; set; }
         public string Username { get; set; }
         public string PassWord { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     
         public virtual NhanVien NhanVien { get; set; }
     }

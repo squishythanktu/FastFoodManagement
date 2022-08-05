@@ -22,6 +22,7 @@ namespace FastFoodManagement.DTO
     
         public int MaDM { get; set; }
         public string TenDM { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }

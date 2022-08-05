@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Bans">
       <EntityTypeMapping TypeName="PBL3Model.Ban">
         <MappingFragment StoreEntitySet="Ban">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="TenBan" ColumnName="TenBan" />
           <ScalarProperty Name="MaBan" ColumnName="MaBan" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
@@ -13,6 +14,7 @@
     <EntitySetMapping Name="DanhMucs">
       <EntityTypeMapping TypeName="PBL3Model.DanhMuc">
         <MappingFragment StoreEntitySet="DanhMuc">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="MaDM" ColumnName="MaDM" />
           <ScalarProperty Name="TenDM" ColumnName="TenDM" />
         </MappingFragment>
@@ -26,7 +28,6 @@
           <ScalarProperty Name="ThoiGianVao" ColumnName="ThoiGianVao" />
           <ScalarProperty Name="MaNV" ColumnName="MaNV" />
           <ScalarProperty Name="MaBan" ColumnName="MaBan" />
-          <ScalarProperty Name="MaVC" ColumnName="MaVC" />
           <ScalarProperty Name="TongTien" ColumnName="TongTien" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -45,6 +46,7 @@
     <EntitySetMapping Name="SanPhams">
       <EntityTypeMapping TypeName="PBL3Model.SanPham">
         <MappingFragment StoreEntitySet="SanPham">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="MaSP" ColumnName="MaSP" />
           <ScalarProperty Name="TenSP" ColumnName="TenSP" />
           <ScalarProperty Name="MaDM" ColumnName="MaDM" />
@@ -52,18 +54,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Vouchers">
-      <EntityTypeMapping TypeName="PBL3Model.Voucher">
-        <MappingFragment StoreEntitySet="Voucher">
-          <ScalarProperty Name="MaVC" ColumnName="MaVC" />
-          <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
-          <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="PBL3Model.Account">
         <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="PassWord" ColumnName="PassWord" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="MaAcc" ColumnName="MaAcc" />

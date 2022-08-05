@@ -21,16 +21,15 @@ namespace FastFoodManagement.VIEW
         {
             InitializeComponent();
             this.nv = nv;
-            //if (nv != null)
-                //LoadAllCommponent();
+            if (nv != null)
+                LoadAllCommponent();
         }
-
-        //private void LoadAllCommponent()
-        //{
-        //    Account AccNV = db.Accounts.Where(p => p.MaAcc == nv.MaAcc).FirstOrDefault();
-        //    txtUsername.Text = AccNV.Username;
-        //    txtUsername.Enabled = false;
-        //}
+        private void LoadAllCommponent()
+        {
+            Account AccNV = db.Accounts.Where(p => p.MaAcc == nv.MaNV).FirstOrDefault();
+            txtUsername.Text = AccNV.Username;
+            txtUsername.Enabled = false;
+        }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

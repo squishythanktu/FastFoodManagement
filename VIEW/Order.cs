@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,6 +35,7 @@ namespace FastFoodManagement
         BindingSource bsAccount = new BindingSource();
 
         private List<Button> listBan = new List<Button>();
+        Dictionary<string, int> mapTable = new Dictionary<string, int>();
 
         //data binding doesn't work when the lastest selection element is unselection by clicking on blank dgv
         //this all temp string (in which function has it) in order to solve that problem
@@ -70,51 +72,74 @@ namespace FastFoodManagement
             //QL~0, NV~1
             if (nv.ChucVu == 0)
             {
-                //lbPerson.Text = nv.TenNV + " - Quản Lý";
+                lbPerson.Text = nv.TenNV + " - Quản Lý";
+
+                btnAccount.Visible = true;
+                btnFood.Visible = true;
+                btnTable.Visible = true;
+                btnRevenue.Visible = true;
+                btnDanhmuc.Visible = true;
+                //vo hieu hoa chuhc nang Accout
                 btnAddAccount.Visible = true;
-                btnSortAccount.Visible = true;
+                
                 btnDeleteAccount.Visible = true;
                 btnUpdateAccount.Visible = true;
+                
 
                 //vo hieu hoa chuc nang Table
                 btnAddTable.Visible = true;
                 btnDelTable.Visible = true;
-                btnSortTable.Visible = true;
+                
                 btnUpdateTable.Visible = true;
 
                 //Vo hieu hoa chuc nang Category
                 btnAddCategory.Visible = true;
                 btnDeleteCategory.Visible = true;
                 btnUpdateCategory.Visible = true;
-                btnSortCategory.Visible = true;
+                
 
                 //Vo hieu hoa chuc nang Food
                 btnAddFood.Visible = true;
                 btnDeleteFood.Visible = true;
-                btnSortFood.Visible = true;
+                
                 btnUpdateFood.Visible = true;
+
             }
             if (nv.ChucVu != 0)
             {
-                //lbPerson.Text = nv.TenNV + " - Nhân Viên";
+
+                lbPerson.Text = nv.TenNV + " - Nhân Viên";
+
+                btnAccount.Visible = false;
+                btnFood.Visible = false;
+                btnTable.Visible = false;
+                btnRevenue.Visible = false;
+                btnDanhmuc.Visible = false;
+                // Vo hieu hoa chuc nang Accout
+                dgvAccount.Columns["Password"].Visible = false;
                 btnAddAccount.Visible = false;
-                btnSortAccount.Visible = false;
+                
                 btnDeleteAccount.Visible = false;
                 btnUpdateAccount.Visible = false;
+                txtPassword.Visible = false;
+                label22.Visible = false;
 
+                //vo hieu hoa chuc nang Table
                 btnAddTable.Visible = false;
                 btnDelTable.Visible = false;
-                btnSortTable.Visible = false;
+                
                 btnUpdateTable.Visible = false;
 
+                //vo hieu hoa chuc nang Category
                 btnAddCategory.Visible = false;
                 btnDeleteCategory.Visible = false;
                 btnUpdateCategory.Visible = false;
-                btnSortCategory.Visible = false;
+                
 
+                //vo hieu hoa chuc nang Food
                 btnAddFood.Visible = false;
                 btnDeleteFood.Visible = false;
-                btnSortFood.Visible = false;
+                
                 btnUpdateFood.Visible = false;
             }
         }
@@ -126,6 +151,8 @@ namespace FastFoodManagement
             dgvTable.DataSource = bsTable;
             dgvOrder.DataSource = bsOrder;
             dgvAccount.DataSource = bsAccount;
+
+           
 
             //Food
             LoadItemsCbDanhMuc();
@@ -176,53 +203,20 @@ namespace FastFoodManagement
             panelAccount.Visible = false;
             btnChuyenBan.Enabled = false;
             panelRevenue.Visible = false;
-
-            LoadDgvOrder();
-            
-
-            int soluongban = OrderBLL.Instance.DemBan();
-            string[] tenban = OrderBLL.Instance.getAllTableName();
-
-
-            tbban.Controls.Clear();
-            int dem = 0;
-            for (int i = 0; i < tbban.ColumnCount; i++)
+            if(string.IsNullOrEmpty(lbltenbancuabill.Text))
             {
-                for (int j = 0; j < tbban.RowCount; j++)
-                {
-                    if (dem == soluongban)
-                        break;
-                    else
-                    {
-                        Button bnBan = new Button();
-                        bnBan.Text = tenban[dem].ToString();
-                        bnBan.AutoSize = false;
-                        bnBan.Dock = DockStyle.None;
-                        bnBan.TextAlign = ContentAlignment.MiddleCenter;
-                        bnBan.Width = bnBan.Height = 60;
-                        bnBan.Font = new Font("Source Sans Pro", 10, FontStyle.Bold);
-                        bnBan.ForeColor = Color.White;
+                btnThemMon.Enabled = false;
+            }    
+            LoadDgvOrder();
 
-                        if (OrderBLL.Instance.CheckTrangThaiBan(tenban[dem]))
-                        {
-                            bnBan.BackColor = Color.OrangeRed;
-                        }
-                        else
-                        {
-                            bnBan.BackColor = Color.LimeGreen;
-                        }
-
-                        bnBan.FlatStyle = FlatStyle.Standard;
-                        tbban.Controls.Add(bnBan);
-                        listBan.Add(bnBan);
-                        bnBan.Click += bnBan_Click;
-                        dem++;
-                    }
-
-                }
-            }
-            //bnBan_Click(sender, new EventArgs());
+            LoadBtnBan();
+            typeof(FlowLayoutPanel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
+            | BindingFlags.Instance | BindingFlags.NonPublic, null,
+            flTable, new object[] { true });
         }
+
+        
+
         private void btnFood_Click_1(object sender, EventArgs e)
         {
             LoadDgvFood();
@@ -233,10 +227,17 @@ namespace FastFoodManagement
             panelTable.Visible = false;
             panelAccount.Visible = false;
             panelRevenue.Visible = false;
-            dgvFood.CurrentCell.Selected = false;
+            //dgvFood.CurrentCell.Selected = false;
+            ClearSelectedCell(dgvFood);
             ResetTextBoxFood();
             cbDanhMucFood.Items.Clear();
             LoadItemsCbDanhMuc();
+        }
+
+        void ClearSelectedCell(DataGridView dgv)
+        {
+            if(dgv.Rows.Count > 0)
+                dgv.CurrentCell.Selected = false;
         }
         private void btnDanhmuc_Click(object sender, EventArgs e)
         {
@@ -248,7 +249,8 @@ namespace FastFoodManagement
             panelTable.Visible = false;
             panelAccount.Visible = false;
             panelRevenue.Visible = false;
-            dgvCategory.CurrentCell.Selected = false;
+            //dgvCategory.CurrentCell.Selected = false;
+            ClearSelectedCell(dgvCategory);
             ResetTextBoxCategory();
         }
 
@@ -262,7 +264,8 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelAccount.Visible = false;
             panelRevenue.Visible = false;
-            dgvTable.CurrentCell.Selected = false;
+            //dgvTable.CurrentCell.Selected = false;
+            ClearSelectedCell(dgvTable);
             ResetTextBoxTable();
             LoadDgvTable();
         }
@@ -275,7 +278,8 @@ namespace FastFoodManagement
             panelCategory.Visible = false;
             panelTable.Visible = false;
             panelRevenue.Visible = false;
-            dgvAccount.CurrentCell.Selected = false;
+            //dgvAccount.CurrentCell.Selected = false;
+            ClearSelectedCell(dgvAccount);
             ResetTextBoxAccount();
         }
 
@@ -287,6 +291,12 @@ namespace FastFoodManagement
             panelFood.Visible = false;
             panelCategory.Visible = false;
             panelTable.Visible = false;
+            panelAccount.Visible = false;
+
+            dgvRevenue.DataSource = 0;
+            //display blank chart
+            chart1.Series[0].Color = Color.Transparent;
+            lbSoTienDoanhThu.Text = null;
         }
         #endregion
 
@@ -322,7 +332,8 @@ namespace FastFoodManagement
         {
             bsFood.DataSource = SanPhamBLL.Instance.GetAllSanPham();
             ResetTextBoxFood();
-            dgvFood.CurrentCell.Selected = false;
+            //dgvFood.CurrentCell.Selected = false;
+            ClearSelectedCell(dgvFood);
         }
         private void AddFoodBinding()
         {
@@ -341,6 +352,63 @@ namespace FastFoodManagement
         }
         private void btnAddFood_Click(object sender, EventArgs e)
         {
+            SanPham temp = db.SanPhams.Where(p => p.TenSP == txtNameFood.Text).FirstOrDefault();
+            if(temp==null) //SP mới
+            {
+                if (txtNameFood.Text == "" || cbDanhMucFood.SelectedIndex == -1 || txtGiaTienFood.Text == "")
+                {
+                    MessageBox.Show("Bạn chưa nhập đầy đủ thông tin!",
+                                        "Warning",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    if (txtGiaTienFood.Text.Any(char.IsLetter) == true)
+                    {
+                        MessageBox.Show("Giá tiền không hợp lệ! Vui lòng nhập lại",
+                                            "Warning",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        SanPhamBLL.Instance.AddSanPham(new SanPham
+                        {
+                            TenSP = txtNameFood.Text,
+                            MaDM = ((DanhMucDTO)cbDanhMucFood.SelectedItem).MaDM,
+                            GiaSP = Convert.ToInt32(txtGiaTienFood.Text),
+                        });
+                        LoadDgvFood();
+                        
+                    }
+                    
+                }
+            }
+            else
+            {
+                if (txtNameFood.Text == temp.TenSP)
+                {
+                    switch (temp.IsDelete)
+                    {
+                        case false:
+                            MessageBox.Show("Món ăn đã tồn tại! Vui lòng nhập món khác", "Warning",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
+                            break;
+                        case true:
+                            temp.IsDelete = false;
+                            db.SaveChanges();
+                            LoadDgvFood();
+                            LoadItemsCbDanhMuc();
+                            break;
+                    }
+                }
+            }
+        }
+        private void btnUpdateFood_Click(object sender, EventArgs e)
+        {
+            SanPham temp = db.SanPhams.Where(p => p.TenSP == txtNameFood.Text).FirstOrDefault();
             if (txtNameFood.Text == "" || cbDanhMucFood.SelectedIndex == -1 || txtGiaTienFood.Text == "")
             {
                 MessageBox.Show("Bạn chưa nhập đầy đủ thông tin!",
@@ -348,33 +416,41 @@ namespace FastFoodManagement
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Warning);
             }
+            else if (txtNameFood.Text == temp.TenSP && temp.IsDelete == false && txtIDFood.Text!=temp.MaSP.ToString())
+            {
+                MessageBox.Show("Sản phẩm đã tồn tại!Vui lòng nhập lại",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                LoadDgvFood();
+                LoadItemsCbDanhMuc();
+            }
+            else if (txtGiaTienFood.Text.Any(char.IsLetter)==true)
+            {
+                MessageBox.Show("Giá tiền không hợp lệ! Vui lòng nhập lại",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                txtGiaTienFood.Text = "";
+            }
             else
             {
-                SanPhamBLL.Instance.AddSanPham(new SanPham
+                //set temp info
+                txtTempNameFood = txtNameFood.Text;
+                txtTempIdFood = txtIDFood.Text;
+                txtTempGiaTienFood = txtGiaTienFood.Text;
+                tempCbDanhMucFood = (DanhMucDTO)cbDanhMucFood.SelectedItem;
+                SanPhamBLL.Instance.UpdateSanPham(new SanPham
                 {
+                    MaSP = Convert.ToInt32(txtIDFood.Text),
                     TenSP = txtNameFood.Text,
-                    MaDM = ((DanhMucDTO)cbDanhMucFood.SelectedItem).MaDM,
                     GiaSP = Convert.ToInt32(txtGiaTienFood.Text),
+                    MaDM = ((DanhMucDTO)cbDanhMucFood.SelectedItem).MaDM
                 });
-                LoadDgvFood();
+                btnFood_Click_1(sender, e);
             }
-        }
-        private void btnUpdateFood_Click(object sender, EventArgs e)
-        {
-            //set temp info
-            txtTempNameFood = txtNameFood.Text;
-            txtTempIdFood = txtIDFood.Text;
-            txtTempGiaTienFood = txtGiaTienFood.Text;
-            tempCbDanhMucFood = (DanhMucDTO)cbDanhMucFood.SelectedItem;
-
-            SanPhamBLL.Instance.UpdateSanPham(new SanPham
-            {
-                MaSP = Convert.ToInt32(txtIDFood.Text),
-                TenSP = txtNameFood.Text,
-                GiaSP = Convert.ToInt32(txtGiaTienFood.Text),
-                MaDM = ((DanhMucDTO)cbDanhMucFood.SelectedItem).MaDM
-            });
-            LoadDgvFood();
+            
+            
         }
         private void btnDeleteFood_Click(object sender, EventArgs e)
         {
@@ -461,7 +537,8 @@ namespace FastFoodManagement
         private void LoadItemsCbDanhMuc()
         {
             cbDanhMucFood.Items.AddRange(DanhMucBLL.Instance.GetAllDanhMuc().ToArray());
-            cbDanhMucFood.SelectedIndex = 0;
+            if(cbDanhMucFood.Items.Count > 0)
+                cbDanhMucFood.SelectedIndex = 0;
         }
         private void AddCategoryBinding()
         {
@@ -472,7 +549,8 @@ namespace FastFoodManagement
         {
             bsCategory.DataSource = DanhMucBLL.Instance.GetAllDanhMuc();
             ResetTextBoxCategory();
-            dgvCategory.CurrentCell.Selected = false;
+            //dgvCategory.CurrentCell.Selected = false;
+            ClearSelectedCell(dgvCategory);
         }
         private void ResetTextBoxCategory()
         {
@@ -482,6 +560,48 @@ namespace FastFoodManagement
         }
         private void btnAddCategory_Click(object sender, EventArgs e)
         {
+            DanhMuc temp = db.DanhMucs.Where(p => p.TenDM == txtNameCategory.Text).FirstOrDefault();
+            if (temp == null)
+            {
+                if (txtNameCategory.Text == "")
+                {
+                    MessageBox.Show("Bạn chưa nhập đầy đủ thông tin danh mục!",
+                                        "Warning",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    DanhMucBLL.Instance.AddDanhMuc(txtNameCategory.Text);
+                    LoadDgvCategory();
+                    dgvCategory.CurrentCell.Selected = false;
+                }
+            }
+            else
+            {
+                if (txtNameCategory.Text == temp.TenDM)
+                {
+                    switch (temp.IsDelete)
+                    {
+                        case false:
+                            MessageBox.Show("Danh mục đã tồn tại! Vui lòng nhập tên khác", "Warning",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
+                            break;
+                        case true:
+                            temp.IsDelete = false;
+                            db.SaveChanges();
+                            LoadDgvCategory();
+                            break;
+                    }
+                }
+            }
+            
+        }
+
+        private void btnUpdateCategory_Click(object sender, EventArgs e)
+        {
+            DanhMuc temp = db.DanhMucs.Where(p => p.TenDM == txtNameCategory.Text).FirstOrDefault();
             if (txtNameCategory.Text == "")
             {
                 MessageBox.Show("Bạn chưa nhập đầy đủ thông tin!",
@@ -489,23 +609,25 @@ namespace FastFoodManagement
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Warning);
             }
+            else if (temp!=null && txtNameCategory.Text == temp.TenDM && temp.IsDelete == false && txtIDCategory.Text != temp.MaDM.ToString())
+            {
+                MessageBox.Show("Danh mục đã tồn tại!Vui lòng nhập lại",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                LoadDgvCategory();
+            }
             else
             {
-                DanhMucBLL.Instance.AddDanhMuc(txtNameCategory.Text);
-                LoadDgvCategory();
-                dgvCategory.CurrentCell.Selected = false;
+                txtTempNameCategory = txtNameCategory.Text;
+                DanhMucBLL.Instance.UpdateDanhMuc(new DanhMuc
+                {
+                    MaDM = Convert.ToInt32(txtIDCategory.Text),
+                    TenDM = txtNameCategory.Text
+                });
+              btnDanhmuc_Click(sender, e);
             }
-        }
-
-        private void btnUpdateCategory_Click(object sender, EventArgs e)
-        {
-            txtTempNameCategory = txtNameCategory.Text;
-            DanhMucBLL.Instance.UpdateDanhMuc(new DanhMuc
-            {
-                MaDM = Convert.ToInt32(txtIDCategory.Text),
-                TenDM = txtNameCategory.Text
-            });
-            LoadDgvCategory();
+            
         }
         // Fix cai Del Category
         private void btnDeleteCategory_Click(object sender, EventArgs e)
@@ -580,11 +702,52 @@ namespace FastFoodManagement
 
         //------------- Table Section -------------
         #region Table Section
+        private void LoadBtnBan()
+        {
+            int soluongban = OrderBLL.Instance.DemBan();
+            string[] tenban = OrderBLL.Instance.getAllTableName();
+            flTable.Controls.Clear();
+            int dem = 0;
+            for (int i = 0; i < soluongban; i++)
+            {
+                if (dem == soluongban)
+                    break;
+                else
+                {
+                    Button bnBan = new Button();
+                    bnBan.Text = tenban[dem].ToString();
+                    bnBan.AutoSize = false;
+                    bnBan.Dock = DockStyle.None;
+                    bnBan.TextAlign = ContentAlignment.MiddleCenter;
+                    bnBan.Width = bnBan.Height = 90;
+                    bnBan.Font = new Font("Source Sans Pro", 10, FontStyle.Bold);
+                    bnBan.ForeColor = Color.White;
+
+                    if (OrderBLL.Instance.CheckTrangThaiBan(tenban[dem]))
+                    {
+                        bnBan.BackColor = Color.OrangeRed;
+                    }
+                    else
+                    {
+                        bnBan.BackColor = Color.LimeGreen;
+                    }
+
+                    bnBan.FlatStyle = FlatStyle.Standard;
+                    flTable.Controls.Add(bnBan);
+                    listBan.Add(bnBan);
+                    bnBan.Click += bnBan_Click;
+
+                    dem++;
+                }
+
+            }
+        }
         private void LoadDgvTable()
         {
             bsTable.DataSource = BanBLL.Instance.GetAllBan();
             ResetTextBoxTable();
-            dgvTable.CurrentCell.Selected = false;
+            //dgvTable.CurrentCell.Selected = false;
+            ClearSelectedCell(dgvTable);
         }
         private void ResetTextBoxTable()
         {
@@ -601,20 +764,44 @@ namespace FastFoodManagement
         }
         private void btnAddTable_Click(object sender, EventArgs e)
         {
-            if (txtNameTable.Text == "")
+            Ban temp = db.Bans.Where(p => p.TenBan == txtNameTable.Text).FirstOrDefault();
+            if (temp == null)
             {
-                MessageBox.Show("Bạn chưa nhập đầy đủ thông tin bàn!",
-                                    "Warning",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Warning);
+                if (txtNameTable.Text == "")
+                {
+                    MessageBox.Show("Bạn chưa nhập đầy đủ thông tin bàn!",
+                                        "Warning",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning);
+                }
+                else
+                {
+
+                    BanBLL.Instance.AddBan(txtNameTable.Text);
+                    LoadDgvTable();
+                    dgvTable.CurrentCell.Selected = false;
+                }
             }
             else
             {
-
-                BanBLL.Instance.AddBan(txtNameTable.Text);
-                LoadDgvTable();
-                dgvTable.CurrentCell.Selected = false;
+                if (txtNameTable.Text == temp.TenBan)
+                {
+                    switch (temp.IsDelete)
+                    {
+                        case false:
+                            MessageBox.Show("Bàn đã tồn tại! Vui lòng nhập tên khác", "Warning",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
+                            break;
+                        case true:
+                            temp.IsDelete = false;
+                            db.SaveChanges();
+                            LoadDgvTable();
+                            break;
+                    }
+                }
             }
+                
         }
 
         private void btnSearchTable_Click(object sender, EventArgs e)
@@ -624,14 +811,34 @@ namespace FastFoodManagement
 
         private void btnUpdateTable_Click(object sender, EventArgs e)
         {
-            txtTempNameTable = txtNameTable.Text;
-            BanBLL.Instance.UpdateBan(new Ban
+            Ban temp = db.Bans.Where(p => p.TenBan == txtNameTable.Text).FirstOrDefault();
+            if (txtNameTable.Text == "")
             {
-                MaBan = Convert.ToInt32(txtIDTable.Text),
-                TenBan = txtNameTable.Text,
-                TrangThai = Convert.ToBoolean(txtTrangThaiTable.Text)
-            });
-            LoadDgvTable();
+                MessageBox.Show("Bạn chưa nhập đầy đủ thông tin!",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+            }
+            else if (txtNameTable.Text == temp.TenBan && temp.IsDelete == false && txtIDTable.Text != temp.MaBan.ToString())
+            {
+                MessageBox.Show("Bàn đã tồn tại!Vui lòng nhập lại",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                LoadDgvTable();
+            }
+            else
+            {
+                txtTempNameTable = txtNameTable.Text;
+                BanBLL.Instance.UpdateBan(new Ban
+                {
+                    MaBan = Convert.ToInt32(txtIDTable.Text),
+                    TenBan = txtNameTable.Text,
+                    TrangThai = Convert.ToBoolean(txtTrangThaiTable.Text)
+                });
+                btnTable_Click(sender, e);
+            }
+            
         }
 
         private void btnDelTable_Click(object sender, EventArgs e)
@@ -730,33 +937,20 @@ namespace FastFoodManagement
             bsOrder.DataSource = SanPhamBLL.Instance.GetAllSanPham();
             //ResetTextBoxFood();
             //dgvFood.CurrentCell.Selected = false;
+            if (dgvOrder.Rows.Count == 0)
+            {
+                btnThemMon.Visible = false;
+            }
         }
 
-        //private void dgvOrder_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        //{
-        //    if(OrderBLL.Instance.CheckTrangThaiBanWithHoaDon(IdBan)) OrderBLL.Instance.AddHoaDon(IdBan, nv.MaNV);
-        //    tempIdBan = IdBan;
-        //    int idHoaDonOfBan = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
-        //    OrderBLL.Instance.AddHoaDonChiTiet(new HoaDonChiTiet
-        //    {
-        //        MaHD = idHoaDonOfBan,
-        //        MaSP = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells[0].Value),
-        //        SoLuong = 1,
-        //        GiaTien = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells[2].Value),
-        //    });
-        //    LoadDgvBill();
-        //    btnBanLast.BackColor = Color.OrangeRed;
-        //}
 
         private void bnBan_Click(object sender, EventArgs e)
         {
+            btnThemMon.Enabled = true;
             Button bnBan = sender as Button;
             lbltenbancuabill.Text = bnBan.Text;
-
-
-
             List<BanDTO> bans = OrderBLL.Instance.GetAllTable();
-            var mapTable = new Dictionary<string, int>();
+            
             for (int i = 0; i < bans.Count; i++)
             {
                 mapTable[bans[i].TenBan] = bans[i].MaBan;
@@ -773,35 +967,22 @@ namespace FastFoodManagement
             LoadTongTienBill();
             cbChuyenBan.Items.Clear();
             LoadCBBItemBan();
-            //foreach (CBBItemBan i in cbChuyenBan.Items)
-            //{
-            //    if (i.Text == bnBan.Text)
-            //    {
-            //        cbChuyenBan.Items.Remove(i);
-            //        break;
-            //    }
-            //}
-            RemoveCbItemTableNotAvailible();
+            RemoveCbItemCurrentTable();
 
             cbChuyenBan.SelectedIndex = -1;
             btnChuyenBan.Enabled = false;
         }
 
-        private void RemoveCbItemTableNotAvailible()
+        private void RemoveCbItemCurrentTable()
         {
-            foreach (Button btn in listBan)
+            foreach (CBBItemBan i in cbChuyenBan.Items)
             {
-                if (btn.BackColor == Color.OrangeRed)
+                if (i.Text == btnBanLast.Text)
                 {
-                    foreach (CBBItemBan i in cbChuyenBan.Items)
-                    {
-                        if (i.Text == btn.Text)
-                        {
-                            cbChuyenBan.Items.Remove(i);
-                            break;
-                        }
-                    }
+                    cbChuyenBan.Items.Remove(i);
+                    break;
                 }
+
             }
         }
 
@@ -810,7 +991,7 @@ namespace FastFoodManagement
             int tongTien = 0;
             foreach (DataGridViewRow i in dgvBill.Rows)
             {
-                tongTien += Convert.ToInt32(i.Cells[2].Value);
+                tongTien += Convert.ToInt32(i.Cells["ThanhTien"].Value);
             }
             lbNumThanhTien.Text = tongTien.ToString() + " đ";
         }
@@ -819,25 +1000,30 @@ namespace FastFoodManagement
         {
             int IdHoaDon = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
             dgvBill.DataSource = OrderBLL.Instance.GetAllHDCTByIdHoaDon(IdHoaDon);
+            dgvBill.Columns["MaSP"].Visible = false;
+            dgvBill.Columns["MaHDCT"].Visible = false;  
             SetAlignmentItem();
         }
 
         private void SetAlignmentItem()
         {
-            dgvBill.Columns[0].Width = 120;
-            dgvBill.Columns[1].Width = 24;
-            dgvBill.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvBill.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            ////dgvBill.Columns["STT"].Width = 32;
+            //dgvBill.Columns["STT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvBill.Columns["TenSP"].Width = 100;
+            dgvBill.Columns["SL"].Width = 24;
+            dgvBill.Columns["SL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvBill.Columns["SL"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
+            
             int idHoaDonOfBan = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
             OrderBLL.Instance.ThanhToanHoaDon(idHoaDonOfBan, Convert.ToInt32(lbNumThanhTien.Text.Remove(lbNumThanhTien.Text.Length - 2)));
             LoadDgvBill();
-            SetColorBtnBan();
             OrderBLL.Instance.SetTrangThaiBan(IdBan, false);
             SetVisibleBtnIfHaveData();
+            LoadBtnBan();
         }
 
         private void btnThemMon_Click(object sender, EventArgs e)
@@ -847,19 +1033,21 @@ namespace FastFoodManagement
             OrderBLL.Instance.AddHoaDonChiTiet(new HoaDonChiTiet
             {
                 MaHD = idHoaDonOfBan,
-                MaSP = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells[0].Value),
+                MaSP = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells["MaSP"].Value),
                 SoLuong = Convert.ToInt32(numSoLuong.Value),
-                GiaTien = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells[2].Value),
+                GiaTien = Convert.ToInt32(dgvOrder.SelectedRows[0].Cells["Gia"].Value),
             });
             LoadDgvBill();
 
 
             numSoLuong.Value = 1;
 
+            OrderBLL.Instance.SetTrangThaiBan(IdBan, true);
+
             SetVisibleBtnIfHaveData();
             LoadTongTienBill();
-            SetColorBtnBan();
-            RemoveCbItemTableNotAvailible();
+            LoadBtnBan();
+            RemoveCbItemCurrentTable();
         }
 
         private void SetVisibleBtnIfHaveData()
@@ -885,10 +1073,11 @@ namespace FastFoodManagement
             OrderBLL.Instance.DeleteHoaDonChiTiet(IdBan);
             int idHoaDonOfBan = OrderBLL.Instance.FindIdHoaDonOfBan(IdBan);
             LoadDgvBill();
-            SetColorBtnBan();
+            
             SetVisibleBtnIfHaveData();
             OrderBLL.Instance.SetTrangThaiBan(IdBan, false);
             lbNumThanhTien.Text = "0 đ";
+            LoadBtnBan();
         }
 
         private void LoadCBBItemBan()
@@ -898,20 +1087,59 @@ namespace FastFoodManagement
 
         private void btnChuyenBan_Click(object sender, EventArgs e)
         {
-            OrderBLL.Instance.ChuyenBan(OrderBLL.Instance.FindIdHoaDonOfBan(IdBan),
-                ((CBBItemBan)cbChuyenBan.SelectedItem).Value, IdBan);
-            LoadDgvBill();
-
-            foreach (Button btn in listBan)
+            if (OrderBLL.Instance.CheckTrangThaiBan(cbChuyenBan.SelectedItem.ToString()))
             {
-                if (btn.Text == cbChuyenBan.SelectedItem.ToString())
+                    
+                    foreach (DataGridViewRow i in dgvBill.SelectedRows)
+                    {
+
+                        OrderBLL.Instance.AddHoaDonChiTiet(new HoaDonChiTiet
+                        {
+                            MaHD = OrderBLL.Instance.FindIdHoaDonOfBan(mapTable[cbChuyenBan.SelectedItem.ToString()]),
+                            MaSP = Convert.ToInt32(i.Cells["MaSP"].Value),
+                            SoLuong = Convert.ToInt32(i.Cells["SL"].Value),
+                            GiaTien = Convert.ToInt32(i.Cells["ThanhTien"].Value),
+                        });
+                        OrderBLL.Instance.DeleteOneHoaDonChiTiet(Convert.ToInt32(i.Cells["MaHDCT"].Value));
+                    }
+                if (dgvBill.SelectedRows.Count == dgvBill.Rows.Count)
                 {
-                    btn.BackColor = Color.OrangeRed;
-                    break;
+                    OrderBLL.Instance.SetTrangThaiBan(IdBan, false);
+                }
+                else
+                {
+                    //OrderBLL.Instance.SetTrangThaiBan(IdBan, true);
+                    
                 }
             }
+            else
+            {
+                if(dgvBill.SelectedRows.Count == dgvBill.Rows.Count)
+                    OrderBLL.Instance.ChuyenBan(OrderBLL.Instance.FindIdHoaDonOfBan(IdBan),
+                    ((CBBItemBan)cbChuyenBan.SelectedItem).Value, IdBan);
+                else
+                {
+                    OrderBLL.Instance.AddHoaDon(mapTable[cbChuyenBan.SelectedItem.ToString()], nv.MaNV);
+                    foreach (DataGridViewRow i in dgvBill.SelectedRows)
+                    {
+
+                        OrderBLL.Instance.AddHoaDonChiTiet(new HoaDonChiTiet
+                        {
+                            MaHD = OrderBLL.Instance.FindIdHoaDonOfBan(mapTable[cbChuyenBan.SelectedItem.ToString()]),
+                            MaSP = Convert.ToInt32(i.Cells["MaSP"].Value),
+                            SoLuong = Convert.ToInt32(i.Cells["SL"].Value),
+                            
+                            GiaTien = Convert.ToInt32(i.Cells["ThanhTien"].Value),
+                        });
+                        OrderBLL.Instance.DeleteOneHoaDonChiTiet(Convert.ToInt32(i.Cells["MaHDCT"].Value));
+                    }
+                }
+            }
+            LoadDgvBill();
+
+
             SetVisibleBtnIfHaveData();
-            SetColorBtnBan();
+            LoadBtnBan();        
         }
 
         private void SetColorBtnBan()
@@ -942,6 +1170,7 @@ namespace FastFoodManagement
             bsAccount.DataSource = AccountBLL.Instance.GetAllAccount();
             ResetTextBoxAccount();
             dgvAccount.CurrentCell.Selected = false;
+
         }
 
         private void LoadItemsCbAccount()
@@ -960,33 +1189,81 @@ namespace FastFoodManagement
             txtUsername.Text = "";
             txtPassword.Text = "";
         }
+        private void pnAccount_Click(object sender, EventArgs e)
+        {
+            dgvAccount.ClearSelection();
+            ResetTextBoxAccount();
+        }
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            AccountBLL.Instance.AddAccount(new NhanVien
-            { 
-                
-                TenNV = txtTenNhanVien.Text,
-                DiaChi = txtDiaChiNhanVien.Text,
-                SDT = txtSDTNhanVien.Text,
-                ChucVu = ((CbbItemChucVu)cbChucVuNhanVien.SelectedItem).MaCV,
-                Account = new Account
+            NhanVien temp = db.NhanViens.Where(p => p.Account.Username == txtUsername.Text||p.SDT == txtSDTNhanVien.Text).FirstOrDefault();
+            if (temp == null) //SP mới
+            {
+                if (txtTenNhanVien.Text == "" || txtDiaChiNhanVien.Text == "" || txtSDTNhanVien.Text == "" || cbChucVuNhanVien.SelectedIndex == -1 || txtUsername.Text == "" || txtPassword.Text == "")
                 {
-                    Username = txtUsername.Text,
-                    PassWord = txtPassword.Text,
+                    MessageBox.Show("Bạn chưa nhập đầy đủ thông tin!",
+                                        "Warning",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning);
                 }
-                
-            });
-            LoadDgvAccount();
+                else
+                {
+                    if (txtSDTNhanVien.Text.Any(char.IsLetter) == true)
+                    {
+                        MessageBox.Show("Số điện thoại không hợp lệ! Vui lòng nhập lại",
+                                            "Warning",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        AccountBLL.Instance.AddAccount(new NhanVien
+                        {
+
+                            TenNV = txtTenNhanVien.Text,
+                            DiaChi = txtDiaChiNhanVien.Text,
+                            SDT = txtSDTNhanVien.Text,
+                            ChucVu = ((CbbItemChucVu)cbChucVuNhanVien.SelectedItem).MaCV,
+                            Account = new Account
+                            {
+                                Username = txtUsername.Text,
+                                PassWord = txtPassword.Text,
+                            }
+
+                        });
+                        LoadDgvAccount();
+
+                    }
+
+                }
+            }
+            else
+            {
+                if(txtSDTNhanVien.Text == temp.SDT || txtUsername.Text == temp.Account.Username)
+                {
+                    switch (temp.Account.IsDelete)
+                    {
+                        case false:
+                            MessageBox.Show("Tài khoản đã tồn tại! Vui lòng nhập lại", "Warning",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Warning);
+                            break;
+                        case true:
+                            temp.Account.IsDelete = false;
+                            db.SaveChanges();
+                            LoadDgvAccount();
+                            LoadItemsCbAccount();
+                            break;
+                    }
+                }
+            }
+            
+            
         }
 
 
         
-
-        private void pnAccount_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
 
         private void dgvAccount_MouseClick(object sender, MouseEventArgs e)
         {
@@ -1051,27 +1328,56 @@ namespace FastFoodManagement
 
         private void btnUpdateAccount_Click(object sender, EventArgs e)
         {
-            txtTempTenNhanVien = txtTenNhanVien.Text;
-            txtTempIdNhanVien = txtIDNhanVien.Text;
-            txtTempDiaChiNhanVien = txtDiaChiNhanVien.Text;
-            cbTempCbChucVu = (CbbItemChucVu)cbChucVuNhanVien.SelectedItem;
-            txtTempSDTNhanVien = txtSDTNhanVien.Text;
-            txtTempUsername = txtUsername.Text;
-            txtTempPassword = txtPassword.Text;
-            AccountBLL.Instance.UpdateAccount(new NhanVien
+            NhanVien temp = db.NhanViens.Where(p => p.Account.Username == txtUsername.Text || p.SDT == txtSDTNhanVien.Text).FirstOrDefault();
+            if (txtTenNhanVien.Text == "" || txtDiaChiNhanVien.Text == "" || txtSDTNhanVien.Text == "" || cbChucVuNhanVien.SelectedIndex == -1 || txtUsername.Text == "" || txtPassword.Text == "")
             {
-                MaNV = Convert.ToInt32(txtIDNhanVien.Text),
-                TenNV = txtTenNhanVien.Text,
-                DiaChi = txtDiaChiNhanVien.Text,
-                SDT = txtSDTNhanVien.Text,
-                ChucVu = ((CbbItemChucVu)cbChucVuNhanVien.SelectedItem).MaCV,
-                Account = new Account
+                MessageBox.Show("Bạn chưa nhập đầy đủ thông tin!",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+            }
+            else if ((txtSDTNhanVien.Text == temp.SDT||txtUsername.Text == temp.Account.Username) && temp.Account.IsDelete == false && txtIDNhanVien.Text != temp.MaNV.ToString())
+            {
+                MessageBox.Show("Tài khoản đã tồn tại!Vui lòng nhập lại",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                LoadDgvAccount();
+
+            }
+            else if (txtSDTNhanVien.Text.Any(char.IsLetter) == true)
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ! Vui lòng nhập lại",
+                                    "Warning",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                txtSDTNhanVien.Text = "";
+            }
+            else
+            {
+                //set temp info
+                txtTempTenNhanVien = txtTenNhanVien.Text;
+                txtTempIdNhanVien = txtIDNhanVien.Text;
+                txtTempDiaChiNhanVien = txtDiaChiNhanVien.Text;
+                cbTempCbChucVu = (CbbItemChucVu)cbChucVuNhanVien.SelectedItem;
+                txtTempSDTNhanVien = txtSDTNhanVien.Text;
+                txtTempUsername = txtUsername.Text;
+                txtTempPassword = txtPassword.Text;
+                AccountBLL.Instance.UpdateAccount(new NhanVien
                 {
-                    Username = txtUsername.Text,
-                    PassWord = txtPassword.Text,
-                }
-            });
-            LoadDgvAccount();
+                    MaNV = Convert.ToInt32(txtIDNhanVien.Text),
+                    TenNV = txtTenNhanVien.Text,
+                    DiaChi = txtDiaChiNhanVien.Text,
+                    SDT = txtSDTNhanVien.Text,
+                    ChucVu = ((CbbItemChucVu)cbChucVuNhanVien.SelectedItem).MaCV,
+                    Account = new Account
+                    {
+                        Username = txtUsername.Text,
+                        PassWord = txtPassword.Text,
+                    }
+                });
+                btnAccount_Click(sender, e);
+            }
         }
 
         private void btnDeleteAccount_Click(object sender, EventArgs e)
@@ -1132,6 +1438,7 @@ namespace FastFoodManagement
             chart1.DataSource = HoaDonBLL.Instance.GetDoanhThuFromDateToDate(dateTimePickerFrom.Value, dateTimePickerTo.Value);
             chart1.Series["DoanhThu"].XValueMember = "DateFrom";
             chart1.Series["DoanhThu"].YValueMembers = "TongTien";
+            chart1.Series[0].Color = Color.Tomato;
             chart1.Invalidate();
             int tongTien = 0;
             foreach (DataGridViewRow i in dgvRevenue.Rows)
@@ -1139,8 +1446,28 @@ namespace FastFoodManagement
                 tongTien += Convert.ToInt32(i.Cells[3].Value);
             }
             lbSoTienDoanhThu.Text = tongTien.ToString() + " đ";
+            lbSoTienDoanhThu.Font = new Font("Gill Sans Ultra Bold", 16, FontStyle.Bold);
+
         }
         #endregion
 
+        private void btnChangePass_Click(object sender, EventArgs e)
+        {
+            ChangePassword f = new ChangePassword(nv);
+            f.Show();
+            f.d = isChange;
+        }
+
+        private void dgvRevenue_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dgvRevenue_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int maHD = Convert.ToInt32(dgvRevenue.SelectedRows[0].Cells["MaHD"].Value);
+            Bill b = new Bill(maHD);
+            b.Show();
+        }
     }
 }

@@ -43,10 +43,8 @@ namespace FastFoodManagement
                 Account temp = db.Accounts.Where(x => x.Username == username && x.PassWord == password).FirstOrDefault();
                 if (temp != null)
                 {
-                    NhanVien nv = db.NhanViens.Where(p => p.Account.MaAcc == temp.MaAcc).FirstOrDefault();
-                    
+                    NhanVien nv = db.NhanViens.Where(p => p.MaNV == temp.MaAcc).FirstOrDefault();
                     Order ord = new Order(nv);
-                    
                     ord.Show();
                     this.Hide();
                     ord.Dangxuat += Order_Dangxuat;
@@ -71,18 +69,6 @@ namespace FastFoodManagement
             (sender as Order).isThoat = false;
             (sender as Order).Close();
             this.Show();
-        }
-
-        private void ckbShowHide_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ckbShowHide.Checked)
-            {
-                txtPassword.UseSystemPasswordChar = true;
-            }
-            else
-            {
-                txtPassword.UseSystemPasswordChar = false;
-            }
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -124,6 +110,42 @@ namespace FastFoodManagement
         public void isChange(bool check)
         {
 
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPassword.Text.Length > 0 && txtPassword.UseSystemPasswordChar == true)
+            {
+                picEyeOpen.Visible = false;
+                picEyeClose.Visible = true;
+            }
+            else
+            {
+                if (txtPassword.Text.Length > 0)
+                {
+                    picEyeOpen.Visible = true;
+                    txtPassword.UseSystemPasswordChar = false;
+                }
+                else
+                {
+                    picEyeOpen.Visible = false;
+                    picEyeClose.Visible = false;
+                }
+            }
+        }
+
+        private void picEyeOpen_Click(object sender, EventArgs e)
+        {
+            picEyeOpen.Visible = false;
+            picEyeClose.Visible = true;
+            txtPassword.UseSystemPasswordChar = true;
+        }
+
+        private void picEyeClose_Click(object sender, EventArgs e)
+        {
+            picEyeOpen.Visible = true;
+            picEyeClose.Visible = false;
+            txtPassword.UseSystemPasswordChar = false;
         }
     }
 }

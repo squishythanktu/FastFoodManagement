@@ -30,7 +30,6 @@ namespace FastFoodManagement.DTO
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<HoaDonChiTiet> HoaDonChiTiets { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
-        public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
     }
